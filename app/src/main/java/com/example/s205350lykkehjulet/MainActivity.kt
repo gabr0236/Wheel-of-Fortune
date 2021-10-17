@@ -2,9 +2,6 @@ package com.example.s205350lykkehjulet
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import androidx.activity.viewModels
-
-
 
 
 class MainActivity : AppCompatActivity() {
@@ -17,7 +14,7 @@ class MainActivity : AppCompatActivity() {
         val losingScreen = LosingScreen()
 
         supportFragmentManager.beginTransaction().apply {
-            replace(R.id.flFragment, gameFragment)
+            replace(R.id.gameFragment, gameFragment)
             commit()
         }
 
