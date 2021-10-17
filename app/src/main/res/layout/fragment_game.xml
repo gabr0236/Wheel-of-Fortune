@@ -32,27 +32,28 @@
 
     <ImageView
         android:id="@+id/LuckyWheel"
-        android:layout_width="wrap_content"
-        android:layout_height="127dp"
+        android:layout_width="354dp"
+        android:layout_height="346dp"
         android:layout_marginVertical="20dp"
+        android:layout_marginTop="20dp"
+        android:src="@drawable/lucky_wheel"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/LetterInput"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/WordToBeGuessed"
-        tools:srcCompat="@tools:sample/avatars" />
+        app:layout_constraintTop_toBottomOf="@+id/WordToBeGuessed" />
 
     <TextView
         android:id="@+id/WheelResult"
         android:layout_width="52dp"
         android:layout_height="19dp"
         android:text="800"
+        android:textAlignment="center"
         app:layout_constraintBottom_toBottomOf="@+id/LuckyWheel"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.111"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toEndOf="@+id/LuckyWheel"
         app:layout_constraintTop_toTopOf="@+id/LuckyWheel"
-        app:layout_constraintVertical_bias="0.509"
-        android:textAlignment="center"/>
+        app:layout_constraintVertical_bias="0.52" />
 
     <TextView
         android:id="@+id/GameQuote"
