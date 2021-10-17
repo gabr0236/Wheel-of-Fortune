@@ -1,16 +1,14 @@
 package com.example.s205350lykkehjulet
 
-import android.text.Spannable
-import android.text.SpannableString
-import android.text.style.TtsSpan
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.Transformations
 import androidx.lifecycle.ViewModel
 
 class GameViewModel : ViewModel() {
 
+    init {
+        getNextWord()
+    }
     private val _score = MutableLiveData(0)
     //Use of Backing Properties to return immutable object
     val score: LiveData<Int>
@@ -22,22 +20,27 @@ class GameViewModel : ViewModel() {
 
     private var wordsList: MutableList<String> = mutableListOf()
     private lateinit var currentWordToBeGuessed: String
-    private lateinit var _currentScrambledWord: String
+    private lateinit var shownWordToBeGuessed: String
 
     private fun getNextWord() {
+        //TODO: add catagory
         currentWordToBeGuessed = allWordsList.random()
-        val tempWord = currentWordToBeGuessed.toCharArray()
-        tempWord.shuffle()
+        shownWordToBeGuessed = ""
+        for (i in 0..currentWordToBeGuessed.length) shownWordToBeGuessed+="_"
 
-        while (tempWord.toString().equals(currentWordToBeGuessed, false)) {
-            tempWord.shuffle()
-        }
         if (wordsList.contains(currentWordToBeGuessed)) {
             getNextWord()
         } else {
-            _currentScrambledWord = String(tempWord)
-
             wordsList.add(currentWordToBeGuessed)
         }
+    }
+
+
+    fun isUserImputMatch(playerInputLetter: String): Boolean {
+        if (shownWordToBeGuessed.contains(playerInputLetter)){
+            //TODO replace with letter
+            //shownWordToBeGuessed.replace()
+        }
+        return true
     }
 }
