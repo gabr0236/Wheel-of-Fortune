@@ -78,14 +78,14 @@ class GameViewModel : ViewModel() {
                     }
                     else tempWordSoFar += "_"
                 }
-                increasePlayerScore(currentWordToBeGuessed.filter { it == playerInputLetter }.count())
+                doWheelAction(currentWordToBeGuessed.filter { it == playerInputLetter }.count())
                 _shownWordToBeGuessed = insertSpacesBetweenLetters(tempWordSoFar)
                 return true
             }
         return false
     }
 
-    private fun increasePlayerScore(occurrencesOfPlayerInputLetter: Int) {
+    private fun doWheelAction(occurrencesOfPlayerInputLetter: Int) {
             if (_wheelResult.isDigitsOnly()){
                 val wheelValue = _wheelResult.toInt()
                 _score+= (wheelValue * occurrencesOfPlayerInputLetter)
