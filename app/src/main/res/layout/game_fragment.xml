@@ -8,9 +8,6 @@
         <variable
             name="gameViewModel"
             type="com.example.s205350lykkehjulet.GameViewModel" />
-        <variable
-            name="maxNoOfWords"
-            type="int" />
     </data>
 
     <ScrollView
@@ -22,7 +19,6 @@
             android:layout_height="wrap_content"
             android:padding="16dp"
             tools:context=".GameFragment">
-
 
             <TextView
                 android:id="@+id/Catagory"
@@ -63,7 +59,7 @@
                 android:id="@+id/WheelResult"
                 android:layout_width="52dp"
                 android:layout_height="19dp"
-                android:text="800"
+                android:text="@{gameViewModel.wheelResult}"
                 android:textAlignment="center"
                 app:layout_constraintBottom_toBottomOf="@+id/LuckyWheel"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -81,7 +77,8 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/WordToBeGuessed"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/LuckyWheel" />
+                app:layout_constraintTop_toBottomOf="@+id/LuckyWheel"
+                />
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/LetterInput"
@@ -93,7 +90,9 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/GameQuote" />
+                app:layout_constraintTop_toBottomOf="@+id/GameQuote"
+                android:maxLength="1"
+                />
 
             <Button
                 android:id="@+id/GuessButton"

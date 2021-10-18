@@ -41,9 +41,9 @@ class GameFragment : Fragment() {
 
     private fun submitGuess() {
         val playerInputLetter = binding.LetterInput.text.toString()
-        if (viewModel.isUserImputMatch(playerInputLetter)) {
+        if (viewModel.isUserImputMatch(playerInputLetter[0])) {
             updateWordToBeGuessedOnScreen()
-            //setErrorTextField(false)
+            updateLuckyWheelResult()
         } else {
             //setErrorTextField(true)
             //TODO: fix vvv (value!!)
@@ -63,5 +63,9 @@ class GameFragment : Fragment() {
 
     private fun updateWordToBeGuessedOnScreen() {
         binding.WordToBeGuessed.text = viewModel.shownWordToBeGuessed
+    }
+
+    private fun updateLuckyWheelResult(){
+        binding.WheelResult.text = viewModel.wheelResult
     }
 }
