@@ -19,6 +19,7 @@ class GameFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
+        print("Binding")
         // Inflate the layout XML file and return a binding object instance
         binding = inflate(inflater, R.layout.game_fragment, container, false)
         return binding.root
@@ -30,7 +31,6 @@ class GameFragment : Fragment() {
         // Set the viewModel for data binding - this allows the bound layout access
         // to all the data in the VieWModel
         binding.gameViewModel = viewModel
-        binding.maxNoOfWords = MAX_NO_OF_WORDS
         // Specify the fragment view as the lifecycle owner of the binding.
         // This is used so that the binding can observe LiveData updates
         binding.lifecycleOwner = viewLifecycleOwner
@@ -40,14 +40,14 @@ class GameFragment : Fragment() {
     }
 
     private fun submitGuess() {
-        val playerWord = binding.LetterInput.text.toString()
-
-        if (viewModel.isUserImputMatch(playerWord)) {
-            setErrorTextField(false)
+        val playerInputLetter = binding.LetterInput.text.toString()
+        if (viewModel.isUserImputMatch(playerInputLetter)) {
+            updateWordToBeGuessedOnScreen()
+            //setErrorTextField(false)
         } else {
-            setErrorTextField(true)
+            //setErrorTextField(true)
             //TODO: fix vvv (value!!)
-            if (viewModel.lives.value!! <=0) {
+            if (viewModel.lives <=0) {
                 endGame()
             }
         }
@@ -59,5 +59,9 @@ class GameFragment : Fragment() {
 
     private fun setErrorTextField(b: Boolean) {
     //TODO: implement (prøv lambda?)
+    }
+
+    private fun updateWordToBeGuessedOnScreen() {
+        binding.WordToBeGuessed.text = viewModel.shownWordToBeGuessed
     }
 }

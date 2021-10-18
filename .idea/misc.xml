@@ -8,7 +8,7 @@
         <entry key="app/src/main/res/layout/fragment_game.xml" value="0.335" />
         <entry key="app/src/main/res/layout/fragment_losing_screen.xml" value="0.14935950316203836" />
         <entry key="app/src/main/res/layout/fragment_winning_screen.xml" value="0.1911231884057971" />
-        <entry key="app/src/main/res/layout/game_fragment.xml" value="0.178125" />
+        <entry key="app/src/main/res/layout/game_fragment.xml" value="0.25" />
       </map>
     </option>
   </component>

@@ -15,7 +15,7 @@
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="645dp">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -40,7 +40,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginVertical="20dp"
-                android:text="_ _ _ _ _ _ _"
+                android:text="@{gameViewModel.shownWordToBeGuessed}"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/Catagory"
                 app:layout_constraintStart_toStartOf="parent"
@@ -67,10 +67,10 @@
                 android:textAlignment="center"
                 app:layout_constraintBottom_toBottomOf="@+id/LuckyWheel"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintHorizontal_bias="1.0"
                 app:layout_constraintStart_toEndOf="@+id/LuckyWheel"
                 app:layout_constraintTop_toTopOf="@+id/LuckyWheel"
-                app:layout_constraintVertical_bias="0.52" />
+                app:layout_constraintVertical_bias="0.495" />
 
             <TextView
                 android:id="@+id/GameQuote"
