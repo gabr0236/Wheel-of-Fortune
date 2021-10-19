@@ -28,7 +28,7 @@ class GameViewModel : ViewModel() {
 
     init {
         getNextWord()
-        spinWheel()
+        spinLuckyWheel()
     }
 
     private fun getNextWord() {
@@ -49,20 +49,24 @@ class GameViewModel : ViewModel() {
         }
     }
 
-    fun spinWheel(){
+    private fun spinLuckyWheel(){
         //22 Different fields in total
         val random = (1..22).random()
-        if (random<=2)          _wheelResult="100"         //2 x 100
-        else if (random<=3)     _wheelResult="300"         //1 x 300
-        else if (random<=9)     _wheelResult="500"         //6 x 500
-        else if (random<=11)    _wheelResult="600"         //2 x 600
-        else if (random<=16)    _wheelResult="800"         //5 x 800
-        else if (random<=18)    _wheelResult="1000"        //2 x 1000
-        else if (random<=19)    _wheelResult="1500"        //1 x 1500
-        else if (random<=20)    _wheelResult="Bankrupt"    //1 x Bankrupt
-        else if (random<=21)    _wheelResult="Extra Turn"  //1 x Extra Turn
-        else if (random<=22)    _wheelResult="Miss Turn"   //1 x Lost Turn
-        else throw Exception("Random generator not generating a number from 1 to 22")
+        _wheelResult = when (random) {
+            in 1..2 ->   "100"           //2 x 100
+            3 ->         "300"           //1 x 300
+            in 4..9 ->   "500"           //6 x 500
+            in 10..11 -> "600"           //2 x 600
+            in 12..16 -> "800"           //5 x 800
+            in 17..18 -> "1000"          //2 x 1000
+            19 ->        "1500"          //1 x 1500
+            20 ->        "Bankrupt"      //1 x Bankrupt
+            21 ->        "Extra Turn"    //1 x Extra Turn
+            22 ->        "Miss Turn"     //1 x Lost Turn
+            else -> throw Exception("Random generator not generating a number from 1 to 22")
+        }
+        //Avoid getting bankrupt when player is already bankrupt (eg. at game start)
+        if (_score==0 && _wheelResult=="Bankrupt") spinLuckyWheel()
     }
 
     //TODO: måske nemmere med char?
@@ -80,6 +84,7 @@ class GameViewModel : ViewModel() {
                 }
                 doWheelAction(currentWordToBeGuessed.filter { it == playerInputLetter }.count())
                 _shownWordToBeGuessed = insertSpacesBetweenLetters(tempWordSoFar)
+                spinLuckyWheel()
                 return true
             }
         return false

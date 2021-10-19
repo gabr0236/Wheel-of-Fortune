@@ -12,7 +12,7 @@
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="645dp">
+        android:layout_height="match_parent">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -21,87 +21,123 @@
             tools:context=".GameFragment">
 
             <TextView
+                android:id="@+id/Score"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
+                android:text="@{@string/score(gameViewModel.score)}"
+                android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="Points: 1400" />
+
+            <TextView
+                android:id="@+id/Lives"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="16dp"
+                android:text="@{@string/lives(gameViewModel.score)}"
+                android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="Lives: 4" />
+
+            <TextView
                 android:id="@+id/Catagory"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginVertical="20dp"
+                android:layout_marginTop="16dp"
                 android:text="CATAGORY"
+                android:textAppearance="@style/TextAppearance.MaterialComponents.Headline5"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/GuessButton"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toBottomOf="@+id/Score" />
+
 
             <TextView
                 android:id="@+id/WordToBeGuessed"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginVertical="20dp"
                 android:text="@{gameViewModel.shownWordToBeGuessed}"
+                android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/Catagory"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/Catagory" />
+                app:layout_constraintTop_toBottomOf="@+id/Catagory"
+                tools:text="_ _ _ _ _ _" />
 
-
-            <ImageView
-                android:id="@+id/LuckyWheel"
-                android:layout_width="354dp"
-                android:layout_height="346dp"
-                android:layout_marginVertical="20dp"
-                android:layout_marginTop="20dp"
-                android:src="@drawable/lucky_wheel"
+            <RelativeLayout
+                android:id="@+id/relativelayout"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:layout_marginTop="16dp"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/WordToBeGuessed" />
+                app:layout_constraintTop_toBottomOf="@+id/WordToBeGuessed">
 
-            <TextView
-                android:id="@+id/WheelResult"
-                android:layout_width="52dp"
-                android:layout_height="19dp"
-                android:text="@{gameViewModel.wheelResult}"
-                android:textAlignment="center"
-                app:layout_constraintBottom_toBottomOf="@+id/LuckyWheel"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="1.0"
-                app:layout_constraintStart_toEndOf="@+id/LuckyWheel"
-                app:layout_constraintTop_toTopOf="@+id/LuckyWheel"
-                app:layout_constraintVertical_bias="0.495" />
+                <ImageView
+                    android:id="@+id/LuckyWheel"
+                    android:layout_width="354dp"
+                    android:layout_height="346dp"
+                    android:layout_marginStart="0dp"
+                    android:layout_marginTop="0dp"
+                    android:layout_marginEnd="0dp"
+                    android:src="@drawable/lucky_wheel"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent" />
+
+                <TextView
+                    android:id="@+id/WheelResult"
+                    android:layout_width="105dp"
+                    android:layout_height="43dp"
+                    android:layout_alignLeft="@id/LuckyWheel"
+                    android:layout_alignTop="@id/LuckyWheel"
+                    android:layout_alignEnd="@id/LuckyWheel"
+                    android:layout_alignBottom="@id/LuckyWheel"
+                    android:layout_marginStart="1dp"
+                    android:layout_marginLeft="244dp"
+                    android:layout_marginTop="163dp"
+                    android:layout_marginEnd="5dp"
+                    android:layout_marginBottom="139dp"
+                    android:background="@color/white"
+                    android:gravity="center"
+                    android:text="@{gameViewModel.wheelResult}"
+                    android:textAlignment="center"
+                    tools:text="1000" />
+            </RelativeLayout>
 
             <TextView
                 android:id="@+id/GameQuote"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginVertical="20dp"
+                android:layout_marginTop="16dp"
                 android:text="GUESS A LETTER!"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/WordToBeGuessed"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/LuckyWheel"
-                />
+                app:layout_constraintTop_toBottomOf="@+id/relativelayout" />
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/LetterInput"
-                android:layout_width="74dp"
-                android:layout_height="48dp"
+                android:layout_width="100dp"
+                android:layout_height="40dp"
                 android:layout_marginVertical="10dp"
+                android:layout_marginTop="16dp"
                 android:hint="letter"
+
+                android:maxLength="1"
                 android:textAlignment="center"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/GameQuote"
-                android:maxLength="1"
-                />
+                app:layout_constraintTop_toBottomOf="@+id/GameQuote" />
 
             <Button
                 android:id="@+id/GuessButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginVertical="20dp"
+                android:layout_marginTop="16dp"
                 android:text="Guess"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/LuckyWheel"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/LetterInput" />
 
