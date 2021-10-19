@@ -35,10 +35,10 @@ class GameViewModel : ViewModel() {
 
     private fun getNextWord() {
         //TODO: add catagory vv
-        this.currentWordToBeGuessed = allWordsList.random()
+        currentWordToBeGuessed = allWordsList.random()
         _shownWordToBeGuessed = ""
 
-        for (i in 0..this.currentWordToBeGuessed.length) _shownWordToBeGuessed += "_"
+        for (i in currentWordToBeGuessed.indices) _shownWordToBeGuessed += "_"
         _shownWordToBeGuessed = insertSpacesBetweenLetters(_shownWordToBeGuessed)
 
         if (wordsList.contains(this.currentWordToBeGuessed)) {
@@ -69,20 +69,20 @@ class GameViewModel : ViewModel() {
         }
         timesOfLuckyWheelSpins++
         //Avoid getting bankrupt when player is already bankrupt (eg. at game start)
-        if ((_score==0 && _wheelResult=="Bankrupt")
+        if ((score==0 && wheelResult=="Bankrupt")
             //Avoid Extra Turn or Miss Turn when game is just started TODO: should the game play like this??
             || ((timesOfLuckyWheelSpins==1)
-                    && (_wheelResult=="Extra Turn" || _wheelResult=="Miss Turn")))
+                    && (wheelResult=="Extra Turn" || wheelResult=="Miss Turn")))
                         spinLuckyWheel()
     }
 
-    fun isUserImputMatch(playerInputLetter: Char): Boolean {
+    fun isUserInputMatch(playerInputLetter: Char): Boolean {
         val playerInputLetterLC = playerInputLetter.lowercaseChar()
             var tempWordSoFar = ""
-        playerGuessedCharacters.add(playerInputLetterLC)
 
         if (currentWordToBeGuessed.contains(playerInputLetterLC)
-                && !playerGuessedCharacters.contains(playerInputLetterLC)) {
+            && !playerGuessedCharacters.contains(playerInputLetterLC)) {
+            playerGuessedCharacters.add(playerInputLetterLC)
 
                 for (i in currentWordToBeGuessed.indices) {
                     if (playerGuessedCharacters.contains(currentWordToBeGuessed[i])){
@@ -95,12 +95,15 @@ class GameViewModel : ViewModel() {
                 spinLuckyWheel()
                 return true
             }
-        return false
+        else {
+            loseLife()
+            return false
+        }
     }
 
     private fun doWheelAction(occurrencesOfPlayerInputLetter: Int) {
             if (wheelResult.isDigitsOnly()){
-                val wheelValue = _wheelResult.toInt()
+                val wheelValue = wheelResult.toInt()
                 _score+= (wheelValue * occurrencesOfPlayerInputLetter)
             }
             else if (wheelResult == "Bankrupt") _score = 0
@@ -110,8 +113,7 @@ class GameViewModel : ViewModel() {
     }
 
     private fun loseLife() {
-        //TODO: endgame skal ske i fragment måske?
-        TODO("Not yet implemented")
+    _lives--
     }
 
     private fun insertSpacesBetweenLetters(s: String): String{

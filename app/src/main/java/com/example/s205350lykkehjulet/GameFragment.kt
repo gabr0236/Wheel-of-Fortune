@@ -47,15 +47,17 @@ class GameFragment : Fragment() {
         //Resets LetterInput field
         binding.LetterInput.setText("")
 
-        if (viewModel.isUserImputMatch(playerInputLetter)) {
+        if (viewModel.isUserInputMatch(playerInputLetter)) {
             updateWordToBeGuessedOnScreen()
             updateLuckyWheelResult()
             updateScore()
             updateLives()
             setErrorTextField(false)
         } else {
-            //TODO: fix vvv (value!!)
-                setErrorTextField(true)
+            updateLives()
+            updateLuckyWheelResult()
+            updateScore()
+            setErrorTextField(true)
             if (viewModel.lives<=0) {
                 endGame()
             }
