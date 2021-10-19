@@ -85,7 +85,7 @@ class GameFragment : Fragment() {
     private fun setErrorTextField(error: Boolean) {
         if (error) {
             binding.textField.isErrorEnabled = true
-            binding.LetterInput.error = "The word does not contain an ${viewModel.lastGuessedChar}"
+            binding.LetterInput.error = "Oh no! The word does not contain a \"${viewModel.lastGuessedChar}\""
         } else {
             binding.textField.isErrorEnabled = false
             binding.LetterInput.text = null
