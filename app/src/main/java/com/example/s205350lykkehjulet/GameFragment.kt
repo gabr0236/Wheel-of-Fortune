@@ -52,8 +52,10 @@ class GameFragment : Fragment() {
             updateLuckyWheelResult()
             updateScore()
             updateLives()
+            setErrorTextField(false)
         } else {
             //TODO: fix vvv (value!!)
+                setErrorTextField(true)
             if (viewModel.lives<=0) {
                 endGame()
             }
@@ -80,13 +82,13 @@ class GameFragment : Fragment() {
         binding.WheelResult.text = viewModel.wheelResult
     }
 
-    //private fun setErrorTextField(error: Boolean) {
-    //    if (error) {
-    //        binding. = true
-    //        binding.LetterInput.error = "The word does not contain an ${viewModel.lastGuessedChar}"
-    //    } else {
-    //        binding.textField.setErrorEnabled()
-    //        binding.textInputEditText.text = null
-    //    }
-    //}
+    private fun setErrorTextField(error: Boolean) {
+        if (error) {
+            binding.textField.isErrorEnabled = true
+            binding.LetterInput.error = "The word does not contain an ${viewModel.lastGuessedChar}"
+        } else {
+            binding.textField.isErrorEnabled = false
+            binding.LetterInput.text = null
+        }
+    }
 }
