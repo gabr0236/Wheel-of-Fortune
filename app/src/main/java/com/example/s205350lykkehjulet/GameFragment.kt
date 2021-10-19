@@ -19,7 +19,6 @@ class GameFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        print("Binding")
         // Inflate the layout XML file and return a binding object instance
         binding = inflate(inflater, R.layout.game_fragment, container, false)
         return binding.root
@@ -40,25 +39,37 @@ class GameFragment : Fragment() {
     }
 
     private fun submitGuess() {
-        val playerInputLetter = binding.LetterInput.text.toString()
-        if (viewModel.isUserImputMatch(playerInputLetter[0])) {
+        val playerInputLetter = binding.LetterInput.text?.firstOrNull()
+
+        //PlayerInputLetter cannot be null beyond this point
+        playerInputLetter ?: return
+
+        //Resets LetterInput field
+        binding.LetterInput.setText("")
+
+        if (viewModel.isUserImputMatch(playerInputLetter)) {
             updateWordToBeGuessedOnScreen()
             updateLuckyWheelResult()
+            updateScore()
+            updateLives()
         } else {
-            //setErrorTextField(true)
             //TODO: fix vvv (value!!)
-            if (viewModel.lives <=0) {
+            if (viewModel.lives<=0) {
                 endGame()
             }
         }
     }
 
-    private fun endGame() {
-        TODO("Not yet implemented")
+    private fun updateLives() {
+        binding.Lives.text = getString(R.string.lives, viewModel.lives.toString())
     }
 
-    private fun setErrorTextField(b: Boolean) {
-    //TODO: implement (prøv lambda?)
+    private fun updateScore() {
+        binding.Score.text = getString(R.string.score, viewModel.score.toString())
+    }
+
+    private fun endGame() {
+        TODO("Not yet implemented")
     }
 
     private fun updateWordToBeGuessedOnScreen() {
@@ -68,4 +79,14 @@ class GameFragment : Fragment() {
     private fun updateLuckyWheelResult(){
         binding.WheelResult.text = viewModel.wheelResult
     }
+
+    //private fun setErrorTextField(error: Boolean) {
+    //    if (error) {
+    //        binding. = true
+    //        binding.LetterInput.error = "The word does not contain an ${viewModel.lastGuessedChar}"
+    //    } else {
+    //        binding.textField.setErrorEnabled()
+    //        binding.textInputEditText.text = null
+    //    }
+    //}
 }

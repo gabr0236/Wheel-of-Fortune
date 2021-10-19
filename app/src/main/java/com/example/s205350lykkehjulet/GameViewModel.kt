@@ -13,10 +13,12 @@ class GameViewModel : ViewModel() {
     private var _lives = 5
     val lives: Int
         get() = _lives
-
+    private var timesOfLuckyWheelSpins = 0
     private var wordsList = mutableListOf<String>()
     private lateinit var currentWordToBeGuessed: String
     private var playerGuessedCharacters = mutableListOf<Char>()
+    val lastGuessedChar: Char
+        get() = playerGuessedCharacters.last()
 
     private lateinit var _shownWordToBeGuessed: String
     val shownWordToBeGuessed: String
@@ -65,8 +67,13 @@ class GameViewModel : ViewModel() {
             22 ->        "Miss Turn"     //1 x Lost Turn
             else -> throw Exception("Random generator not generating a number from 1 to 22")
         }
+        timesOfLuckyWheelSpins++
         //Avoid getting bankrupt when player is already bankrupt (eg. at game start)
-        if (_score==0 && _wheelResult=="Bankrupt") spinLuckyWheel()
+        if ((_score==0 && _wheelResult=="Bankrupt")
+            //Avoid Extra Turn or Miss Turn when game is just started TODO: should the game play like this??
+            || ((timesOfLuckyWheelSpins==1)
+                    && (_wheelResult=="Extra Turn" || _wheelResult=="Miss Turn")))
+                        spinLuckyWheel()
     }
 
     //TODO: måske nemmere med char?
@@ -92,7 +99,7 @@ class GameViewModel : ViewModel() {
     }
 
     private fun doWheelAction(occurrencesOfPlayerInputLetter: Int) {
-            if (_wheelResult.isDigitsOnly()){
+            if (wheelResult.isDigitsOnly()){
                 val wheelValue = _wheelResult.toInt()
                 _score+= (wheelValue * occurrencesOfPlayerInputLetter)
             }
