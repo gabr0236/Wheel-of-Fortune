@@ -71,10 +71,11 @@ class GameViewModel : ViewModel() {
 
     //TODO: måske nemmere med char?
     fun isUserImputMatch(playerInputLetter: Char): Boolean {
+        val playerInputLetterLC = playerInputLetter.lowercaseChar()
             var tempWordSoFar = ""
-            if (currentWordToBeGuessed.contains(playerInputLetter)
-                && !playerGuessedCharacters.contains(playerInputLetter)) {
-                playerGuessedCharacters.add(playerInputLetter)
+            if (currentWordToBeGuessed.contains(playerInputLetterLC)
+                && !playerGuessedCharacters.contains(playerInputLetterLC)) {
+                playerGuessedCharacters.add(playerInputLetterLC)
 
                 for (i in currentWordToBeGuessed.indices) {
                     if (playerGuessedCharacters.contains(currentWordToBeGuessed[i])){
@@ -82,7 +83,7 @@ class GameViewModel : ViewModel() {
                     }
                     else tempWordSoFar += "_"
                 }
-                doWheelAction(currentWordToBeGuessed.filter { it == playerInputLetter }.count())
+                doWheelAction(currentWordToBeGuessed.filter { it == playerInputLetterLC }.count())
                 _shownWordToBeGuessed = insertSpacesBetweenLetters(tempWordSoFar)
                 spinLuckyWheel()
                 return true
