@@ -8,6 +8,7 @@ import androidx.core.text.isDigitsOnly
 import androidx.databinding.DataBindingUtil.inflate
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import com.example.s205350lykkehjulet.databinding.GameFragmentBinding
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 
@@ -61,6 +62,7 @@ class GameFragment : Fragment() {
             updateLuckyWheelResult()
             updateScore()
             updateLives()
+            if (viewModel.isWon) findNavController().navigate(R.id.action_gameFragment_to_winningScreen)
         } else {
             updateLives()
             updateLuckyWheelResult()

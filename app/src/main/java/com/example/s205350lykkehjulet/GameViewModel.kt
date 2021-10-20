@@ -5,6 +5,7 @@ import androidx.lifecycle.ViewModel
 
 class GameViewModel : ViewModel() {
 
+
     private var _score = 0
     //Use of Backing Properties to return immutable object
     val score: Int
@@ -13,11 +14,15 @@ class GameViewModel : ViewModel() {
     private var _lives = 5
     val lives: Int
         get() = _lives
+
+    private var _isWon = false
+    val isWon: Boolean
+        get() = _isWon
     private var timesOfLuckyWheelSpins = 0
     private var wordsList = mutableListOf<String>()
     private lateinit var currentWordToBeGuessed: String
     private var playerGuessedCharacters = mutableListOf<Char>()
-    val lastGuessedChar: Char
+    private val lastGuessedChar: Char
         get() = playerGuessedCharacters.last()
 
     private lateinit var _shownWordToBeGuessed: String
@@ -91,6 +96,7 @@ class GameViewModel : ViewModel() {
                     else tempWordSoFar += "_"
                 }
                 _shownWordToBeGuessed = insertSpacesBetweenLetters(tempWordSoFar)
+            if (!shownWordToBeGuessed.contains("_")) _isWon = true
                 return true
             }
         else {

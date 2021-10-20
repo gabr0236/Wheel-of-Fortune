@@ -4,10 +4,13 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-
         <variable
             name="gameViewModel"
             type="com.example.s205350lykkehjulet.GameViewModel" />
+
+        <variable
+            name="gameFragment"
+            type="com.example.s205350lykkehjulet.GameFragment" />
     </data>
 
     <ScrollView
@@ -132,7 +135,6 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/GameQuote">
-
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/LetterInput"

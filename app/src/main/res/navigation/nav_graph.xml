@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/gameFragment">
+    <fragment
+        android:id="@+id/winningScreen"
+        android:name="com.example.s205350lykkehjulet.WinningScreen"
+        android:label="fragment_winning_screen"
+        tools:layout="@layout/fragment_winning_screen" >
+        <action
+            android:id="@+id/action_winningScreen_to_gameFragment"
+            app:destination="@id/gameFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/losingScreen"
+        android:name="com.example.s205350lykkehjulet.LosingScreen"
+        android:label="fragment_losing_screen"
+        tools:layout="@layout/fragment_losing_screen" >
+        <action
+            android:id="@+id/action_losingScreen_to_gameFragment"
+            app:destination="@id/gameFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/gameFragment"
+        android:name="com.example.s205350lykkehjulet.GameFragment"
+        android:label="GameFragment"
+        tools:layout="@layout/game_fragment" >
+        <action
+            android:id="@+id/action_gameFragment_to_winningScreen"
+            app:destination="@id/winningScreen" />
+        <action
+            android:id="@+id/action_gameFragment_to_losingScreen"
+            app:destination="@id/losingScreen" />
+    </fragment>
+</navigation>
