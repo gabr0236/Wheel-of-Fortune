@@ -21,14 +21,16 @@ class GameFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View {
+    ): View? {
         // Inflate the layout XML file and return a binding object instance
-        binding = inflate(inflater, R.layout.game_fragment, container, false)
+        val fragmentBinding = GameFragmentBinding.inflate(inflater, container, false)
+        binding=fragmentBinding
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        binding.gameFragment = this
 
         // Set the viewModel for data binding - this allows the bound layout access
         // to all the data in the VieWModel
@@ -62,7 +64,7 @@ class GameFragment : Fragment() {
             updateLuckyWheelResult()
             updateScore()
             updateLives()
-            if (viewModel.isWon) findNavController().navigate(R.id.action_gameFragment_to_winningScreen)
+            if (viewModel.isWon) findNavController().navigate(R.id.action_gameFragment_to_gameWonFragment)
         } else {
             updateLives()
             updateLuckyWheelResult()

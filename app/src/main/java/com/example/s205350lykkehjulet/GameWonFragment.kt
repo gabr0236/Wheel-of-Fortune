@@ -5,13 +5,11 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.viewModels
-import com.example.s205350lykkehjulet.databinding.FragmentWinningScreenBinding
-import com.example.s205350lykkehjulet.databinding.GameFragmentBinding
+import com.example.s205350lykkehjulet.databinding.GameWonFragmentBinding
 
-class WinningScreen : Fragment() {
-    private var binding: FragmentWinningScreenBinding? = null
+class GameWonFragment : Fragment() {
+    private var binding: GameWonFragmentBinding? = null
 
     private val viewModel: GameViewModel by viewModels()
 
@@ -20,7 +18,7 @@ class WinningScreen : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         // Inflate the layout XML file and return a binding object instance
-        val fragmentBinding = FragmentWinningScreenBinding.inflate(inflater, container, false)
+        val fragmentBinding = GameWonFragmentBinding.inflate(inflater, container, false)
         binding = fragmentBinding
         return fragmentBinding.root
     }
@@ -33,10 +31,10 @@ class WinningScreen : Fragment() {
             lifecycleOwner = viewLifecycleOwner
 
             // Assign the view model to a property in the binding class
-            gameViewModel = viewModel
+            binding!!.gameViewModel = viewModel
 
             // Assign the fragment
-            winningScreenFragment = this@WinningScreen
+            winningScreenFragment = this@GameWonFragment
         }
     }
 }
