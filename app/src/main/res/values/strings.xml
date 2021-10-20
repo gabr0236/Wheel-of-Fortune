@@ -2,5 +2,9 @@
     <string name="app_name">Wheel of Fortune</string>
     <string name="score">Score: %s</string>
     <string name="lives">Lives: %s</string>
+    <string name="guess_and_spin">Guess &amp; Spin</string>
+    <string name="category">Category: %s</string>
+    <string name="game_quote">You rolled %s! Guess a letter!</string>
+    <string name="letter_hint">Letter</string>
 
 </resources>

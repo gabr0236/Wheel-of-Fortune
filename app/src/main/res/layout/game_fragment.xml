@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+
         <variable
             name="gameViewModel"
             type="com.example.s205350lykkehjulet.GameViewModel" />
@@ -24,9 +24,9 @@
                 android:id="@+id/Score"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:includeFontPadding="false"
                 android:layout_marginStart="@dimen/default_padding"
                 android:layout_marginTop="@dimen/default_padding"
+                android:includeFontPadding="false"
                 android:text="@{@string/score(gameViewModel.score)}"
                 android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6"
                 app:layout_constraintStart_toStartOf="parent"
@@ -37,9 +37,9 @@
                 android:id="@+id/Lives"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:includeFontPadding="false"
                 android:layout_marginTop="@dimen/default_padding"
                 android:layout_marginEnd="@dimen/default_padding"
+                android:includeFontPadding="false"
                 android:text="@{@string/lives(gameViewModel.lives)}"
                 android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -51,11 +51,12 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/default_padding"
-                android:text="CATAGORY"
+                android:text="@string/category"
                 android:textAppearance="@style/TextAppearance.MaterialComponents.Body1"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/Score" />
+                app:layout_constraintTop_toBottomOf="@+id/Score"
+                tools:text="Animal" />
 
 
             <TextView
@@ -67,7 +68,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/Catagory"
-                tools:text="_ _ _ _ _ _" />
+                tools:text="_ _ a _ _ _" />
 
             <RelativeLayout
                 android:id="@+id/relativelayout"
@@ -82,8 +83,8 @@
                     android:id="@+id/LuckyWheel"
                     android:layout_width="300dp"
                     android:layout_height="300dp"
-                    android:gravity="center"
                     android:layout_centerHorizontal="true"
+                    android:gravity="center"
                     android:src="@drawable/lucky_wheel" />
 
                 <TextView
@@ -95,7 +96,6 @@
                     android:layout_alignEnd="@id/LuckyWheel"
                     android:layout_alignBottom="@id/LuckyWheel"
                     android:layout_marginStart="1dp"
-                    android:layout_marginLeft="177dp"
                     android:layout_marginTop="135dp"
                     android:layout_marginEnd="8dp"
                     android:layout_marginBottom="125dp"
@@ -108,40 +108,39 @@
 
             <TextView
                 android:id="@+id/GameQuote"
-                android:textAppearance="@style/TextAppearance.MaterialComponents.Body1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/default_padding"
-                android:text="You rolled 1000! Guess a letter!"
+                android:text="@string/game_quote"
+                android:textAppearance="@style/TextAppearance.MaterialComponents.Body1"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/relativelayout" />
+                app:layout_constraintTop_toBottomOf="@+id/relativelayout"
+                tools:text="You rolled 1000! Guess a letter!" />
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/textField"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="100dp"
                 android:layout_height="wrap_content"
-                android:hint="letter"
+                android:layout_marginVertical="@dimen/default_padding"
+                android:layout_marginTop="@dimen/default_padding"
+                android:hint="@string/letter_hint"
+                android:includeFontPadding="false"
                 android:textAlignment="center"
                 android:textAppearance="@style/TextAppearance.MaterialComponents.Body2"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/GameQuote"
-                android:includeFontPadding="false"
-                android:layout_marginTop="@dimen/default_padding"
-                android:layout_marginVertical="@dimen/default_padding"
+                app:layout_constraintTop_toBottomOf="@+id/GameQuote">
 
 
-                >
-
-
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/LetterInput"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:maxLength="1"
-                android:digits="ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz" />
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/LetterInput"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:digits="ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz"
+                    android:maxLength="1"
+                    android:gravity="center_horizontal"/>
             </com.google.android.material.textfield.TextInputLayout>
 
             <Button
@@ -149,7 +148,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/default_padding"
-                android:text="Guess &amp; Spin Again"
+                android:text="@string/guess_and_spin"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/textField" />
