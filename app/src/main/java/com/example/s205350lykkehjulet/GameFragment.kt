@@ -4,10 +4,12 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.text.isDigitsOnly
 import androidx.databinding.DataBindingUtil.inflate
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import com.example.s205350lykkehjulet.databinding.GameFragmentBinding
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 
 
 class GameFragment : Fragment() {
@@ -42,17 +44,23 @@ class GameFragment : Fragment() {
         val playerInputLetter = binding.LetterInput.text?.firstOrNull()
 
         //PlayerInputLetter cannot be null beyond this point
+        //TODO add this throughout the code
         playerInputLetter ?: return
 
         //Resets LetterInput field
         binding.LetterInput.setText("")
 
         if (viewModel.isUserInputMatch(playerInputLetter)) {
+            viewModel.doWheelAction()
+            setErrorTextField(false)
+            viewModel.spinLuckyWheel()
+            if (!viewModel.wheelResult.isDigitsOnly()) {
+                showJokerDialog()
+            }
             updateWordToBeGuessedOnScreen()
             updateLuckyWheelResult()
             updateScore()
             updateLives()
-            setErrorTextField(false)
         } else {
             updateLives()
             updateLuckyWheelResult()
@@ -62,6 +70,46 @@ class GameFragment : Fragment() {
                 endGame()
             }
         }
+    }
+
+    private fun showJokerDialog(){
+        when (viewModel.wheelResult) {
+            "Miss Turn"  -> showMissTurnDialog()
+            "Extra Turn" -> showExtraTurnDialog()
+            "Bankrupt"   -> showBankruptDialog()
+        }
+        viewModel.doWheelAction()
+        viewModel.spinLuckyWheel()
+
+        //In case of rolling this again
+        if (viewModel.wheelResult=="Extra Turn" || viewModel.wheelResult=="Miss Turn"){
+            showJokerDialog()
+        }
+    }
+
+    private fun showExtraTurnDialog() {
+        MaterialAlertDialogBuilder(requireContext())
+            .setTitle(viewModel.wheelResult)
+            .setMessage("Yay! You rolled \"${viewModel.wheelResult}\" and gained a life")
+            .setCancelable(true)
+            .show()
+        //TODO add skip button og evt gør dynamisk så der ikke er 3 funktioner
+    }
+
+    private fun showMissTurnDialog() {
+        MaterialAlertDialogBuilder(requireContext())
+            .setTitle(viewModel.wheelResult)
+            .setMessage("Dang! You rolled \"${viewModel.wheelResult}\" and lost a life")
+            .setCancelable(true)
+            .show()
+    }
+
+    private fun showBankruptDialog() {
+        MaterialAlertDialogBuilder(requireContext())
+            .setTitle(viewModel.wheelResult)
+            .setMessage("Dang! You rolled \"${viewModel.wheelResult}\" and lost a your points :(")
+            .setCancelable(true)
+            .show()
     }
 
     private fun updateLives() {
@@ -87,7 +135,7 @@ class GameFragment : Fragment() {
     private fun setErrorTextField(error: Boolean) {
         if (error) {
             binding.textField.isErrorEnabled = true
-            binding.LetterInput.error = "Oh no! The word does not contain a \"${viewModel.lastGuessedChar}\""
+            binding.LetterInput.error = "Oh no! Wrong Guess." // \"${viewModel.lastGuessedChar}\""
         } else {
             binding.textField.isErrorEnabled = false
             binding.LetterInput.text = null

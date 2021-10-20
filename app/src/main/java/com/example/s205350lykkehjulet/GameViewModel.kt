@@ -51,7 +51,7 @@ class GameViewModel : ViewModel() {
         }
     }
 
-    private fun spinLuckyWheel(){
+    fun spinLuckyWheel(){
         //22 Different fields in total
         val random = (1..22).random()
         _wheelResult = when (random) {
@@ -90,21 +90,21 @@ class GameViewModel : ViewModel() {
                     }
                     else tempWordSoFar += "_"
                 }
-                doWheelAction(currentWordToBeGuessed.filter { it == playerInputLetterLC }.count())
                 _shownWordToBeGuessed = insertSpacesBetweenLetters(tempWordSoFar)
-                spinLuckyWheel()
                 return true
             }
         else {
+            playerGuessedCharacters.add(playerInputLetterLC)
             loseLife()
+            spinLuckyWheel()
             return false
         }
     }
 
-    private fun doWheelAction(occurrencesOfPlayerInputLetter: Int) {
+    fun doWheelAction() {
             if (wheelResult.isDigitsOnly()){
                 val wheelValue = wheelResult.toInt()
-                _score+= (wheelValue * occurrencesOfPlayerInputLetter)
+                _score+= (wheelValue * currentWordToBeGuessed.filter { it == lastGuessedChar }.count())
             }
             else if (wheelResult == "Bankrupt") _score = 0
             else if (wheelResult == "Miss Turn") loseLife()
