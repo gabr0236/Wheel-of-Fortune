@@ -5,7 +5,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.text.isDigitsOnly
-import androidx.databinding.DataBindingUtil.inflate
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
@@ -21,7 +20,7 @@ class GameFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         // Inflate the layout XML file and return a binding object instance
         val fragmentBinding = GameFragmentBinding.inflate(inflater, container, false)
         binding = fragmentBinding
@@ -93,12 +92,22 @@ class GameFragment : Fragment() {
     }
 
     private fun showJokerDialog() {
-        when (viewModel.wheelResult) {
-            "Miss Turn" -> showMissTurnDialog()
-            "Extra Turn" -> showExtraTurnDialog()
-            "Bankrupt" -> showBankruptDialog()
+        val message: String = when(viewModel.wheelResult) {
+            "Miss Turn" -> "Dang! You rolled \"${viewModel.wheelResult}\" and lost a life"
+            "Extra Turn" -> "Yay! You rolled \"${viewModel.wheelResult}\" and gained a life"
+            "Bankrupt" -> "Dang! You rolled \"${viewModel.wheelResult}\" and lost a your points :("
+            else -> "Error" //TODO: udenom det her? evt kast exception
         }
-        //TODO: det her skal ikke ske her vv
+        MaterialAlertDialogBuilder(requireContext())
+            .setTitle(viewModel.wheelResult)
+            .setMessage(message)
+            .setCancelable(true)
+            .show()
+
+        continueGameAfterJokerDialog()
+    }
+
+    private fun continueGameAfterJokerDialog() {
         viewModel.doWheelAction()
         if (viewModel.lives <= 0) {
             findNavController().navigate(R.id.action_gameFragment_to_gameLostFragment)
@@ -107,34 +116,11 @@ class GameFragment : Fragment() {
         viewModel.spinLuckyWheel()
 
         //In case of rolling this again
-        if (viewModel.wheelResult == "Extra Turn" || viewModel.wheelResult == "Miss Turn") {
+        if (viewModel.wheelResult == "Extra Turn"
+            || viewModel.wheelResult == "Miss Turn"
+            || viewModel.wheelResult == "Bankrupt") {
             showJokerDialog()
         }
-    }
-
-    private fun showExtraTurnDialog() {
-        MaterialAlertDialogBuilder(requireContext())
-            .setTitle(viewModel.wheelResult)
-            .setMessage("Yay! You rolled \"${viewModel.wheelResult}\" and gained a life")
-            .setCancelable(true)
-            .show()
-        //TODO add skip button og evt gør dynamisk så der ikke er 3 funktioner
-    }
-
-    private fun showMissTurnDialog() {
-        MaterialAlertDialogBuilder(requireContext())
-            .setTitle(viewModel.wheelResult)
-            .setMessage("Dang! You rolled \"${viewModel.wheelResult}\" and lost a life")
-            .setCancelable(true)
-            .show()
-    }
-
-    private fun showBankruptDialog() {
-        MaterialAlertDialogBuilder(requireContext())
-            .setTitle(viewModel.wheelResult)
-            .setMessage("Dang! You rolled \"${viewModel.wheelResult}\" and lost a your points :(")
-            .setCancelable(true)
-            .show()
     }
 
     private fun updateLives() {

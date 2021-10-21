@@ -3,11 +3,8 @@ package com.example.s205350lykkehjulet
 import android.util.Log
 import androidx.core.text.isDigitsOnly
 import androidx.lifecycle.ViewModel
-import java.util.*
 
-
-class GameViewModel() : ViewModel() {
-
+class GameViewModel : ViewModel() {
 
     private var _score = 0
     val score: Int //Use of Backing Properties to return immutable object
@@ -111,18 +108,20 @@ class GameViewModel() : ViewModel() {
 
     fun isUserInputMatch(playerInputLetter: Char): Boolean {
         val playerInputLetterLC = playerInputLetter.lowercaseChar()
-        if (currentWordToBeGuessed.contains(playerInputLetterLC, ignoreCase = true)
+        return if (currentWordToBeGuessed.contains(playerInputLetterLC, ignoreCase = true)
             && !playerGuessedCharacters.contains(playerInputLetterLC)
         ) {
             playerGuessedCharacters.add(playerInputLetterLC)
             _shownWordToBeGuessed = insertSpacesBetweenLetters(updateHiddenWordForDisplay())
-            if (!shownWordToBeGuessed.contains("_")) { _isWon = true }
-            return true
+            if (!shownWordToBeGuessed.contains("_")) {
+                _isWon = true
+            }
+            true
         } else {
             //TODO: udenfor if-else vv ??
             playerGuessedCharacters.add(playerInputLetterLC)
             loseLife()
-            return false
+            false
         }
     }
 
@@ -139,12 +138,15 @@ class GameViewModel() : ViewModel() {
     }
 
     fun doWheelAction() {
-        if (wheelResult.isDigitsOnly()) {
-            val wheelValue = wheelResult.toInt()
-            _score += (wheelValue * currentWordToBeGuessed.filter { it == lastGuessedChar }.count())
-        } else if (wheelResult == "Bankrupt") _score = 0
-        else if (wheelResult == "Miss Turn") loseLife()
-        else if (wheelResult == "Extra Turn") _lives++
+        when {
+            wheelResult.isDigitsOnly() -> {
+                val wheelValue = wheelResult.toInt()
+                _score += (wheelValue * currentWordToBeGuessed.filter { it == lastGuessedChar }.count())
+            }
+            wheelResult == "Bankrupt" -> _score = 0
+            wheelResult == "Miss Turn" -> loseLife()
+            wheelResult == "Extra Turn" -> _lives++
+        }
     }
 
     private fun loseLife() {
@@ -155,7 +157,7 @@ class GameViewModel() : ViewModel() {
         return s.replace(".(?!$)".toRegex(), "$0 ")
     }
 
-    fun newGame() {
+    private fun newGame() {
         //TODO: ændre til 5 igen vv
         _lives = 1
         _score = 0
