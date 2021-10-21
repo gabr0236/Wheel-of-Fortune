@@ -1,31 +1,43 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".GameLostFragment">
+    xmlns:tools="http://schemas.android.com/tools">
 
-    <!-- TODO: Update blank fragment layout -->
+    <data>
+        <variable
+            name="gameViewModel"
+            type="com.example.s205350lykkehjulet.GameViewModel" />
 
-    <TextView
-        android:id="@+id/textView2"
-        android:layout_width="644dp"
-        android:layout_height="381dp"
-        android:layout_marginTop="40dp"
-        android:text="Losing screen"
-        android:textSize="100dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.482"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        <variable
+            name="gameLostFragment"
+            type="com.example.s205350lykkehjulet.GameLostFragment" />
+    </data>
 
-    <Button
-        android:id="@+id/button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Go to home screen"
-        app:layout_constraintTop_toBottomOf="@+id/textView2"
-        tools:layout_editor_absoluteX="289dp" />
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".GameLostFragment">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="345dp"
+            android:layout_height="371dp"
+            android:text="You Lost!"
+            android:textSize="100dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.044" />
+
+        <Button
+            android:id="@+id/playAgainButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Play again"
+            app:layout_constraintTop_toBottomOf="@+id/textView"
+            tools:layout_editor_absoluteX="136dp" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

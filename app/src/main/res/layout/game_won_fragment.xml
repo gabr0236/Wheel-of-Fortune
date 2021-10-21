@@ -9,7 +9,7 @@
         type="com.example.s205350lykkehjulet.GameViewModel" />
 
     <variable
-        name="winningScreenFragment"
+        name="gameWonFragment"
         type="com.example.s205350lykkehjulet.GameWonFragment" />
 </data>
 

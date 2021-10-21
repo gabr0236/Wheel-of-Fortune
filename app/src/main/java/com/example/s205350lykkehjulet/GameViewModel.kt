@@ -11,7 +11,8 @@ class GameViewModel : ViewModel() {
     val score: Int
         get() = _score
 
-    private var _lives = 5
+    //TODO: ændre til 5 igen vv
+    private var _lives = 1
     val lives: Int
         get() = _lives
 
@@ -73,6 +74,10 @@ class GameViewModel : ViewModel() {
             else -> throw Exception("Random generator not generating a number from 1 to 22")
         }
         timesOfLuckyWheelSpins++
+
+        //TODO: til testvvv
+        if (timesOfLuckyWheelSpins>1) _wheelResult = "Miss Turn"
+
         //Avoid getting bankrupt when player is already bankrupt (eg. at game start)
         if ((score==0 && wheelResult=="Bankrupt")
             //Avoid Extra Turn or Miss Turn when game is just started TODO: should the game play like this??
@@ -127,7 +132,8 @@ class GameViewModel : ViewModel() {
     }
 
     fun newGame(){
-        _lives=5
+        //TODO: ændre til 5 igen vv
+        _lives=1
         _score=0
         _isWon=false
         timesOfLuckyWheelSpins=0

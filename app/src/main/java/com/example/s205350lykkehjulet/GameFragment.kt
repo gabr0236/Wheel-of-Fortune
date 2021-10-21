@@ -56,12 +56,14 @@ class GameFragment : Fragment() {
         if (viewModel.isUserInputMatch(playerInputLetter)) {
             viewModel.doWheelAction()
             setErrorTextField(false)
-            viewModel.spinLuckyWheel()
 
             if (viewModel.isWon) {
                 findNavController().navigate(R.id.action_gameFragment_to_gameWonFragment)
+                return
             }
-            else if (!viewModel.wheelResult.isDigitsOnly()) {
+
+            viewModel.spinLuckyWheel()
+            if (!viewModel.wheelResult.isDigitsOnly()) {
                 showJokerDialog()
             }
             updateWordToBeGuessedOnScreen()
@@ -69,13 +71,14 @@ class GameFragment : Fragment() {
             updateScore()
             updateLives()
         } else {
+            if (viewModel.lives<=0) {
+                findNavController().navigate(R.id.action_gameFragment_to_gameLostFragment)
+                return
+            }
             updateLives()
             updateLuckyWheelResult()
             updateScore()
             setErrorTextField(true)
-            if (viewModel.lives<=0) {
-                endGame()
-            }
         }
     }
 
@@ -85,7 +88,12 @@ class GameFragment : Fragment() {
             "Extra Turn" -> showExtraTurnDialog()
             "Bankrupt"   -> showBankruptDialog()
         }
+        //TODO: de her ting skal ske i viewModel?
         viewModel.doWheelAction()
+        if (viewModel.lives<=0) {
+            findNavController().navigate(R.id.action_gameFragment_to_gameLostFragment)
+            return
+        }
         viewModel.spinLuckyWheel()
 
         //In case of rolling this again
@@ -125,10 +133,6 @@ class GameFragment : Fragment() {
 
     private fun updateScore() {
         binding.Score.text = getString(R.string.score, viewModel.score.toString())
-    }
-
-    private fun endGame() {
-        TODO("Not yet implemented")
     }
 
     private fun updateWordToBeGuessedOnScreen() {

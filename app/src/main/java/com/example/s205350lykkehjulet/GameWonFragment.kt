@@ -35,7 +35,7 @@ class GameWonFragment : Fragment() {
             binding!!.gameViewModel = viewModel
 
             // Assign the fragment
-            winningScreenFragment = this@GameWonFragment
+            gameWonFragment = this@GameWonFragment
 
             binding!!.playAgainButton.setOnClickListener {
                 viewModel.newGame()
