@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import com.example.s205350lykkehjulet.databinding.GameWonFragmentBinding
 
 class GameWonFragment : Fragment() {
@@ -35,6 +36,12 @@ class GameWonFragment : Fragment() {
 
             // Assign the fragment
             winningScreenFragment = this@GameWonFragment
+
+            binding!!.playAgainButton.setOnClickListener {
+                viewModel.newGame()
+                findNavController().navigate(R.id.action_gameWonFragment_to_gameFragment)
+            }
+
         }
     }
 }

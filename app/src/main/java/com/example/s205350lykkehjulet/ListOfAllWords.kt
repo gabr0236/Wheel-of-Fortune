@@ -22,7 +22,8 @@ const val MAX_NO_OF_WORDS = 1
 // List with all the words for the Game
 val allWordsList: List<String> =
     listOf(
-        "ab"
+        "ab",
+        "ca"
         //"Briefcase",
         //"Toothpaste",
     )

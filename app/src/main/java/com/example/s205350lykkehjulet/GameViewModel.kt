@@ -125,4 +125,15 @@ class GameViewModel : ViewModel() {
     private fun insertSpacesBetweenLetters(s: String): String{
         return s.replace(".(?!$)".toRegex(), "$0 ")
     }
+
+    fun newGame(){
+        _lives=5
+        _score=0
+        _isWon=false
+        timesOfLuckyWheelSpins=0
+        playerGuessedCharacters = mutableListOf()
+        if (playerGuessedCharacters.isNotEmpty()) throw Exception("PlayerGuessedCharacter array doesnt reset")
+        getNextWord()
+        spinLuckyWheel()
+    }
 }

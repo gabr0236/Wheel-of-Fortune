@@ -57,14 +57,17 @@ class GameFragment : Fragment() {
             viewModel.doWheelAction()
             setErrorTextField(false)
             viewModel.spinLuckyWheel()
-            if (!viewModel.wheelResult.isDigitsOnly()) {
+
+            if (viewModel.isWon) {
+                findNavController().navigate(R.id.action_gameFragment_to_gameWonFragment)
+            }
+            else if (!viewModel.wheelResult.isDigitsOnly()) {
                 showJokerDialog()
             }
             updateWordToBeGuessedOnScreen()
             updateLuckyWheelResult()
             updateScore()
             updateLives()
-            if (viewModel.isWon) findNavController().navigate(R.id.action_gameFragment_to_gameWonFragment)
         } else {
             updateLives()
             updateLuckyWheelResult()
