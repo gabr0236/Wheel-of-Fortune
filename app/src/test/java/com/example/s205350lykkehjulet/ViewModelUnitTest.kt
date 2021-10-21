@@ -20,9 +20,11 @@ class ViewModelUnitTest {
     @Test
     fun loseLifeTest(){
         val lives = viewModel.lives
-        viewModel.isUserInputMatch(("ë").toCharArray()[0])
+        val char: Char = 'ë'
+        viewModel.isUserInputMatch((char))
         assertTrue(viewModel.lives==lives-1)
     }
+
 
 
 }

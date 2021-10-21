@@ -78,7 +78,7 @@ class GameFragment : Fragment() {
         }
     }
 
-    private fun updateView(){
+    private fun updateView() {
         updateLives()
         updateLuckyWheelResult()
         updateScore()
@@ -92,7 +92,7 @@ class GameFragment : Fragment() {
     }
 
     private fun showJokerDialog() {
-        val message: String = when(viewModel.wheelResult) {
+        val message: String = when (viewModel.wheelResult) {
             "Miss Turn" -> "Dang! You rolled \"${viewModel.wheelResult}\" and lost a life"
             "Extra Turn" -> "Yay! You rolled \"${viewModel.wheelResult}\" and gained a life"
             "Bankrupt" -> "Dang! You rolled \"${viewModel.wheelResult}\" and lost a your points :("
@@ -118,7 +118,8 @@ class GameFragment : Fragment() {
         //In case of rolling this again
         if (viewModel.wheelResult == "Extra Turn"
             || viewModel.wheelResult == "Miss Turn"
-            || viewModel.wheelResult == "Bankrupt") {
+            || viewModel.wheelResult == "Bankrupt"
+        ) {
             showJokerDialog()
         }
     }

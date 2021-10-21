@@ -6,6 +6,9 @@
     <string name="category">Category: %s</string>
     <string name="game_quote">You rolled %s! Guess a letter!</string>
     <string name="letter_hint">Letter</string>
+    <string name="you_won">You won!</string>
+    <string name="you_lost">You Lost!</string>
+    <string name="play_again">Play again</string>
     <string-array name="category_and_words">
         <item>Animals,Mountain Lion</item>
         <item>Animals,Spiny Lumpsucker</item>

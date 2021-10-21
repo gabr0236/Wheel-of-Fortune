@@ -5,6 +5,7 @@
     tools:context=".GameFragment">
 
     <data>
+
         <variable
             name="gameViewModel"
             type="com.example.s205350lykkehjulet.GameViewModel" />
@@ -142,8 +143,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:digits="ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz"
-                    android:maxLength="1"
-                    android:gravity="center_horizontal"/>
+                    android:gravity="center_horizontal"
+                    android:maxLength="1" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <Button

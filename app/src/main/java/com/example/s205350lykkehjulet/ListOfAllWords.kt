@@ -17,14 +17,12 @@
 package com.example.s205350lykkehjulet
 
 
-const val MAX_NO_OF_WORDS = 1
-
 // List with all the words for the Game
 val allWordsList: List<String> =
     listOf(
         //"a b",
         //"c a"
-        "Animals,Mountain",
+        "Animals,Mountain Lion",
         "Animals,Spiny Lumpsucker",
         "Animals,Pink Fairy Armadillo",
         "Animals,Rasberry Crazy Ant",

@@ -10,8 +10,7 @@ class GameViewModel : ViewModel() {
     val score: Int //Use of Backing Properties to return immutable object
         get() = _score
 
-    //TODO: ændre til 5 igen vv
-    private var _lives = 1
+    private var _lives = 5
     val lives: Int
         get() = _lives
 
@@ -45,7 +44,7 @@ class GameViewModel : ViewModel() {
 
     private fun getNextWord() {
 
-        //TODO SPØRG vvv
+        //TODO SPØRG vvv BRUG RESOUCEPROVIDER
         //val wordsAndCategories = Resources.getSystem().getStringArray(R.array.category_and_words)
         //val randomWordAndCategory = wordsAndCategories.random().split(",")
         //currentWordToBeGuessed=randomWordAndCategory.first()
@@ -128,7 +127,7 @@ class GameViewModel : ViewModel() {
     private fun updateHiddenWordForDisplay(): String {
         var updatedHiddenWord = ""
         for (i in currentWordToBeGuessed.indices) {
-            if (playerGuessedCharacters.contains(currentWordToBeGuessed[i])
+            if (playerGuessedCharacters.contains(currentWordToBeGuessed[i].lowercaseChar())
                 || currentWordToBeGuessed[i].toString() == " "
             ) {
                 updatedHiddenWord += currentWordToBeGuessed[i]
@@ -141,7 +140,12 @@ class GameViewModel : ViewModel() {
         when {
             wheelResult.isDigitsOnly() -> {
                 val wheelValue = wheelResult.toInt()
-                _score += (wheelValue * currentWordToBeGuessed.filter { it == lastGuessedChar }.count())
+                _score += (wheelValue * currentWordToBeGuessed.filter {
+                    it.equals(
+                        lastGuessedChar,
+                        ignoreCase = true
+                    )
+                }.count())
             }
             wheelResult == "Bankrupt" -> _score = 0
             wheelResult == "Miss Turn" -> loseLife()
@@ -158,8 +162,7 @@ class GameViewModel : ViewModel() {
     }
 
     private fun newGame() {
-        //TODO: ændre til 5 igen vv
-        _lives = 1
+        _lives = 5
         _score = 0
         _isWon = false
         timesOfLuckyWheelSpins = 0
