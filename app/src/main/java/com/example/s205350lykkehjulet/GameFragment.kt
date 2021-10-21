@@ -41,6 +41,8 @@ class GameFragment : Fragment() {
 
         // Setup a click listener for the Submit
         binding.GuessButton.setOnClickListener { submitGuess() }
+        updateGameQuote()
+
     }
 
     private fun submitGuess() {
@@ -70,6 +72,7 @@ class GameFragment : Fragment() {
             updateLuckyWheelResult()
             updateScore()
             updateLives()
+            updateGameQuote()
         } else {
             if (viewModel.lives<=0) {
                 findNavController().navigate(R.id.action_gameFragment_to_gameLostFragment)
@@ -78,8 +81,13 @@ class GameFragment : Fragment() {
             updateLives()
             updateLuckyWheelResult()
             updateScore()
+            updateGameQuote()
             setErrorTextField(true)
         }
+    }
+
+    private fun updateGameQuote() {
+        binding.GameQuote.text = String.format(resources.getString(R.string.game_quote),viewModel.wheelResult)
     }
 
     private fun showJokerDialog(){

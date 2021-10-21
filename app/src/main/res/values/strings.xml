@@ -6,5 +6,19 @@
     <string name="category">Category: %s</string>
     <string name="game_quote">You rolled %s! Guess a letter!</string>
     <string name="letter_hint">Letter</string>
-
+    <string-array name="category_and_words">
+        <item>Animals,Mountain Lion</item>
+        <item>Animals,Spiny Lumpsucker</item>
+        <item>Animals,Pink Fairy Armadillo</item>
+        <item>Animals,Rasberry Crazy Ant</item>
+        <item>Animals,Tasselled Wobbegong</item>
+        <item>Animals,Hellbender</item>
+        <item>Animals,Goblin Shark</item>
+        <item>Movies,The Dark Knight</item>
+        <item>Movies,The Shawshank Redemption</item>
+        <item>Movies,Inception</item>
+        <item>Movies,The Green Mile</item>
+        <item>Movies,Untouchable</item>
+        <item>Movies,Gladiator</item>
+    </string-array>
 </resources>

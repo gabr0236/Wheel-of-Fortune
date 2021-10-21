@@ -22,8 +22,19 @@ const val MAX_NO_OF_WORDS = 1
 // List with all the words for the Game
 val allWordsList: List<String> =
     listOf(
-        "ab",
-        "ca"
-        //"Briefcase",
-        //"Toothpaste",
+        //"a b",
+        //"c a"
+        "Animals,Mountain",
+        "Animals,Spiny Lumpsucker",
+        "Animals,Pink Fairy Armadillo",
+        "Animals,Rasberry Crazy Ant",
+        "Animals,Tasselled Wobbegong",
+        "Animals,Hellbender",
+        "Animals,Goblin Shark",
+        "Movies,The Dark Knight",
+        "Movies,The Shawshank Redemption",
+        "Movies,Inception",
+        "Movies,The Green Mile",
+        "Movies,Untouchable",
+        "Movies,Gladiator"
     )
