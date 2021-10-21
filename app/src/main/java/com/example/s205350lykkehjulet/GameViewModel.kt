@@ -1,11 +1,8 @@
 package com.example.s205350lykkehjulet
 
-import android.content.Context
-import android.content.res.Resources
 import android.util.Log
 import androidx.core.text.isDigitsOnly
 import androidx.lifecycle.ViewModel
-import androidx.test.core.app.ApplicationProvider.getApplicationContext
 import java.util.*
 
 
@@ -26,7 +23,7 @@ class GameViewModel() : ViewModel() {
         get() = _isWon
 
     private lateinit var _category: String
-    private val category: String
+    val category: String
         get() = _category
 
     private lateinit var _shownWordToBeGuessed: String
@@ -46,6 +43,7 @@ class GameViewModel() : ViewModel() {
 
     init {
         newGame()
+        Log.d("initTest", "Init viewmodel called")
     }
 
     private fun getNextWord() {
@@ -60,28 +58,24 @@ class GameViewModel() : ViewModel() {
         // shownwordtobeguessed viser category,
         // den skal matche til lowercase
         val randomWordAndCategory = allWordsList.random().split(",")
-        currentWordToBeGuessed=randomWordAndCategory[0]
-        _category=randomWordAndCategory[1]
+        Log.d("Test", randomWordAndCategory.toString())
+        _category = randomWordAndCategory[0]
+        currentWordToBeGuessed = randomWordAndCategory[1]
         Log.d("Test", currentWordToBeGuessed)
         Log.d("Test", category)
 
         _shownWordToBeGuessed = ""
 
+        createHiddenWordForDisplay()
+        _shownWordToBeGuessed = insertSpacesBetweenLetters(_shownWordToBeGuessed)
+    }
+
+    private fun createHiddenWordForDisplay() {
         for (i in currentWordToBeGuessed.indices) {
             _shownWordToBeGuessed += if (currentWordToBeGuessed[i].toString() == " ") {
                 " "
             } else "_"
         }
-        _shownWordToBeGuessed = insertSpacesBetweenLetters(_shownWordToBeGuessed)
-
-        //if (wordsList.contains(currentWordToBeGuessed)) {
-        //    //TODO: this should eventually end the game
-        //    if (wordsList.count() == allWordsList.count()) throw Exception("All words have been guessed")
-        //    else getNextWord()
-        //
-        //} else {
-        //    wordsList.add(this.currentWordToBeGuessed)
-        //}
     }
 
     fun spinLuckyWheel() {
@@ -117,29 +111,31 @@ class GameViewModel() : ViewModel() {
 
     fun isUserInputMatch(playerInputLetter: Char): Boolean {
         val playerInputLetterLC = playerInputLetter.lowercaseChar()
-        var tempWordSoFar = ""
-
-        if (currentWordToBeGuessed.contains(playerInputLetterLC)
+        if (currentWordToBeGuessed.contains(playerInputLetterLC, ignoreCase = true)
             && !playerGuessedCharacters.contains(playerInputLetterLC)
         ) {
             playerGuessedCharacters.add(playerInputLetterLC)
-
-            for (i in currentWordToBeGuessed.indices) {
-                if (playerGuessedCharacters.contains(currentWordToBeGuessed[i])
-                    || currentWordToBeGuessed[i].toString() == " "
-                ) {
-                    tempWordSoFar += currentWordToBeGuessed[i]
-                } else tempWordSoFar += "_"
-            }
-            _shownWordToBeGuessed = insertSpacesBetweenLetters(tempWordSoFar)
-            if (!shownWordToBeGuessed.contains("_")) _isWon = true
+            _shownWordToBeGuessed = insertSpacesBetweenLetters(updateHiddenWordForDisplay())
+            if (!shownWordToBeGuessed.contains("_")) { _isWon = true }
             return true
         } else {
+            //TODO: udenfor if-else vv ??
             playerGuessedCharacters.add(playerInputLetterLC)
             loseLife()
-            spinLuckyWheel()
             return false
         }
+    }
+
+    private fun updateHiddenWordForDisplay(): String {
+        var updatedHiddenWord = ""
+        for (i in currentWordToBeGuessed.indices) {
+            if (playerGuessedCharacters.contains(currentWordToBeGuessed[i])
+                || currentWordToBeGuessed[i].toString() == " "
+            ) {
+                updatedHiddenWord += currentWordToBeGuessed[i]
+            } else updatedHiddenWord += "_"
+        }
+        return updatedHiddenWord
     }
 
     fun doWheelAction() {
@@ -149,7 +145,6 @@ class GameViewModel() : ViewModel() {
         } else if (wheelResult == "Bankrupt") _score = 0
         else if (wheelResult == "Miss Turn") loseLife()
         else if (wheelResult == "Extra Turn") _lives++
-        else throw Exception("_wheelResult is behaving strangely")
     }
 
     private fun loseLife() {

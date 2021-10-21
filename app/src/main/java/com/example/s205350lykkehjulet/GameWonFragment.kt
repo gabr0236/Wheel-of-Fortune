@@ -38,7 +38,6 @@ class GameWonFragment : Fragment() {
             gameWonFragment = this@GameWonFragment
 
             binding!!.playAgainButton.setOnClickListener {
-                viewModel.newGame()
                 findNavController().navigate(R.id.action_gameWonFragment_to_gameFragment)
             }
 

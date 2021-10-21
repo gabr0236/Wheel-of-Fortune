@@ -39,7 +39,6 @@ class GameLostFragment : Fragment() {
             gameLostFragment = this@GameLostFragment
 
             binding!!.playAgainButton.setOnClickListener {
-                viewModel.newGame()
                 findNavController().navigate(R.id.action_gameLostFragment_to_gameFragment)
             }
 

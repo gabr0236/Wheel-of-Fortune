@@ -24,7 +24,7 @@ class GameFragment : Fragment() {
     ): View? {
         // Inflate the layout XML file and return a binding object instance
         val fragmentBinding = GameFragmentBinding.inflate(inflater, container, false)
-        binding=fragmentBinding
+        binding = fragmentBinding
         return binding.root
     }
 
@@ -40,12 +40,12 @@ class GameFragment : Fragment() {
         binding.lifecycleOwner = viewLifecycleOwner
 
         // Setup a click listener for the Submit
-        binding.GuessButton.setOnClickListener { submitGuess() }
+        binding.GuessButton.setOnClickListener { submitGuessAndSpinWheel() }
         updateGameQuote()
-
+        updateCategory()
     }
 
-    private fun submitGuess() {
+    private fun submitGuessAndSpinWheel() {
         val playerInputLetter = binding.LetterInput.text?.firstOrNull()
 
         //PlayerInputLetter cannot be null beyond this point
@@ -63,49 +63,51 @@ class GameFragment : Fragment() {
                 findNavController().navigate(R.id.action_gameFragment_to_gameWonFragment)
                 return
             }
-
             viewModel.spinLuckyWheel()
             if (!viewModel.wheelResult.isDigitsOnly()) {
                 showJokerDialog()
             }
-            updateWordToBeGuessedOnScreen()
-            updateLuckyWheelResult()
-            updateScore()
-            updateLives()
-            updateGameQuote()
+            updateView()
         } else {
-            if (viewModel.lives<=0) {
+            if (viewModel.lives <= 0) {
                 findNavController().navigate(R.id.action_gameFragment_to_gameLostFragment)
                 return
             }
-            updateLives()
-            updateLuckyWheelResult()
-            updateScore()
-            updateGameQuote()
+            viewModel.spinLuckyWheel()
+            updateView()
             setErrorTextField(true)
         }
     }
 
-    private fun updateGameQuote() {
-        binding.GameQuote.text = String.format(resources.getString(R.string.game_quote),viewModel.wheelResult)
+    private fun updateView(){
+        updateLives()
+        updateLuckyWheelResult()
+        updateScore()
+        updateGameQuote()
+        updateWordToBeGuessedOnScreen()
     }
 
-    private fun showJokerDialog(){
+    private fun updateGameQuote() {
+        binding.GameQuote.text =
+            String.format(resources.getString(R.string.game_quote), viewModel.wheelResult)
+    }
+
+    private fun showJokerDialog() {
         when (viewModel.wheelResult) {
-            "Miss Turn"  -> showMissTurnDialog()
+            "Miss Turn" -> showMissTurnDialog()
             "Extra Turn" -> showExtraTurnDialog()
-            "Bankrupt"   -> showBankruptDialog()
+            "Bankrupt" -> showBankruptDialog()
         }
-        //TODO: de her ting skal ske i viewModel?
+        //TODO: det her skal ikke ske her vv
         viewModel.doWheelAction()
-        if (viewModel.lives<=0) {
+        if (viewModel.lives <= 0) {
             findNavController().navigate(R.id.action_gameFragment_to_gameLostFragment)
             return
         }
         viewModel.spinLuckyWheel()
 
         //In case of rolling this again
-        if (viewModel.wheelResult=="Extra Turn" || viewModel.wheelResult=="Miss Turn"){
+        if (viewModel.wheelResult == "Extra Turn" || viewModel.wheelResult == "Miss Turn") {
             showJokerDialog()
         }
     }
@@ -147,17 +149,22 @@ class GameFragment : Fragment() {
         binding.WordToBeGuessed.text = viewModel.shownWordToBeGuessed
     }
 
-    private fun updateLuckyWheelResult(){
+    private fun updateLuckyWheelResult() {
         binding.WheelResult.text = viewModel.wheelResult
     }
 
     private fun setErrorTextField(error: Boolean) {
         if (error) {
             binding.textField.isErrorEnabled = true
-            binding.LetterInput.error = "Oh no! Wrong Guess." // \"${viewModel.lastGuessedChar}\""
+            binding.LetterInput.error = "Oh no! Wrong Guess."
         } else {
             binding.textField.isErrorEnabled = false
             binding.LetterInput.text = null
         }
+    }
+
+    private fun updateCategory() {
+        binding.Catagory.text =
+            String.format(resources.getString(R.string.category), viewModel.category)
     }
 }
