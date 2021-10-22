@@ -162,7 +162,7 @@ class GameViewModel : ViewModel() {
     }
 
     private fun newGame() {
-        _lives = 5
+        _lives = 1
         _score = 0
         _isWon = false
         timesOfLuckyWheelSpins = 0
