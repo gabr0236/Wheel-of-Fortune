@@ -40,7 +40,6 @@ class GameLostFragment : Fragment() {
             binding!!.playAgainButton.setOnClickListener {
                 findNavController().navigate(R.id.action_gameLostFragment_to_gameFragment)
             }
-
         }
     }
 }

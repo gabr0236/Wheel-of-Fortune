@@ -93,7 +93,9 @@ class GameViewModel : ViewModel() {
         timesOfLuckyWheelSpins++
 
         //TODO: til testvvv
-        //$if (timesOfLuckyWheelSpins>1) _wheelResult = "Miss Turn"
+        //if (timesOfLuckyWheelSpins>1) _wheelResult = "Miss Turn"
+        //if (timesOfLuckyWheelSpins>2) _wheelResult = "Bankrupt"
+
 
         //Avoid getting bankrupt when player is already bankrupt (eg. at game start)
         if ((score == 0 && wheelResult == "Bankrupt")
@@ -162,7 +164,7 @@ class GameViewModel : ViewModel() {
     }
 
     private fun newGame() {
-        _lives = 1
+        _lives = 5
         _score = 0
         _isWon = false
         timesOfLuckyWheelSpins = 0

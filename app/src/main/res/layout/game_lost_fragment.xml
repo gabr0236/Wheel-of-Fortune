@@ -4,11 +4,9 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-
         <variable
             name="gameViewModel"
             type="com.example.s205350lykkehjulet.GameViewModel" />
-
         <variable
             name="gameLostFragment"
             type="com.example.s205350lykkehjulet.GameLostFragment" />
@@ -47,7 +45,8 @@
                 android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/youLost" />
+                app:layout_constraintTop_toBottomOf="@+id/youLost"
+                tools:text="Score: 3500"/>
 
             <Button
                 android:id="@+id/playAgainButton"

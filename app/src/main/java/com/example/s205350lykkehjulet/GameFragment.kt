@@ -1,6 +1,7 @@
 package com.example.s205350lykkehjulet
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -30,6 +31,8 @@ class GameFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding.gameFragment = this
+        Log.d("GameFragment", "onViewCreated() called")
+
 
         // Set the viewModel for data binding - this allows the bound layout access
         // to all the data in the VieWModel
@@ -87,11 +90,14 @@ class GameFragment : Fragment() {
     }
 
     private fun updateGameQuote() {
+        Log.d("GameFragment", "updateGameQuote() called")
         binding.GameQuote.text =
             String.format(resources.getString(R.string.game_quote), viewModel.wheelResult)
     }
 
     private fun showJokerDialog() {
+        Log.d("GameFragment", "showJokerDialog() called")
+
         val message: String = when (viewModel.wheelResult) {
             "Miss Turn" -> "Dang! You rolled \"${viewModel.wheelResult}\" and lost a life"
             "Extra Turn" -> "Yay! You rolled \"${viewModel.wheelResult}\" and gained a life"
@@ -103,11 +109,12 @@ class GameFragment : Fragment() {
             .setMessage(message)
             .setCancelable(true)
             .show()
-
         continueGameAfterJokerDialog()
     }
 
     private fun continueGameAfterJokerDialog() {
+        Log.d("GameFragment", "continueGameAfterJokerDialog() called")
+
         viewModel.doWheelAction()
         if (viewModel.lives <= 0) {
             findNavController().navigate(R.id.action_gameFragment_to_gameLostFragment)

@@ -53,16 +53,20 @@
 
             <TextView
                 android:id="@+id/Catagory"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="217dp"
+                android:layout_height="56dp"
                 android:layout_marginTop="@dimen/default_padding"
+                android:background="@drawable/category_border"
+                android:padding="@dimen/default_padding"
                 android:text="@string/category"
                 android:textAppearance="@style/TextAppearance.MaterialComponents.Body1"
+                android:textColor="@color/white"
+                android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/Score"
-                tools:text="Animal" />
-
+                tools:text="Category: Animals"
+                android:textAlignment="center"/>
 
             <TextView
                 android:id="@+id/WordToBeGuessed"
@@ -106,7 +110,7 @@
                     android:layout_marginTop="113dp"
                     android:layout_marginEnd="-1dp"
                     android:layout_marginBottom="106dp"
-                    android:background="@color/white"
+                    android:background="@drawable/wheel_result_border"
                     android:gravity="center"
                     android:text="@{gameViewModel.wheelResult}"
                     android:textAlignment="center"
@@ -157,7 +161,8 @@
                 android:text="@string/guess_and_spin"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textField" />
+                app:layout_constraintTop_toBottomOf="@+id/textField"
+                />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>
