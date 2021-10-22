@@ -68,26 +68,23 @@
                 tools:text="Category: Animals"
                 android:textAlignment="center"/>
 
-            <TextView
-                android:id="@+id/WordToBeGuessed"
-                android:layout_width="wrap_content"
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recyclerView"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@{gameViewModel.shownWordToBeGuessed}"
-                android:textAppearance="@style/TextAppearance.MaterialComponents.Body1"
                 android:layout_marginTop="16dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/Catagory"
-                tools:text="_ _ a _ _ _" />
+                app:layoutManager="LinearLayoutManager"/>
 
             <RelativeLayout
                 android:id="@+id/relativelayout"
                 android:layout_width="fill_parent"
                 android:layout_height="fill_parent"
-                android:layout_marginTop="@dimen/default_padding"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/WordToBeGuessed">
+                app:layout_constraintTop_toBottomOf="@+id/recyclerView">
 
                 <ImageView
                     android:id="@+id/LuckyWheel"
@@ -163,6 +160,8 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/textField"
                 />
+
+
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>

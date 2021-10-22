@@ -9,12 +9,17 @@ import androidx.core.text.isDigitsOnly
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.OrientationHelper
+import androidx.recyclerview.widget.RecyclerView
+import com.example.s205350lykkehjulet.Adapter.ItemAdapter
 import com.example.s205350lykkehjulet.databinding.GameFragmentBinding
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 
 
 class GameFragment : Fragment() {
     private lateinit var binding: GameFragmentBinding
+    private lateinit var recyclerView: RecyclerView
 
     private val viewModel: GameViewModel by viewModels()
 
@@ -25,6 +30,10 @@ class GameFragment : Fragment() {
         // Inflate the layout XML file and return a binding object instance
         val fragmentBinding = GameFragmentBinding.inflate(inflater, container, false)
         binding = fragmentBinding
+
+        recyclerView = binding.recyclerView
+        recyclerView.layoutManager = LinearLayoutManager(context, RecyclerView.HORIZONTAL, false)
+        recyclerView.adapter = ItemAdapter(arrayOf("a", "b", "c","d","e"))
         return binding.root
     }
 
@@ -32,7 +41,6 @@ class GameFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         binding.gameFragment = this
         Log.d("GameFragment", "onViewCreated() called")
-
 
         // Set the viewModel for data binding - this allows the bound layout access
         // to all the data in the VieWModel
@@ -53,7 +61,6 @@ class GameFragment : Fragment() {
         //PlayerInputLetter cannot be null beyond this point
         //TODO add this throughout the code
         playerInputLetter ?: return
-
         //Resets LetterInput field
         binding.LetterInput.setText("")
 
@@ -86,7 +93,8 @@ class GameFragment : Fragment() {
         updateLuckyWheelResult()
         updateScore()
         updateGameQuote()
-        updateWordToBeGuessedOnScreen()
+        //TODO ADD BACK
+        //updateWordToBeGuessedOnScreen()
     }
 
     private fun updateGameQuote() {
@@ -139,9 +147,10 @@ class GameFragment : Fragment() {
         binding.Score.text = getString(R.string.score, viewModel.score.toString())
     }
 
-    private fun updateWordToBeGuessedOnScreen() {
-        binding.WordToBeGuessed.text = viewModel.shownWordToBeGuessed
-    }
+    //TODO: ADD BACK
+    //private fun updateWordToBeGuessedOnScreen() {
+    //    binding.WordToBeGuessed.text = viewModel.shownWordToBeGuessed
+    //}
 
     private fun updateLuckyWheelResult() {
         binding.WheelResult.text = viewModel.wheelResult
