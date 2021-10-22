@@ -70,21 +70,21 @@
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/recyclerView"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/Catagory"
-                app:layoutManager="LinearLayoutManager"/>
+                app:layout_constraintTop_toBottomOf="@+id/Catagory"/>
 
             <RelativeLayout
                 android:id="@+id/relativelayout"
-                android:layout_width="fill_parent"
-                android:layout_height="fill_parent"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/recyclerView">
+                app:layout_constraintTop_toBottomOf="@+id/recyclerView"
+                android:layout_marginTop="@dimen/default_padding">
 
                 <ImageView
                     android:id="@+id/LuckyWheel"
