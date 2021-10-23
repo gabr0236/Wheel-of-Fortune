@@ -10,15 +10,17 @@
     <string name="you_lost">You Lost!</string>
     <string name="play_again">Play again</string>
     <string-array name="category_and_words">
+        <!--Animals-->
         <item>Animals,Mountain Lion</item>
         <item>Animals,Spiny Lumpsucker</item>
-        <item>Animals,Pink Fairy Armadillo</item>
-        <item>Animals,Rasberry Crazy Ant</item>
-        <item>Animals,Tasselled Wobbegong</item>
+        <item>Animals,Blobfish</item>
+        <item>Animals,Chicken Turtle</item>
+        <item>Animals,Leafy Seadragon</item>
         <item>Animals,Hellbender</item>
         <item>Animals,Goblin Shark</item>
+        <!--Movies-->
         <item>Movies,The Dark Knight</item>
-        <item>Movies,The Shawshank Redemption</item>
+        <item>Movies,Django Unchained</item>
         <item>Movies,Inception</item>
         <item>Movies,The Green Mile</item>
         <item>Movies,Untouchable</item>
