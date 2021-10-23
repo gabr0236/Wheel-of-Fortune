@@ -39,13 +39,7 @@ class GameViewModel : ViewModel() {
     private lateinit var currentCategoryAndWord: Array<String>
 
     init {
-        //newGame()
         Log.d("initTest", "Init viewmodel called")
-    }
-
-    private fun getNextWord() {
-        //TODO SLET metode
-        createHiddenWordForDisplay()
     }
 
     private fun createHiddenWordForDisplay() {
@@ -76,11 +70,6 @@ class GameViewModel : ViewModel() {
         }
         timesOfLuckyWheelSpins++
 
-        //TODO: til testvvv
-        //if (timesOfLuckyWheelSpins>1) _wheelResult = "Miss Turn"
-        //if (timesOfLuckyWheelSpins>2) _wheelResult = "Bankrupt"
-
-
         //Avoid getting bankrupt when player is already bankrupt (eg. at game start)
         if ((score == 0 && wheelResult == "Bankrupt")
             //Avoid Extra Turn or Miss Turn when game is just started TODO: should the game play like this??
@@ -103,7 +92,6 @@ class GameViewModel : ViewModel() {
             }
             true
         } else {
-            //TODO: udenfor if-else vv ??
             playerGuessedCharacters.add(playerInputLetterLC)
             loseLife()
             false
@@ -143,10 +131,6 @@ class GameViewModel : ViewModel() {
         _lives--
     }
 
-    //private fun insertSpacesBetweenLetters(s: String): String {
-    //    return s.replace(".(?!$)".toRegex(), "$0 ")
-    //}
-
     fun newGame() {
         _lives = 5
         _score = 0
@@ -154,13 +138,11 @@ class GameViewModel : ViewModel() {
         timesOfLuckyWheelSpins = 0
         playerGuessedCharacters = mutableListOf()
         if (playerGuessedCharacters.isNotEmpty()) throw Exception("PlayerGuessedCharacter array doesnt reset")
-        getNextWord()
+        createHiddenWordForDisplay()
         spinLuckyWheel()
     }
 
     fun setRandomCategoryAndWord(array: Array<String>) {
-        //TODO NÅET HERTIL, har lige lavet dether og nu skal det videre i gamefragment til hvordan ordet læses
-        //TODO måske fucker det her noget op siden det her plejede at ske i getNextWord?
         currentCategoryAndWord= array[(array.indices).random()].split(",").toTypedArray()
         _category = currentCategoryAndWord[0]
         currentWordToBeGuessed = currentCategoryAndWord[1]

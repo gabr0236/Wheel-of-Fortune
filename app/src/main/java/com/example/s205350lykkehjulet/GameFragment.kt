@@ -61,7 +61,7 @@ class GameFragment : Fragment() {
         val playerInputLetter = binding.LetterInput.text?.firstOrNull()
 
         //PlayerInputLetter cannot be null beyond this point
-        //TODO add this throughout the code
+        //TODO add this throughout the code?
         playerInputLetter ?: return
 
         //Resets LetterInput field
@@ -96,7 +96,6 @@ class GameFragment : Fragment() {
         updateLuckyWheelResult()
         updateScore()
         updateGameQuote()
-        //TODO ADD BACK
         updateWordToBeGuessedOnScreen()
     }
 
@@ -113,7 +112,7 @@ class GameFragment : Fragment() {
             "Miss Turn" -> "Dang! You rolled \"${viewModel.wheelResult}\" and lost a life"
             "Extra Turn" -> "Yay! You rolled \"${viewModel.wheelResult}\" and gained a life"
             "Bankrupt" -> "Dang! You rolled \"${viewModel.wheelResult}\" and lost a your points :("
-            else -> "Error" //TODO: udenom det her? evt kast exception
+            else -> throw Exception("WheelResult is not an expected value") //TODO: Det her ok?
         }
         MaterialAlertDialogBuilder(requireContext())
             .setTitle(viewModel.wheelResult)

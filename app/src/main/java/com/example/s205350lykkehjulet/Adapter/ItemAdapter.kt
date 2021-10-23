@@ -34,7 +34,6 @@ class ItemAdapter(private var letterList: CharArray) :
 
     fun updateItems(letterList: CharArray){
         //TODO skal det her ligge her?
-        //TODO måske i stedet kun opdater de elemter der har ændret sig
         for(i in this.letterList.indices) {
             if (this.letterList[i] != letterList[i]) this.letterList[i] = letterList[i]
         }
