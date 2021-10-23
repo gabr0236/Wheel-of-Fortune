@@ -6,8 +6,9 @@ import androidx.lifecycle.ViewModel
 
 class GameViewModel : ViewModel() {
 
+    //Use of Backing Properties to return immutable object
     private var _score = 0
-    val score: Int //Use of Backing Properties to return immutable object
+    val score: Int
         get() = _score
 
     private var _lives = 5
@@ -34,14 +35,17 @@ class GameViewModel : ViewModel() {
         get() = _wheelResult
 
     private var timesOfLuckyWheelSpins = 0
-    private lateinit var currentWordToBeGuessed: String
     private var playerGuessedCharacters = mutableListOf<Char>()
-    private lateinit var currentCategoryAndWord: Array<String>
+    private lateinit var currentWordToBeGuessed: String
 
     init {
-        Log.d("initTest", "Init viewmodel called")
+        Log.d("GameViewModel", "ViewModel initialized")
     }
 
+    /**
+     * Creates a char array of currentWordToBeGuessed where all chars are substituted by '_'
+     * This is used for the initial creation of the RecyclerView
+     */
     private fun createHiddenWordForDisplay() {
         var tempString =""
         for (i in currentWordToBeGuessed.indices) {
@@ -52,65 +56,80 @@ class GameViewModel : ViewModel() {
         _shownWordToBeGuessedAsArray = tempString.toCharArray()
     }
 
+    /**
+     * Sets _wheelResult to random wheel property
+     * This method doesn't allow Joker values ("Bankrupt", "Miss Turn" or "Extra Turn") on the first roll
+     *
+     */
     fun spinLuckyWheel() {
-        //22 Different fields in total
         val random = (1..22).random()
         _wheelResult = when (random) {
             in 1..2 -> "100"           //2 x 100
-            3 -> "300"           //1 x 300
+            3 -> "300"                 //1 x 300
             in 4..9 -> "500"           //6 x 500
-            in 10..11 -> "600"           //2 x 600
-            in 12..16 -> "800"           //5 x 800
-            in 17..18 -> "1000"          //2 x 1000
-            19 -> "1500"          //1 x 1500
-            20 -> "Bankrupt"      //1 x Bankrupt
-            21 -> "Extra Turn"    //1 x Extra Turn
-            22 -> "Miss Turn"     //1 x Lost Turn
+            in 10..11 -> "600"         //2 x 600
+            in 12..16 -> "800"         //5 x 800
+            in 17..18 -> "1000"        //2 x 1000
+            19 -> "1500"               //1 x 1500
+            20 -> "Bankrupt"           //1 x Bankrupt
+            21 -> "Extra Turn"         //1 x Extra Turn
+            22 -> "Miss Turn"          //1 x Lost Turn
             else -> throw Exception("Random generator not generating a number from 1 to 22")
         }
         timesOfLuckyWheelSpins++
 
         //Avoid getting bankrupt when player is already bankrupt (eg. at game start)
         if ((score == 0 && wheelResult == "Bankrupt")
-            //Avoid Extra Turn or Miss Turn when game is just started TODO: should the game play like this??
+            //Avoid Extra Turn or Miss Turn when game is just started
             || ((timesOfLuckyWheelSpins == 1)
                     && (wheelResult == "Extra Turn" || wheelResult == "Miss Turn"))
         ) {
+            timesOfLuckyWheelSpins=0
             spinLuckyWheel()
         }
     }
 
+    /**
+     * Return whether the currentWordToBeGuessed contains the player input
+     */
     fun isUserInputMatch(playerInputLetter: Char): Boolean {
         val playerInputLetterLC = playerInputLetter.lowercaseChar()
         return if (currentWordToBeGuessed.contains(playerInputLetterLC, ignoreCase = true)
             && !playerGuessedCharacters.contains(playerInputLetterLC)
         ) {
             playerGuessedCharacters.add(playerInputLetterLC)
-            _shownWordToBeGuessedAsArray = updateHiddenWordForDisplay()
+            _shownWordToBeGuessedAsArray = updateShownWordToBeGuessedForDisplay()
             if (!shownWordToBeGuessedAsArray.contains('_')) {
                 _isWon = true
             }
             true
         } else {
             playerGuessedCharacters.add(playerInputLetterLC)
-            loseLife()
+            _lives--
             false
         }
     }
 
-    private fun updateHiddenWordForDisplay(): CharArray {
-        var updatedHiddenWord = ""
+    /**
+     * Updates and returns the _shownWordToBeGuessedAsArray
+     */
+    private fun updateShownWordToBeGuessedForDisplay(): CharArray {
+        var tempUpdatedShownWord = ""
         for (i in currentWordToBeGuessed.indices) {
             if (playerGuessedCharacters.contains(currentWordToBeGuessed[i].lowercaseChar())
                 || currentWordToBeGuessed[i].toString() == " "
             ) {
-                updatedHiddenWord += currentWordToBeGuessed[i]
-            } else updatedHiddenWord += "_"
+                tempUpdatedShownWord += currentWordToBeGuessed[i]
+            } else tempUpdatedShownWord += "_"
         }
-        return updatedHiddenWord.toCharArray()
+        _shownWordToBeGuessedAsArray = tempUpdatedShownWord.toCharArray()
+        return _shownWordToBeGuessedAsArray
     }
 
-    fun doWheelAction() {
+    /**
+     * Updates the player score or lives depending on the wheelResult
+     */
+    fun doWheelResultAction() {
         when {
             wheelResult.isDigitsOnly() -> {
                 val wheelValue = wheelResult.toInt()
@@ -122,15 +141,15 @@ class GameViewModel : ViewModel() {
                 }.count())
             }
             wheelResult == "Bankrupt" -> _score = 0
-            wheelResult == "Miss Turn" -> loseLife()
+            wheelResult == "Miss Turn" -> _lives--
             wheelResult == "Extra Turn" -> _lives++
         }
     }
 
-    private fun loseLife() {
-        _lives--
-    }
 
+    /**
+     * Resets all appropriate values for a fresh game
+     */
     fun newGame() {
         _lives = 5
         _score = 0
@@ -142,9 +161,12 @@ class GameViewModel : ViewModel() {
         spinLuckyWheel()
     }
 
-    fun setRandomCategoryAndWord(array: Array<String>) {
-        currentCategoryAndWord= array[(array.indices).random()].split(",").toTypedArray()
-        _category = currentCategoryAndWord[0]
-        currentWordToBeGuessed = currentCategoryAndWord[1]
+    /**
+     * Sets the _category and the currentWordToBeGuessed from randomCategoryAndWord
+     */
+    fun setRandomCategoryAndWord(randomCategoryAndWord: String) {
+        val tempArray = randomCategoryAndWord.split(",").toTypedArray()
+        _category = tempArray[0]
+        currentWordToBeGuessed = tempArray[1]
     }
 }

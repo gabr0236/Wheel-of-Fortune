@@ -30,7 +30,7 @@ class GameFragment : Fragment() {
         val fragmentBinding = GameFragmentBinding.inflate(inflater, container, false)
         binding = fragmentBinding
 
-        viewModel.setRandomCategoryAndWord(Datasource(requireContext()).getCategoriesAndWords())
+        viewModel.setRandomCategoryAndWord(Datasource(requireContext()).getRandomCategoryAndWord())
         viewModel.newGame()
         recyclerView = binding.recyclerView
         recyclerView.layoutManager = LinearLayoutManager(context, RecyclerView.HORIZONTAL, false)
@@ -68,7 +68,7 @@ class GameFragment : Fragment() {
         binding.LetterInput.setText("")
 
         if (viewModel.isUserInputMatch(playerInputLetter)) {
-            viewModel.doWheelAction()
+            viewModel.doWheelResultAction()
             setErrorTextField(false)
 
             if (viewModel.isWon) {
@@ -125,7 +125,7 @@ class GameFragment : Fragment() {
     private fun continueGameAfterJokerDialog() {
         Log.d("GameFragment", "continueGameAfterJokerDialog() called")
 
-        viewModel.doWheelAction()
+        viewModel.doWheelResultAction()
         if (viewModel.lives <= 0) {
             findNavController().navigate(R.id.action_gameFragment_to_gameLostFragment)
             return

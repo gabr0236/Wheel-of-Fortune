@@ -6,4 +6,7 @@ class Datasource(private val context: Context) {
     fun getCategoriesAndWords(): Array<String> {
         return context.resources.getStringArray(R.array.category_and_words)
     }
+    fun getRandomCategoryAndWord(): String {
+        return context.resources.getStringArray(R.array.category_and_words).random()
+    }
 }
