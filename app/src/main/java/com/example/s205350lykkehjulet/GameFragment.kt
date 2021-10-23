@@ -15,7 +15,6 @@ import com.example.s205350lykkehjulet.Adapter.ItemAdapter
 import com.example.s205350lykkehjulet.databinding.GameFragmentBinding
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 
-
 class GameFragment : Fragment() {
     private lateinit var binding: GameFragmentBinding
     private lateinit var recyclerView: RecyclerView
