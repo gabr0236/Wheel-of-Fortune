@@ -44,7 +44,6 @@ class GameFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-
         Log.d("GameFragment", "onViewCreated() called")
         //Specify the fragment as the lifecycle owner
         binding.lifecycleOwner = viewLifecycleOwner
@@ -61,11 +60,14 @@ class GameFragment : Fragment() {
         updateCategory()
     }
 
+    /**
+     * Main function for the game loop
+     * Submits the players input and updates the view accordingly
+     */
     private fun submitGuessAndSpinWheel() {
         val playerInputLetter = binding.LetterInput.text?.firstOrNull()
 
         //PlayerInputLetter cannot be null beyond this point
-        //TODO add this throughout the code?
         playerInputLetter ?: return
 
         //Resets LetterInput field
@@ -95,6 +97,9 @@ class GameFragment : Fragment() {
         }
     }
 
+    /**
+     * For a complete GUI update, except from category
+     */
     private fun updateView() {
         updateLives()
         updateLuckyWheelResult()
@@ -103,12 +108,18 @@ class GameFragment : Fragment() {
         updateWordToBeGuessedOnScreen()
     }
 
+    /**
+     * Updates the game quote
+     */
     private fun updateGameQuote() {
         Log.d("GameFragment", "updateGameQuote() called")
         binding.GameQuote.text =
             String.format(resources.getString(R.string.game_quote), viewModel.wheelResult)
     }
 
+    /**
+     * Display a dialog if player rolled a joker
+     */
     private fun showJokerDialog() {
         Log.d("GameFragment", "showJokerDialog() called")
 
@@ -126,6 +137,9 @@ class GameFragment : Fragment() {
         continueGameAfterJokerDialog()
     }
 
+    /**
+     * Continuation of the game loop after player rolled a joker
+     */
     private fun continueGameAfterJokerDialog() {
         Log.d("GameFragment", "continueGameAfterJokerDialog() called")
 
@@ -152,7 +166,6 @@ class GameFragment : Fragment() {
     private fun updateScore() {
         binding.Score.text = getString(R.string.score, viewModel.score.toString())
     }
-
 
     private fun updateWordToBeGuessedOnScreen(){
         //TODO det her skal ændres
