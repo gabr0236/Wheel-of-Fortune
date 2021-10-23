@@ -36,7 +36,7 @@ class GameViewModel : ViewModel() {
     private var timesOfLuckyWheelSpins = 0
     private lateinit var currentWordToBeGuessed: String
     private var playerGuessedCharacters = mutableListOf<Char>()
-    private lateinit var currentCategoryAndWord: String
+    private lateinit var currentCategoryAndWord: Array<String>
 
     init {
         //newGame()
@@ -161,9 +161,8 @@ class GameViewModel : ViewModel() {
     fun setRandomCategoryAndWord(array: Array<String>) {
         //TODO NÅET HERTIL, har lige lavet dether og nu skal det videre i gamefragment til hvordan ordet læses
         //TODO måske fucker det her noget op siden det her plejede at ske i getNextWord?
-        currentCategoryAndWord=array[(array.indices).random()]
-        val randomWordAndCategory = allWordsList.random().split(",")
-        _category = randomWordAndCategory[0]
-        currentWordToBeGuessed = randomWordAndCategory[1]
+        currentCategoryAndWord= array[(array.indices).random()].split(",").toTypedArray()
+        _category = currentCategoryAndWord[0]
+        currentWordToBeGuessed = currentCategoryAndWord[1]
     }
 }
