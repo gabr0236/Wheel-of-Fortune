@@ -26,12 +26,15 @@ class GameFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        // Inflate the layout XML file and return a binding object instance
+        //Inflate the layout XML file and return a binding object instance
         val fragmentBinding = GameFragmentBinding.inflate(inflater, container, false)
         binding = fragmentBinding
 
+        //Get random category and word from datasouce and set in viewModel
         viewModel.setRandomCategoryAndWord(Datasource(requireContext()).getRandomCategoryAndWord())
         viewModel.newGame()
+
+        //Setup recyclerview
         recyclerView = binding.recyclerView
         recyclerView.layoutManager = LinearLayoutManager(context, RecyclerView.HORIZONTAL, false)
         recyclerView.adapter = ItemAdapter(viewModel.shownWordToBeGuessedAsArray)
@@ -40,18 +43,19 @@ class GameFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding.gameFragment = this
+
+
         Log.d("GameFragment", "onViewCreated() called")
-
-
-        // Set the viewModel for data binding - this allows the bound layout access
-        // to all the data in the VieWModel
-        binding.gameViewModel = viewModel
-        // Specify the fragment view as the lifecycle owner of the binding.
-        // This is used so that the binding can observe LiveData updates
+        //Specify the fragment as the lifecycle owner
         binding.lifecycleOwner = viewLifecycleOwner
 
-        // Setup a click listener for the Submit
+        //Assign the view model to a property in the binding class
+        binding.gameViewModel = viewModel
+
+        //Assign this fragment
+        binding.gameFragment = this
+
+        //Setup a click listener for the Submit
         binding.GuessButton.setOnClickListener { submitGuessAndSpinWheel() }
         updateGameQuote()
         updateCategory()

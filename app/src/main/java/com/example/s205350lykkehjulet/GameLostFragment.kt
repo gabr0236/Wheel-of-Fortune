@@ -18,7 +18,7 @@ class GameLostFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        // Inflate the layout XML file and return a binding object instance
+        //Inflate the layout XML file and return a binding object instance
         val fragmentBinding = GameLostFragmentBinding.inflate(inflater, container, false)
         binding = fragmentBinding
         return fragmentBinding.root
@@ -28,15 +28,16 @@ class GameLostFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         binding?.apply {
-            // Specify the fragment as the lifecycle owner
+            //Specify the fragment as the lifecycle owner
             lifecycleOwner = viewLifecycleOwner
 
-            // Assign the view model to a property in the binding class
+            //Assign the view model to a property in the binding class
             binding!!.gameViewModel = viewModel
 
-            // Assign the fragment
+            //Assign this fragment
             gameLostFragment = this@GameLostFragment
 
+            //Assign navigation to button
             binding!!.playAgainButton.setOnClickListener {
                 findNavController().navigate(R.id.action_gameLostFragment_to_gameFragment)
             }
