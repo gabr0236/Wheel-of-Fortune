@@ -7,15 +7,15 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.s205350lykkehjulet.R
 
-class ItemAdapter(private val letterList: Array<String>) :
+class ItemAdapter(private var letterList: CharArray) :
     RecyclerView.Adapter<ItemAdapter.ViewHolder>(){
 
     class ViewHolder(itemView: View) :RecyclerView.ViewHolder(itemView){
         //TODO ikke brug findview by id (pass context som param?)
         private val letterTextView: TextView = itemView.findViewById(R.id.letterTextView)
 
-        fun bind(letter: String){
-            letterTextView.text = letter
+        fun bind(letter: Char){
+            letterTextView.text = letter.toString()
         }
     }
 
@@ -31,4 +31,13 @@ class ItemAdapter(private val letterList: Array<String>) :
     }
 
     override fun getItemCount() = letterList.size
+
+    fun updateItems(letterList: CharArray){
+        //TODO skal det her ligge her?
+        //TODO måske i stedet kun opdater de elemter der har ændret sig
+        for(i in this.letterList.indices) {
+            if (this.letterList[i] != letterList[i]) this.letterList[i] = letterList[i]
+        }
+        notifyDataSetChanged()
+    }
 }

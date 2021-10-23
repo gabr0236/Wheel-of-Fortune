@@ -10,7 +10,6 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.OrientationHelper
 import androidx.recyclerview.widget.RecyclerView
 import com.example.s205350lykkehjulet.Adapter.ItemAdapter
 import com.example.s205350lykkehjulet.databinding.GameFragmentBinding
@@ -31,9 +30,11 @@ class GameFragment : Fragment() {
         val fragmentBinding = GameFragmentBinding.inflate(inflater, container, false)
         binding = fragmentBinding
 
+        viewModel.setRandomCategoryAndWord(Datasource(requireContext()).getCategoriesAndWords())
+        viewModel.newGame()
         recyclerView = binding.recyclerView
         recyclerView.layoutManager = LinearLayoutManager(context, RecyclerView.HORIZONTAL, false)
-        recyclerView.adapter = ItemAdapter(arrayOf("a", "b", "c","d","e"))
+        recyclerView.adapter = ItemAdapter(viewModel.shownWordToBeGuessedAsArray)
         return binding.root
     }
 
@@ -94,7 +95,7 @@ class GameFragment : Fragment() {
         updateScore()
         updateGameQuote()
         //TODO ADD BACK
-        //updateWordToBeGuessedOnScreen()
+        updateWordToBeGuessedOnScreen()
     }
 
     private fun updateGameQuote() {
@@ -147,10 +148,11 @@ class GameFragment : Fragment() {
         binding.Score.text = getString(R.string.score, viewModel.score.toString())
     }
 
-    //TODO: ADD BACK
-    //private fun updateWordToBeGuessedOnScreen() {
-    //    binding.WordToBeGuessed.text = viewModel.shownWordToBeGuessed
-    //}
+
+    private fun updateWordToBeGuessedOnScreen(){
+        //TODO det her skal ændres
+        recyclerView.adapter = ItemAdapter(viewModel.shownWordToBeGuessedAsArray)
+    }
 
     private fun updateLuckyWheelResult() {
         binding.WheelResult.text = viewModel.wheelResult

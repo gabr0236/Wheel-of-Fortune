@@ -22,10 +22,11 @@ val allWordsList: List<String> =
     listOf(
         //"a b",
         //"c a"
+        //TODO current maxword capacity on screen = 16
         "Animals,Mountain Lion",
-        "Animals,Spiny Lumpsucker",
-        "Animals,Pink Fairy Armadillo",
-        "Animals,Rasberry Crazy Ant",
+        "Animals,Spiny Lumpsucker", //16 long
+        "Animals,Pink Fairy Armadillo", //20 long
+        "Animals,Rasberry Crazy Ant", //18 long
         "Animals,Tasselled Wobbegong",
         "Animals,Hellbender",
         "Animals,Goblin Shark",

@@ -22,9 +22,9 @@ class GameViewModel : ViewModel() {
     val category: String
         get() = _category
 
-    private lateinit var _shownWordToBeGuessed: String
-    val shownWordToBeGuessed: String
-        get() = _shownWordToBeGuessed
+    private lateinit var _shownWordToBeGuessedAsArray: CharArray
+    val shownWordToBeGuessedAsArray: CharArray
+        get() = _shownWordToBeGuessedAsArray
 
     private val lastGuessedChar: Char
         get() = playerGuessedCharacters.last()
@@ -36,42 +36,26 @@ class GameViewModel : ViewModel() {
     private var timesOfLuckyWheelSpins = 0
     private lateinit var currentWordToBeGuessed: String
     private var playerGuessedCharacters = mutableListOf<Char>()
+    private lateinit var currentCategoryAndWord: String
 
     init {
-        newGame()
+        //newGame()
         Log.d("initTest", "Init viewmodel called")
     }
 
     private fun getNextWord() {
-
-        //TODO SPØRG vvv BRUG RESOUCEPROVIDER
-        //val wordsAndCategories = Resources.getSystem().getStringArray(R.array.category_and_words)
-        //val randomWordAndCategory = wordsAndCategories.random().split(",")
-        //currentWordToBeGuessed=randomWordAndCategory.first()
-        //_category=randomWordAndCategory.last()
-
-        //TODO: category opdateres ikke,
-        // shownwordtobeguessed viser category,
-        // den skal matche til lowercase
-        val randomWordAndCategory = allWordsList.random().split(",")
-        Log.d("Test", randomWordAndCategory.toString())
-        _category = randomWordAndCategory[0]
-        currentWordToBeGuessed = randomWordAndCategory[1]
-        Log.d("Test", currentWordToBeGuessed)
-        Log.d("Test", category)
-
-        _shownWordToBeGuessed = ""
-
+        //TODO SLET metode
         createHiddenWordForDisplay()
-        _shownWordToBeGuessed = insertSpacesBetweenLetters(_shownWordToBeGuessed)
     }
 
     private fun createHiddenWordForDisplay() {
+        var tempString =""
         for (i in currentWordToBeGuessed.indices) {
-            _shownWordToBeGuessed += if (currentWordToBeGuessed[i].toString() == " ") {
+            tempString += if (currentWordToBeGuessed[i] == ' ') {
                 " "
             } else "_"
         }
+        _shownWordToBeGuessedAsArray = tempString.toCharArray()
     }
 
     fun spinLuckyWheel() {
@@ -113,8 +97,8 @@ class GameViewModel : ViewModel() {
             && !playerGuessedCharacters.contains(playerInputLetterLC)
         ) {
             playerGuessedCharacters.add(playerInputLetterLC)
-            _shownWordToBeGuessed = insertSpacesBetweenLetters(updateHiddenWordForDisplay())
-            if (!shownWordToBeGuessed.contains("_")) {
+            _shownWordToBeGuessedAsArray = updateHiddenWordForDisplay()
+            if (!shownWordToBeGuessedAsArray.contains('_')) {
                 _isWon = true
             }
             true
@@ -126,7 +110,7 @@ class GameViewModel : ViewModel() {
         }
     }
 
-    private fun updateHiddenWordForDisplay(): String {
+    private fun updateHiddenWordForDisplay(): CharArray {
         var updatedHiddenWord = ""
         for (i in currentWordToBeGuessed.indices) {
             if (playerGuessedCharacters.contains(currentWordToBeGuessed[i].lowercaseChar())
@@ -135,7 +119,7 @@ class GameViewModel : ViewModel() {
                 updatedHiddenWord += currentWordToBeGuessed[i]
             } else updatedHiddenWord += "_"
         }
-        return updatedHiddenWord
+        return updatedHiddenWord.toCharArray()
     }
 
     fun doWheelAction() {
@@ -159,11 +143,11 @@ class GameViewModel : ViewModel() {
         _lives--
     }
 
-    private fun insertSpacesBetweenLetters(s: String): String {
-        return s.replace(".(?!$)".toRegex(), "$0 ")
-    }
+    //private fun insertSpacesBetweenLetters(s: String): String {
+    //    return s.replace(".(?!$)".toRegex(), "$0 ")
+    //}
 
-    private fun newGame() {
+    fun newGame() {
         _lives = 5
         _score = 0
         _isWon = false
@@ -172,5 +156,14 @@ class GameViewModel : ViewModel() {
         if (playerGuessedCharacters.isNotEmpty()) throw Exception("PlayerGuessedCharacter array doesnt reset")
         getNextWord()
         spinLuckyWheel()
+    }
+
+    fun setRandomCategoryAndWord(array: Array<String>) {
+        //TODO NÅET HERTIL, har lige lavet dether og nu skal det videre i gamefragment til hvordan ordet læses
+        //TODO måske fucker det her noget op siden det her plejede at ske i getNextWord?
+        currentCategoryAndWord=array[(array.indices).random()]
+        val randomWordAndCategory = allWordsList.random().split(",")
+        _category = randomWordAndCategory[0]
+        currentWordToBeGuessed = randomWordAndCategory[1]
     }
 }
