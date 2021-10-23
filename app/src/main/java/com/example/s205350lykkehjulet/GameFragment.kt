@@ -9,12 +9,16 @@ import androidx.core.text.isDigitsOnly
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import com.example.s205350lykkehjulet.Adapter.ItemAdapter
 import com.example.s205350lykkehjulet.databinding.GameFragmentBinding
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 
 
 class GameFragment : Fragment() {
     private lateinit var binding: GameFragmentBinding
+    private lateinit var recyclerView: RecyclerView
 
     private val viewModel: GameViewModel by viewModels()
 
@@ -25,6 +29,12 @@ class GameFragment : Fragment() {
         // Inflate the layout XML file and return a binding object instance
         val fragmentBinding = GameFragmentBinding.inflate(inflater, container, false)
         binding = fragmentBinding
+
+        viewModel.setRandomCategoryAndWord(Datasource(requireContext()).getCategoriesAndWords())
+        viewModel.newGame()
+        recyclerView = binding.recyclerView
+        recyclerView.layoutManager = LinearLayoutManager(context, RecyclerView.HORIZONTAL, false)
+        recyclerView.adapter = ItemAdapter(viewModel.shownWordToBeGuessedAsArray)
         return binding.root
     }
 
@@ -86,6 +96,7 @@ class GameFragment : Fragment() {
         updateLuckyWheelResult()
         updateScore()
         updateGameQuote()
+        //TODO ADD BACK
         updateWordToBeGuessedOnScreen()
     }
 
@@ -139,8 +150,10 @@ class GameFragment : Fragment() {
         binding.Score.text = getString(R.string.score, viewModel.score.toString())
     }
 
-    private fun updateWordToBeGuessedOnScreen() {
-        binding.WordToBeGuessed.text = viewModel.shownWordToBeGuessed
+
+    private fun updateWordToBeGuessedOnScreen(){
+        //TODO det her skal ændres
+        recyclerView.adapter = ItemAdapter(viewModel.shownWordToBeGuessedAsArray)
     }
 
     private fun updateLuckyWheelResult() {
