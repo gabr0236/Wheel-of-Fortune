@@ -53,11 +53,11 @@
 
             <TextView
                 android:id="@+id/Catagory"
-                android:layout_width="217dp"
-                android:layout_height="56dp"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/default_padding"
                 android:background="@drawable/category_border"
-                android:padding="@dimen/default_padding"
+                android:padding="8dp"
                 android:text="@string/category"
                 android:textAppearance="@style/TextAppearance.MaterialComponents.Body1"
                 android:textColor="@color/white"
@@ -75,7 +75,9 @@
                 android:layout_marginTop="16dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/Catagory"/>
+                app:layout_constraintTop_toBottomOf="@+id/Catagory"
+                tools:listitem="@android:layout/simple_list_item_1"
+                tools:itemCount="1"/>
 
             <RelativeLayout
                 android:id="@+id/relativelayout"
@@ -131,10 +133,10 @@
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="100dp"
                 android:layout_height="wrap_content"
-                android:layout_marginVertical="@dimen/default_padding"
                 android:layout_marginTop="@dimen/default_padding"
                 android:hint="@string/letter_hint"
                 android:includeFontPadding="false"
+                android:padding="0dp"
                 android:textAlignment="center"
                 android:textAppearance="@style/TextAppearance.MaterialComponents.Body2"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -144,7 +146,8 @@
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/LetterInput"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="10dp"
                     android:digits="ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz"
                     android:gravity="center_horizontal"
                     android:maxLength="1" />
