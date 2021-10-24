@@ -4,6 +4,10 @@ import android.util.Log
 import androidx.core.text.isDigitsOnly
 import androidx.lifecycle.ViewModel
 
+const val BANKRUPT = "Bankrupt"
+const val MISS_TURN = "Miss Turn"
+const val EXTRA_TURN = "Extra Turn"
+
 class GameViewModel : ViewModel() {
 
     //Use of Backing Properties to return immutable values
@@ -71,18 +75,18 @@ class GameViewModel : ViewModel() {
             in 12..16 -> "800"         //5 x 800
             in 17..18 -> "1000"        //2 x 1000
             19 -> "1500"               //1 x 1500
-            20 -> "Bankrupt"           //1 x Bankrupt
-            21 -> "Extra Turn"         //1 x Extra Turn
-            22 -> "Miss Turn"          //1 x Lost Turn
+            20 -> BANKRUPT             //1 x Bankrupt
+            21 -> EXTRA_TURN           //1 x Extra Turn
+            22 -> MISS_TURN            //1 x Lost Turn
             else -> throw Exception("Random generator not generating a number from 1 to 22")
         }
         timesOfLuckyWheelSpins++
 
         //Avoid getting bankrupt when player is already bankrupt (eg. at game start)
-        if ((score == 0 && wheelResult == "Bankrupt")
+        if ((score == 0 && wheelResult == BANKRUPT)
             //Avoid Extra Turn or Miss Turn when game is just started
             || ((timesOfLuckyWheelSpins == 1)
-                    && (wheelResult == "Extra Turn" || wheelResult == "Miss Turn"))
+                    && (wheelResult == EXTRA_TURN || wheelResult == MISS_TURN))
         ) {
             timesOfLuckyWheelSpins=0
             spinLuckyWheel()
@@ -140,9 +144,9 @@ class GameViewModel : ViewModel() {
                     )
                 }.count())
             }
-            wheelResult == "Bankrupt" -> _score = 0
-            wheelResult == "Miss Turn" -> _lives--
-            wheelResult == "Extra Turn" -> _lives++
+            wheelResult == BANKRUPT -> _score = 0
+            wheelResult == MISS_TURN -> _lives--
+            wheelResult == EXTRA_TURN -> _lives++
         }
     }
 

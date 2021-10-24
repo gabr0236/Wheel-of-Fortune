@@ -139,9 +139,10 @@ class GameFragment : Fragment() {
         Log.d("GameFragment", "showJokerDialog() called")
 
         val message: String = when (viewModel.wheelResult) {
-            "Miss Turn" -> "Dang! You rolled \"${viewModel.wheelResult}\" and lost a life"
-            "Extra Turn" -> "Yay! You rolled \"${viewModel.wheelResult}\" and gained a life"
-            "Bankrupt" -> "Dang! You rolled \"${viewModel.wheelResult}\" and lost a your points :("
+            //TODO: brug string xml, behøver nok ikke engang interpolation
+            MISS_TURN -> "Dang! You rolled \"${viewModel.wheelResult}\" and lost a life"
+            EXTRA_TURN -> "Yay! You rolled \"${viewModel.wheelResult}\" and gained a life"
+            BANKRUPT -> "Dang! You rolled \"${viewModel.wheelResult}\" and lost a your points :("
             else -> throw Exception("WheelResult is not an expected value") //TODO: Det her ok?
         }
         MaterialAlertDialogBuilder(requireContext())
@@ -166,9 +167,9 @@ class GameFragment : Fragment() {
         viewModel.spinLuckyWheel()
 
         //In case of rolling this again
-        if (viewModel.wheelResult == "Extra Turn"
-            || viewModel.wheelResult == "Miss Turn"
-            || viewModel.wheelResult == "Bankrupt"
+        if (viewModel.wheelResult == EXTRA_TURN
+            || viewModel.wheelResult == MISS_TURN
+            || viewModel.wheelResult == BANKRUPT
         ) {
             showJokerDialog()
         }
