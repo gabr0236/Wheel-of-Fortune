@@ -5,14 +5,15 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.viewModels
+import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import com.example.s205350lykkehjulet.databinding.GameLostFragmentBinding
 
 class GameLostFragment : Fragment() {
-    private var binding: GameLostFragmentBinding? = null
+    private var _binding: GameLostFragmentBinding? = null
+    private val binding get() = _binding!!
 
-    private val viewModel: GameViewModel by viewModels()
+    private val viewModel: GameViewModel by activityViewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -20,25 +21,25 @@ class GameLostFragment : Fragment() {
     ): View {
         //Inflate the layout XML file and return a binding object instance
         val fragmentBinding = GameLostFragmentBinding.inflate(inflater, container, false)
-        binding = fragmentBinding
+        _binding = fragmentBinding
         return fragmentBinding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        binding?.apply {
+        _binding?.apply {
             //Specify the fragment as the lifecycle owner
             lifecycleOwner = viewLifecycleOwner
 
             //Assign the view model to a property in the binding class
-            binding!!.gameViewModel = viewModel
+            gameViewModel = viewModel
 
             //Assign this fragment
             gameLostFragment = this@GameLostFragment
 
             //Assign navigation to button
-            binding!!.playAgainButton.setOnClickListener {
+            playAgainButton.setOnClickListener {
                 findNavController().navigate(R.id.action_gameLostFragment_to_gameFragment)
             }
         }
