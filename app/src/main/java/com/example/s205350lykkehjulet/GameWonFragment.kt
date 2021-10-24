@@ -1,11 +1,13 @@
 package com.example.s205350lykkehjulet
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.example.s205350lykkehjulet.databinding.GameWonFragmentBinding
 
@@ -30,13 +32,21 @@ class GameWonFragment : Fragment() {
         binding?.apply {
             //Specify the fragment as the lifecycle owner
             lifecycleOwner = viewLifecycleOwner
-
+            Log.d("GameWonFragment","test")
+            Log.d("GameWonFragment","Score: ${viewModel.isWon}")
             //Assign the view model to a property in the binding class
-            binding!!.gameViewModel = viewModel
+            gameViewModel = viewModel
+            Log.d("GameWonFragment","test")
+            Log.d("GameWonFragment","Score: ${viewModel.score}")
 
             //Assign this fragment
             gameWonFragment = this@GameWonFragment
 
+            //TODO !!
+            binding!!.finalScore.text = getString(R.string.score, viewModel.score.toString())
+            binding!!.livesLeft.text = getString(R.string.lives, viewModel.lives.toString())
+
+            Log.d("GameWonFragment","Score: ${viewModel.score}")
             //Assign navigation to button
             binding!!.playAgainButton.setOnClickListener {
                 findNavController().navigate(R.id.action_gameWonFragment_to_gameFragment)

@@ -6,7 +6,7 @@ import androidx.lifecycle.ViewModel
 
 class GameViewModel : ViewModel() {
 
-    //Use of Backing Properties to return immutable object
+    //Use of Backing Properties to return immutable values
     private var _score = 0
     val score: Int
         get() = _score
@@ -151,6 +151,8 @@ class GameViewModel : ViewModel() {
      * Resets all appropriate values for a fresh game
      */
     fun newGame() {
+        Log.d("GameViewModel", "newGame")
+
         _lives = 5
         _score = 0
         _isWon = false

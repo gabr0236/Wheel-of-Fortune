@@ -16,7 +16,7 @@ import com.example.s205350lykkehjulet.databinding.GameFragmentBinding
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 
 class GameFragment : Fragment() {
-    private lateinit var binding: GameFragmentBinding
+    private var binding: GameFragmentBinding? = null
     private lateinit var recyclerView: RecyclerView
 
     private val viewModel: GameViewModel by viewModels()
@@ -25,38 +25,53 @@ class GameFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
+        Log.d("GameFragment", "On CreateView")
+
         //Inflate the layout XML file and return a binding object instance
         val fragmentBinding = GameFragmentBinding.inflate(inflater, container, false)
         binding = fragmentBinding
-
         //Get random category and word from datasouce and set in viewModel
         viewModel.setRandomCategoryAndWord(Datasource(requireContext()).getRandomCategoryAndWord())
         viewModel.newGame()
 
         //Setup recyclerview
-        recyclerView = binding.recyclerView
+        recyclerView = fragmentBinding.recyclerView
         recyclerView.layoutManager = LinearLayoutManager(context, RecyclerView.HORIZONTAL, false)
         recyclerView.adapter = ItemAdapter(viewModel.shownWordToBeGuessedAsArray)
-        return binding.root
+        return fragmentBinding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        Log.d("GameFragment", "onViewCreated() called")
-        //Specify the fragment as the lifecycle owner
-        binding.lifecycleOwner = viewLifecycleOwner
+        binding?.apply {
+            Log.d("GameFragment", "On ViewCreated")
+            //Specify the fragment as the lifecycle owner
+            lifecycleOwner = viewLifecycleOwner
 
-        //Assign the view model to a property in the binding class
-        binding.gameViewModel = viewModel
+            //Assign the view model to a property in the binding class
+            gameViewModel = viewModel
 
-        //Assign this fragment
-        binding.gameFragment = this
+            //Assign this fragment
+            gameFragment = this@GameFragment
 
-        //Setup a click listener for the Submit
-        binding.GuessButton.setOnClickListener { submitGuessAndSpinWheel() }
-        updateGameQuote()
-        updateCategory()
+            //Setup a click listener for the Submit
+            GuessButton.setOnClickListener { submitGuessAndSpinWheel() }
+            updateGameQuote()
+            updateCategory()
+        }
+    }
+
+    override fun onDestroyView() {
+        Log.d("GameFragment", "On Destroy")
+        super.onDestroyView()
+        binding=null
+    }
+
+    override fun onPause() {
+        Log.d("GameFragment", "On Pause")
+
+        super.onPause()
     }
 
     /**
@@ -64,13 +79,14 @@ class GameFragment : Fragment() {
      * Submits the players input and updates the view accordingly
      */
     private fun submitGuessAndSpinWheel() {
-        val playerInputLetter = binding.LetterInput.text?.firstOrNull()
+        val playerInputLetter = binding?.LetterInput?.text?.firstOrNull()
 
         //PlayerInputLetter cannot be null beyond this point
         playerInputLetter ?: return
 
         //Resets LetterInput field
-        binding.LetterInput.setText("")
+        //TODO: det her ok?
+        binding?.LetterInput?.setText("")
 
         if (viewModel.isUserInputMatch(playerInputLetter)) {
             viewModel.doWheelResultAction()
@@ -111,8 +127,7 @@ class GameFragment : Fragment() {
      * Updates the game quote
      */
     private fun updateGameQuote() {
-        Log.d("GameFragment", "updateGameQuote() called")
-        binding.GameQuote.text =
+        binding?.GameQuote?.text =
             String.format(resources.getString(R.string.game_quote), viewModel.wheelResult)
     }
 
@@ -159,11 +174,11 @@ class GameFragment : Fragment() {
     }
 
     private fun updateLives() {
-        binding.Lives.text = getString(R.string.lives, viewModel.lives.toString())
+        binding?.Lives?.text = getString(R.string.lives, viewModel.lives.toString())
     }
 
     private fun updateScore() {
-        binding.Score.text = getString(R.string.score, viewModel.score.toString())
+        binding?.Score?.text = getString(R.string.score, viewModel.score.toString())
     }
 
     private fun updateWordToBeGuessedOnScreen(){
@@ -172,21 +187,22 @@ class GameFragment : Fragment() {
     }
 
     private fun updateLuckyWheelResult() {
-        binding.WheelResult.text = viewModel.wheelResult
+        binding?.WheelResult?.text = viewModel.wheelResult
     }
 
     private fun setErrorTextField(error: Boolean) {
         if (error) {
-            binding.textField.isErrorEnabled = true
-            binding.LetterInput.error = "Oh no! Wrong Guess."
+            binding?.textField?.isErrorEnabled = true
+            binding?.LetterInput?.error = "Oh no! Wrong Guess."
         } else {
-            binding.textField.isErrorEnabled = false
-            binding.LetterInput.text = null
+            binding?.textField?.isErrorEnabled = false
+            binding?.LetterInput?.text = null
         }
     }
 
     private fun updateCategory() {
-        binding.Catagory.text =
+        binding?.Catagory?.text =
             String.format(resources.getString(R.string.category), viewModel.category)
     }
+
 }

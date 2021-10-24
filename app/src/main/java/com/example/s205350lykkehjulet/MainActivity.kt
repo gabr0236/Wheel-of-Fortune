@@ -1,6 +1,7 @@
 package com.example.s205350lykkehjulet
 
 import android.os.Bundle
+import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 
 
