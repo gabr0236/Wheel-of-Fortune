@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.text.isDigitsOnly
+import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
@@ -31,17 +32,17 @@ class GameFragment : Fragment() {
         Log.d("GameFragment", "On CreateView")
 
         //Inflate the layout XML file and return a binding object instance
-        val fragmentBinding = GameFragmentBinding.inflate(inflater, container, false)
-        _binding = fragmentBinding
+        _binding = DataBindingUtil.inflate(inflater, R.layout.game_fragment, container, false)
+
         //Get random category and word from datasource and set in viewModel
         viewModel.setRandomCategoryAndWord(Datasource(requireContext()).getRandomCategoryAndWord())
         viewModel.newGame()
 
         //Setup recyclerview
-        recyclerView = fragmentBinding.recyclerView
+        recyclerView = binding.recyclerView
         recyclerView.layoutManager = LinearLayoutManager(context, RecyclerView.HORIZONTAL, false)
         recyclerView.adapter = ItemAdapter(viewModel.shownWordToBeGuessedAsArray)
-        return fragmentBinding.root
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -99,12 +100,12 @@ class GameFragment : Fragment() {
                 return
             }
             viewModel.spinLuckyWheel()
-            if (!viewModel.wheelResult.isDigitsOnly()) {
+            if (!viewModel.wheelResult.value?.isDigitsOnly()!!) {
                 showJokerDialog()
             }
             updateView()
         } else {
-            if (viewModel.lives <= 0) {
+            if (viewModel.lives.value!! <= 0) {
                 findNavController().navigate(R.id.action_gameFragment_to_gameLostFragment)
                 return
             }
@@ -118,11 +119,11 @@ class GameFragment : Fragment() {
      * For a complete GUI update, except from category
      */
     private fun updateView() {
-        updateLives()
-        updateLuckyWheelResult()
-        updateScore()
-        updateGameQuote()
-        updateWordToBeGuessedOnScreen()
+      // updateLives()
+      // updateLuckyWheelResult()
+      // updateScore()
+      // updateGameQuote()
+      // updateWordToBeGuessedOnScreen()
     }
 
     /**
@@ -139,7 +140,7 @@ class GameFragment : Fragment() {
     private fun showJokerDialog() {
         Log.d("GameFragment", "showJokerDialog() called")
 
-        val message: String = when (viewModel.wheelResult) {
+        val message: String = when (viewModel.wheelResult.value) {
             //TODO: brug string xml, behøver nok ikke engang interpolation
             MISS_TURN -> "Dang! You rolled \"${viewModel.wheelResult}\" and lost a life"
             EXTRA_TURN -> "Yay! You rolled \"${viewModel.wheelResult}\" and gained a life"
@@ -147,7 +148,7 @@ class GameFragment : Fragment() {
             else -> throw Exception("WheelResult is not an expected value") //TODO: Det her ok?
         }
         MaterialAlertDialogBuilder(requireContext())
-            .setTitle(viewModel.wheelResult)
+            .setTitle(viewModel.wheelResult.value)
             .setMessage(message)
             .setCancelable(true)
             .show()
@@ -161,16 +162,16 @@ class GameFragment : Fragment() {
         Log.d("GameFragment", "continueGameAfterJokerDialog() called")
 
         viewModel.doWheelResultAction()
-        if (viewModel.lives <= 0) {
+        if (viewModel.lives.value!! <= 0) {
             findNavController().navigate(R.id.action_gameFragment_to_gameLostFragment)
             return
         }
         viewModel.spinLuckyWheel()
 
         //In case of rolling this again
-        if (viewModel.wheelResult == EXTRA_TURN
-            || viewModel.wheelResult == MISS_TURN
-            || viewModel.wheelResult == BANKRUPT
+        if (viewModel.wheelResult.value == EXTRA_TURN
+            || viewModel.wheelResult.value == MISS_TURN
+            || viewModel.wheelResult.value == BANKRUPT
         ) {
             showJokerDialog()
         }
@@ -190,7 +191,7 @@ class GameFragment : Fragment() {
     }
 
     private fun updateLuckyWheelResult() {
-        binding.WheelResult.text = viewModel.wheelResult
+        binding.WheelResult.text = viewModel.wheelResult.value
     }
 
     private fun setErrorTextField(error: Boolean) {

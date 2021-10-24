@@ -4,8 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:context=".GameFragment">
 
+    <!-- TODO måske slet layout og bare hav det hele i scrollview -->
     <data>
-
         <variable
             name="gameViewModel"
             type="com.example.s205350lykkehjulet.GameViewModel" />

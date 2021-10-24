@@ -2,6 +2,8 @@ package com.example.s205350lykkehjulet
 
 import android.util.Log
 import androidx.core.text.isDigitsOnly
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 
 const val BANKRUPT = "Bankrupt"
@@ -11,20 +13,20 @@ const val EXTRA_TURN = "Extra Turn"
 class GameViewModel : ViewModel() {
 
     //Use of Backing Properties to return immutable values
-    private var _score = 0
-    val score: Int
+    private val _score = MutableLiveData<Int>()
+    val score: LiveData<Int>
         get() = _score
 
-    private var _lives = 1
-    val lives: Int
+    private val _lives = MutableLiveData<Int>()
+    val lives: LiveData<Int>
         get() = _lives
 
     private var _isWon = false
     val isWon: Boolean
         get() = _isWon
 
-    private lateinit var _category: String
-    val category: String
+    private val _category = MutableLiveData<String>()
+    val category: LiveData<String>
         get() = _category
 
     private lateinit var _shownWordToBeGuessedAsArray: CharArray
@@ -34,8 +36,8 @@ class GameViewModel : ViewModel() {
     private val lastGuessedChar: Char
         get() = playerGuessedCharacters.last()
 
-    private lateinit var _wheelResult: String
-    val wheelResult: String
+    private val _wheelResult = MutableLiveData<String>()
+    val wheelResult: LiveData<String>
         get() = _wheelResult
 
     private var timesOfLuckyWheelSpins = 0
@@ -47,7 +49,7 @@ class GameViewModel : ViewModel() {
     //Only return currentWordToBeGuessed if the game is over
     val currentWordToBeGuessed: String
         get() {
-            return if (isWon || lives<=0) _currentWordToBeGuessed
+            return if (isWon || lives.value!!<=0) _currentWordToBeGuessed
             else ""
         }
 
@@ -75,7 +77,7 @@ class GameViewModel : ViewModel() {
      */
     fun spinLuckyWheel() {
         val random = (1..22).random()
-        _wheelResult = when (random) {
+        _wheelResult.value = when (random) {
             //TODO skal de her tal være const?
             in 1..2 -> "100"           //2 x 100
             3 -> "300"                 //1 x 300
@@ -93,10 +95,10 @@ class GameViewModel : ViewModel() {
 
         //Avoid getting bankrupt when player is already bankrupt (eg. at game start)
         //This is not part of the original game but a design decision for a better user experience
-        if ((score == 0 && wheelResult == BANKRUPT)
+        if ((score.value == 0 && wheelResult.value == BANKRUPT)
             //Avoid Extra Turn or Miss Turn when game is just started
             || ((timesOfLuckyWheelSpins == 1)
-                    && (wheelResult == EXTRA_TURN || wheelResult == MISS_TURN))
+                    && (wheelResult.value == EXTRA_TURN || wheelResult.value == MISS_TURN))
         ) {
             timesOfLuckyWheelSpins=0
             spinLuckyWheel()
@@ -119,7 +121,7 @@ class GameViewModel : ViewModel() {
             true
         } else {
             playerGuessedCharacters.add(playerInputLetterLC)
-            _lives--
+            _lives.value = _lives.value?.minus(1)
             false
         }
     }
@@ -145,18 +147,20 @@ class GameViewModel : ViewModel() {
      */
     fun doWheelResultAction() {
         when {
-            wheelResult.isDigitsOnly() -> {
-                val wheelValue = wheelResult.toInt()
-                _score += (wheelValue * _currentWordToBeGuessed.filter {
-                    it.equals(
-                        lastGuessedChar,
-                        ignoreCase = true
-                    )
-                }.count())
+            wheelResult.value?.isDigitsOnly() == true -> {
+                val wheelValue = wheelResult.value?.toInt()
+                if (wheelValue != null) {
+                    _score.value?.plus((wheelValue * _currentWordToBeGuessed.filter {
+                        it.equals(
+                            lastGuessedChar,
+                            ignoreCase = true
+                        )
+                    }.count()))
+                }
             }
-            wheelResult == BANKRUPT -> _score = 0
-            wheelResult == MISS_TURN -> _lives--
-            wheelResult == EXTRA_TURN -> _lives++
+            wheelResult.value == BANKRUPT -> _score.value = 0
+            wheelResult.value == MISS_TURN -> _lives.value?.minus(1)
+            wheelResult.value == EXTRA_TURN -> _lives.value?.plus(1)
         }
     }
 
@@ -166,8 +170,8 @@ class GameViewModel : ViewModel() {
     fun newGame() {
         Log.d("GameViewModel", "newGame")
 
-        _lives = 1
-        _score = 0
+        _lives.value = 1
+        _score.value = 0
         _isWon = false
         timesOfLuckyWheelSpins = 0
         playerGuessedCharacters = mutableListOf()
@@ -181,7 +185,7 @@ class GameViewModel : ViewModel() {
      */
     fun setRandomCategoryAndWord(randomCategoryAndWord: String) {
         val tempArray = randomCategoryAndWord.split(",").toTypedArray()
-        _category = tempArray[0]
+        _category.value = tempArray[0]
         _currentWordToBeGuessed = tempArray[1]
     }
 }
