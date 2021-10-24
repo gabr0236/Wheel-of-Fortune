@@ -72,11 +72,11 @@ class GameViewModel : ViewModel() {
     /**
      * Sets _wheelResult to random wheel property
      * This method doesn't allow Joker values ("Bankrupt", "Miss Turn" or "Extra Turn") on the first roll
-     *
      */
     fun spinLuckyWheel() {
         val random = (1..22).random()
         _wheelResult = when (random) {
+            //TODO skal de her tal være const?
             in 1..2 -> "100"           //2 x 100
             3 -> "300"                 //1 x 300
             in 4..9 -> "500"           //6 x 500
@@ -159,7 +159,6 @@ class GameViewModel : ViewModel() {
             wheelResult == EXTRA_TURN -> _lives++
         }
     }
-
 
     /**
      * Resets all appropriate values for a fresh game
