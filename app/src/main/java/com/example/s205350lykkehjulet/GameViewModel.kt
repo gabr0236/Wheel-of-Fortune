@@ -150,12 +150,11 @@ class GameViewModel : ViewModel() {
             wheelResult.value?.isDigitsOnly() == true -> {
                 val wheelValue = wheelResult.value?.toInt()
                 if (wheelValue != null) {
-                    _score.value?.plus((wheelValue * _currentWordToBeGuessed.filter {
-                        it.equals(
-                            lastGuessedChar,
-                            ignoreCase = true
-                        )
-                    }.count()))
+                    val multiplier =
+                        playerGuessedCharacters.filter{
+                            it.equals(lastGuessedChar, ignoreCase = true) }.count()
+
+                    _score.value = _score.value?.plus(wheelValue * multiplier)
                 }
             }
             wheelResult.value == BANKRUPT -> _score.value = 0

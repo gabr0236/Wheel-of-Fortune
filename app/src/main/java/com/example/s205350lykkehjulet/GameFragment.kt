@@ -17,7 +17,7 @@ import com.example.s205350lykkehjulet.databinding.GameFragmentBinding
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 
 class GameFragment : Fragment() {
-    //Recommended way of using view binding in fragments
+    //Recommended way for implementing view binding in fragments
     //Source: https://developer.android.com/topic/libraries/view-binding#fragments
     private var _binding: GameFragmentBinding? = null
     private val binding get() = _binding!!
@@ -62,8 +62,9 @@ class GameFragment : Fragment() {
             //Setup a click listener for the Submit
             GuessButton.setOnClickListener { submitGuessAndSpinWheel() }
         }
-        updateGameQuote()
-        updateCategory()
+        //TODO: commented out
+        //updateGameQuote()
+        //updateCategory()
     }
 
     override fun onDestroyView() {
@@ -123,7 +124,7 @@ class GameFragment : Fragment() {
       // updateLuckyWheelResult()
       // updateScore()
       // updateGameQuote()
-      // updateWordToBeGuessedOnScreen()
+      updateWordToBeGuessedOnScreen()
     }
 
     /**
