@@ -62,9 +62,6 @@ class GameFragment : Fragment() {
             //Setup a click listener for the Submit
             GuessButton.setOnClickListener { submitGuessAndSpinWheel() }
         }
-        //TODO: commented out
-        //updateGameQuote()
-        //updateCategory()
     }
 
     override fun onDestroyView() {
@@ -104,35 +101,15 @@ class GameFragment : Fragment() {
             if (!viewModel.wheelResult.value?.isDigitsOnly()!!) {
                 showJokerDialog()
             }
-            updateView()
         } else {
             if (viewModel.lives.value!! <= 0) {
                 findNavController().navigate(R.id.action_gameFragment_to_gameLostFragment)
                 return
             }
             viewModel.spinLuckyWheel()
-            updateView()
             setErrorTextField(true)
         }
-    }
-
-    /**
-     * For a complete GUI update, except from category
-     */
-    private fun updateView() {
-      // updateLives()
-      // updateLuckyWheelResult()
-      // updateScore()
-      // updateGameQuote()
-      updateWordToBeGuessedOnScreen()
-    }
-
-    /**
-     * Updates the game quote
-     */
-    private fun updateGameQuote() {
-        binding.GameQuote.text =
-            String.format(resources.getString(R.string.game_quote), viewModel.wheelResult)
+        updateWordToBeGuessedOnScreen()
     }
 
     /**
@@ -178,21 +155,9 @@ class GameFragment : Fragment() {
         }
     }
 
-    private fun updateLives() {
-        binding.Lives.text = getString(R.string.lives, viewModel.lives.toString())
-    }
-
-    private fun updateScore() {
-        binding.Score.text = getString(R.string.score, viewModel.score.toString())
-    }
-
     private fun updateWordToBeGuessedOnScreen(){
         //TODO det her skal ændres
         recyclerView.adapter = ItemAdapter(viewModel.shownWordToBeGuessedAsArray)
-    }
-
-    private fun updateLuckyWheelResult() {
-        binding.WheelResult.text = viewModel.wheelResult.value
     }
 
     private fun setErrorTextField(error: Boolean) {
@@ -204,10 +169,4 @@ class GameFragment : Fragment() {
             binding.LetterInput.text = null
         }
     }
-
-    private fun updateCategory() {
-        binding.Catagory.text =
-            String.format(resources.getString(R.string.category), viewModel.category)
-    }
-
 }
