@@ -15,7 +15,7 @@ class GameViewModel : ViewModel() {
     val score: Int
         get() = _score
 
-    private var _lives = 5
+    private var _lives = 1
     val lives: Int
         get() = _lives
 
@@ -40,7 +40,16 @@ class GameViewModel : ViewModel() {
 
     private var timesOfLuckyWheelSpins = 0
     private var playerGuessedCharacters = mutableListOf<Char>()
-    private lateinit var currentWordToBeGuessed: String
+    val numberOfGuesses: Int
+        get() = playerGuessedCharacters.size
+
+    private lateinit var _currentWordToBeGuessed: String
+    //Only return currentWordToBeGuessed if the game is over
+    val currentWordToBeGuessed: String
+        get() {
+            return if (isWon || lives<=0) _currentWordToBeGuessed
+            else ""
+        }
 
     init {
         Log.d("GameViewModel", "ViewModel initialized")
@@ -52,8 +61,8 @@ class GameViewModel : ViewModel() {
      */
     private fun createHiddenWordForDisplay() {
         var tempString =""
-        for (i in currentWordToBeGuessed.indices) {
-            tempString += if (currentWordToBeGuessed[i] == ' ') {
+        for (i in _currentWordToBeGuessed.indices) {
+            tempString += if (_currentWordToBeGuessed[i] == ' ') {
                 " "
             } else "_"
         }
@@ -83,6 +92,7 @@ class GameViewModel : ViewModel() {
         timesOfLuckyWheelSpins++
 
         //Avoid getting bankrupt when player is already bankrupt (eg. at game start)
+        //This is not part of the original game but a design decision for a better user experience
         if ((score == 0 && wheelResult == BANKRUPT)
             //Avoid Extra Turn or Miss Turn when game is just started
             || ((timesOfLuckyWheelSpins == 1)
@@ -98,7 +108,7 @@ class GameViewModel : ViewModel() {
      */
     fun isUserInputMatch(playerInputLetter: Char): Boolean {
         val playerInputLetterLC = playerInputLetter.lowercaseChar()
-        return if (currentWordToBeGuessed.contains(playerInputLetterLC, ignoreCase = true)
+        return if (_currentWordToBeGuessed.contains(playerInputLetterLC, ignoreCase = true)
             && !playerGuessedCharacters.contains(playerInputLetterLC)
         ) {
             playerGuessedCharacters.add(playerInputLetterLC)
@@ -119,11 +129,11 @@ class GameViewModel : ViewModel() {
      */
     private fun updateShownWordToBeGuessedForDisplay(): CharArray {
         var tempUpdatedShownWord = ""
-        for (i in currentWordToBeGuessed.indices) {
-            if (playerGuessedCharacters.contains(currentWordToBeGuessed[i].lowercaseChar())
-                || currentWordToBeGuessed[i].toString() == " "
+        for (i in _currentWordToBeGuessed.indices) {
+            if (playerGuessedCharacters.contains(_currentWordToBeGuessed[i].lowercaseChar())
+                || _currentWordToBeGuessed[i].toString() == " "
             ) {
-                tempUpdatedShownWord += currentWordToBeGuessed[i]
+                tempUpdatedShownWord += _currentWordToBeGuessed[i]
             } else tempUpdatedShownWord += "_"
         }
         _shownWordToBeGuessedAsArray = tempUpdatedShownWord.toCharArray()
@@ -137,7 +147,7 @@ class GameViewModel : ViewModel() {
         when {
             wheelResult.isDigitsOnly() -> {
                 val wheelValue = wheelResult.toInt()
-                _score += (wheelValue * currentWordToBeGuessed.filter {
+                _score += (wheelValue * _currentWordToBeGuessed.filter {
                     it.equals(
                         lastGuessedChar,
                         ignoreCase = true
@@ -157,12 +167,12 @@ class GameViewModel : ViewModel() {
     fun newGame() {
         Log.d("GameViewModel", "newGame")
 
-        _lives = 5
+        _lives = 1
         _score = 0
         _isWon = false
         timesOfLuckyWheelSpins = 0
         playerGuessedCharacters = mutableListOf()
-        if (playerGuessedCharacters.isNotEmpty()) throw Exception("PlayerGuessedCharacter array doesnt reset")
+        if (playerGuessedCharacters.isNotEmpty()) throw Exception("PlayerGuessedCharacter array doesn't reset")
         createHiddenWordForDisplay()
         spinLuckyWheel()
     }
@@ -173,6 +183,6 @@ class GameViewModel : ViewModel() {
     fun setRandomCategoryAndWord(randomCategoryAndWord: String) {
         val tempArray = randomCategoryAndWord.split(",").toTypedArray()
         _category = tempArray[0]
-        currentWordToBeGuessed = tempArray[1]
+        _currentWordToBeGuessed = tempArray[1]
     }
 }

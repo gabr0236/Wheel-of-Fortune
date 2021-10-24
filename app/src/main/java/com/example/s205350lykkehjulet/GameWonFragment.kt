@@ -41,6 +41,8 @@ class GameWonFragment : Fragment() {
 
             finalScore.text = getString(R.string.score, viewModel.score.toString())
             livesLeft.text = getString(R.string.lives, viewModel.lives.toString())
+            wordReveal.text = getString(R.string.word_reveal, viewModel.currentWordToBeGuessed)
+            numberOfGuesses.text = getString(R.string.number_of_guesses, viewModel.numberOfGuesses.toString())
 
             Log.d("GameWonFragment","Score: ${viewModel.score}")
             //Assign navigation to button

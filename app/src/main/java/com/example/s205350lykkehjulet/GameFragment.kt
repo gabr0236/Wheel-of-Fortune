@@ -16,13 +16,12 @@ import com.example.s205350lykkehjulet.databinding.GameFragmentBinding
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 
 class GameFragment : Fragment() {
-    //Recomended way of using view binding in fragments
+    //Recommended way of using view binding in fragments
     //Source: https://developer.android.com/topic/libraries/view-binding#fragments
     private var _binding: GameFragmentBinding? = null
     private val binding get() = _binding!!
 
     private lateinit var recyclerView: RecyclerView
-
     private val viewModel: GameViewModel by activityViewModels()
 
     override fun onCreateView(
@@ -34,7 +33,7 @@ class GameFragment : Fragment() {
         //Inflate the layout XML file and return a binding object instance
         val fragmentBinding = GameFragmentBinding.inflate(inflater, container, false)
         _binding = fragmentBinding
-        //Get random category and word from datasouce and set in viewModel
+        //Get random category and word from datasource and set in viewModel
         viewModel.setRandomCategoryAndWord(Datasource(requireContext()).getRandomCategoryAndWord())
         viewModel.newGame()
 

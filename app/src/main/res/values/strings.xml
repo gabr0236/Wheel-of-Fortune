@@ -1,6 +1,8 @@
 <resources>
     <string name="app_name">Wheel of Fortune</string>
     <string name="score">Score: %s</string>
+    <string name="word_reveal">Word: %s</string>
+    <string name="number_of_guesses">Number of Guesses: %s</string>
     <string name="lives">Lives: %s</string>
     <string name="guess_and_spin">Guess &amp; Spin</string>
     <string name="category">Category: %s</string>
@@ -10,7 +12,7 @@
     <string name="you_lost">You Lost!</string>
     <string name="play_again">Play again</string>
     <string-array name="category_and_words">
-        <item>test,a</item>
+        <item>test,ab</item>
         <!--Animals-->
         <!--<item>Animals,Mountain Lion</item>
         <item>Animals,Spiny Lumpsucker</item>
