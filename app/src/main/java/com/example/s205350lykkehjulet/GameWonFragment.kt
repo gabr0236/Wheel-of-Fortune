@@ -33,17 +33,14 @@ class GameWonFragment : Fragment() {
         binding?.apply {
             //Specify the fragment as the lifecycle owner
             lifecycleOwner = viewLifecycleOwner
-            Log.d("GameWonFragment","test")
-            Log.d("GameWonFragment","Score: ${viewModel.isWon}")
+
             //Assign the view model to a property in the binding class
             gameViewModel = viewModel
-            Log.d("GameWonFragment","test")
-            Log.d("GameWonFragment","Score: ${viewModel.score}")
 
             //Assign this fragment
             gameWonFragment = this@GameWonFragment
 
-            //TODO !!
+            //TODO !! -????
             binding!!.finalScore.text = getString(R.string.score, viewModel.score.toString())
             binding!!.livesLeft.text = getString(R.string.lives, viewModel.lives.toString())
 
