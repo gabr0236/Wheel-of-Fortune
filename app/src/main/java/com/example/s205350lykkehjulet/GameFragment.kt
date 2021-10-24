@@ -72,7 +72,6 @@ class GameFragment : Fragment() {
 
     override fun onPause() {
         Log.d("GameFragment", "On Pause")
-
         super.onPause()
     }
 
@@ -120,9 +119,9 @@ class GameFragment : Fragment() {
 
         val message: String = when (viewModel.wheelResult.value) {
             //TODO: brug string xml, behøver nok ikke engang interpolation
-            MISS_TURN -> "Dang! You rolled \"${viewModel.wheelResult}\" and lost a life"
-            EXTRA_TURN -> "Yay! You rolled \"${viewModel.wheelResult}\" and gained a life"
-            BANKRUPT -> "Dang! You rolled \"${viewModel.wheelResult}\" and lost a your points :("
+            MISS_TURN ->  String.format(resources.getString(R.string.miss_turn_message), viewModel.wheelResult)
+            EXTRA_TURN -> String.format(resources.getString(R.string.extra_turn_message), viewModel.wheelResult)
+            BANKRUPT ->   String.format(resources.getString(R.string.bankrupt_message), viewModel.wheelResult)
             else -> throw Exception("WheelResult is not an expected value") //TODO: Det her ok?
         }
         MaterialAlertDialogBuilder(requireContext())
@@ -163,7 +162,7 @@ class GameFragment : Fragment() {
     private fun setErrorTextField(error: Boolean) {
         if (error) {
             binding.textField.isErrorEnabled = true
-            binding.LetterInput.error = "Oh no! Wrong Guess."
+            binding.LetterInput.error = getString(R.string.wrong_guess)
         } else {
             binding.textField.isErrorEnabled = false
             binding.LetterInput.text = null
