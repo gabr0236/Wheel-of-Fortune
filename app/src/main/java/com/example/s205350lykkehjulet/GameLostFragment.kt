@@ -28,7 +28,7 @@ class GameLostFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        _binding?.apply {
+        binding.apply {
             //Specify the fragment as the lifecycle owner
             lifecycleOwner = viewLifecycleOwner
 
@@ -43,5 +43,10 @@ class GameLostFragment : Fragment() {
                 findNavController().navigate(R.id.action_gameLostFragment_to_gameFragment)
             }
         }
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding=null
     }
 }

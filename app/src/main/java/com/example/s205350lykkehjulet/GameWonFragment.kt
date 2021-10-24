@@ -14,7 +14,6 @@ class GameWonFragment : Fragment() {
     private var _binding: GameWonFragmentBinding? = null
     private val binding get() = _binding!!
 
-
     private val viewModel: GameViewModel by activityViewModels()
 
     override fun onCreateView(
@@ -30,7 +29,7 @@ class GameWonFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        _binding?.apply {
+        binding.apply {
             //Specify the fragment as the lifecycle owner
             lifecycleOwner = viewLifecycleOwner
 
@@ -40,16 +39,18 @@ class GameWonFragment : Fragment() {
             //Assign this fragment
             gameWonFragment = this@GameWonFragment
 
-            //TODO !! -????
-            binding.finalScore.text = getString(R.string.score, viewModel.score.toString())
-            binding.livesLeft.text = getString(R.string.lives, viewModel.lives.toString())
+            finalScore.text = getString(R.string.score, viewModel.score.toString())
+            livesLeft.text = getString(R.string.lives, viewModel.lives.toString())
 
             Log.d("GameWonFragment","Score: ${viewModel.score}")
             //Assign navigation to button
-            binding.playAgainButton.setOnClickListener {
+            playAgainButton.setOnClickListener {
                 findNavController().navigate(R.id.action_gameWonFragment_to_gameFragment)
             }
-
         }
+    }
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding=null
     }
 }
