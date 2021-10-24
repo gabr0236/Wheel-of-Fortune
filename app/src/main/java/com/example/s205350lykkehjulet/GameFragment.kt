@@ -48,7 +48,7 @@ class GameFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        _binding?.apply {
+        binding.apply {
             Log.d("GameFragment", "On ViewCreated")
             //Specify the fragment as the lifecycle owner
             lifecycleOwner = viewLifecycleOwner
@@ -61,9 +61,9 @@ class GameFragment : Fragment() {
 
             //Setup a click listener for the Submit
             GuessButton.setOnClickListener { submitGuessAndSpinWheel() }
-            updateGameQuote()
-            updateCategory()
         }
+        updateGameQuote()
+        updateCategory()
     }
 
     override fun onDestroyView() {
