@@ -67,7 +67,7 @@ class GameFragment : Fragment() {
     override fun onDestroyView() {
         Log.d("GameFragment", "On Destroy")
         super.onDestroyView()
-        _binding=null
+        _binding = null
     }
 
     override fun onPause() {
@@ -87,19 +87,20 @@ class GameFragment : Fragment() {
 
         binding.LetterInput.setText("")
 
-        //TODO det her kan gøres pænere
         if (viewModel.isUserInputMatch(playerInputLetter)) {
             setErrorTextField(false)
-            if (viewModel.isWon) { findNavController().navigate(R.id.action_gameFragment_to_gameWonFragment) }
             viewModel.spinLuckyWheel()
-            if (!viewModel.wheelResult.value?.isDigitsOnly()!!) { showJokerDialog() }
         } else {
             setErrorTextField(true)
             viewModel.spinLuckyWheel()
-            if (!viewModel.wheelResult.value?.isDigitsOnly()!!) {
-                showJokerDialog()
-            }
-            if (viewModel.lives.value!! <= 0) { findNavController().navigate(R.id.action_gameFragment_to_gameLostFragment)}
+        }
+        if (!viewModel.wheelResult.value?.isDigitsOnly()!!) {
+            showJokerDialog()
+        }
+        if (viewModel.lives.value!! <= 0) {
+            findNavController().navigate(R.id.action_gameFragment_to_gameLostFragment)
+        } else if (viewModel.isWon) {
+            findNavController().navigate(R.id.action_gameFragment_to_gameWonFragment)
         }
         updateWordToBeGuessedOnScreen()
     }
@@ -109,14 +110,12 @@ class GameFragment : Fragment() {
      */
     private fun showJokerDialog() {
         Log.d("GameFragment", "showJokerDialog() called")
-
         val message: String = when (viewModel.wheelResult.value) {
-            MISS_TURN ->  String.format(resources.getString(R.string.miss_turn_message), MISS_TURN)
+            MISS_TURN -> String.format(resources.getString(R.string.miss_turn_message), MISS_TURN)
             EXTRA_TURN -> String.format(resources.getString(R.string.extra_turn_message), EXTRA_TURN)
-            BANKRUPT ->   String.format(resources.getString(R.string.bankrupt_message), BANKRUPT)
+            BANKRUPT -> String.format(resources.getString(R.string.bankrupt_message), BANKRUPT)
             else -> throw Exception("WheelResult is not an expected value") //TODO: Det her ok?
         }
-
         MaterialAlertDialogBuilder(requireContext())
             .setTitle(viewModel.wheelResult.value)
             .setMessage(message)
@@ -132,7 +131,7 @@ class GameFragment : Fragment() {
         Log.d("GameFragment", "continueGameAfterJokerDialog() called")
 
         viewModel.doWheelResultAction()
-        if (viewModel.lives.value!! <= 0) { findNavController().navigate(R.id.action_gameFragment_to_gameLostFragment)}
+        if (viewModel.lives.value!! <= 0) { findNavController().navigate(R.id.action_gameFragment_to_gameLostFragment) }
         viewModel.spinLuckyWheel()
 
         //In case of rolling this again
@@ -144,7 +143,7 @@ class GameFragment : Fragment() {
         }
     }
 
-    private fun updateWordToBeGuessedOnScreen(){
+    private fun updateWordToBeGuessedOnScreen() {
         //TODO det her skal ændres
         recyclerView.adapter = ItemAdapter(viewModel.shownWordToBeGuessedAsArray)
     }
