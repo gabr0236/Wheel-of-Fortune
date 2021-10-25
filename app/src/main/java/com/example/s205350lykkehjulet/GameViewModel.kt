@@ -50,7 +50,7 @@ class GameViewModel : ViewModel() {
     val currentWordToBeGuessed: String
         get() {
             return if (isWon || lives.value!!<=0) _currentWordToBeGuessed
-            else ""
+            else "It's a secret!"
         }
 
     init {
@@ -93,6 +93,7 @@ class GameViewModel : ViewModel() {
         }
         timesOfLuckyWheelSpins++
 
+        if (timesOfLuckyWheelSpins==2) _wheelResult.value = EXTRA_TURN
         //Avoid getting bankrupt when player is already bankrupt (eg. at game start)
         //This is not part of the original game but a design decision for a better user experience
         if ((score.value == 0 && wheelResult.value == BANKRUPT)
@@ -118,6 +119,7 @@ class GameViewModel : ViewModel() {
             if (!shownWordToBeGuessedAsArray.contains('_')) {
                 _isWon = true
             }
+            doWheelResultAction()
             true
         } else {
             playerGuessedCharacters.add(playerInputLetterLC)
@@ -158,8 +160,8 @@ class GameViewModel : ViewModel() {
                 }
             }
             wheelResult.value == BANKRUPT -> _score.value = 0
-            wheelResult.value == MISS_TURN -> _lives.value?.minus(1)
-            wheelResult.value == EXTRA_TURN -> _lives.value?.plus(1)
+            wheelResult.value == MISS_TURN -> _lives.value = _lives.value?.minus(1)
+            wheelResult.value == EXTRA_TURN -> _lives.value = _lives.value?.plus(1)
         }
     }
 

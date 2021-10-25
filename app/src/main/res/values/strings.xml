@@ -11,9 +11,9 @@
     <string name="you_won">You won!</string>
     <string name="you_lost">You Lost!</string>
     <string name="play_again">Play again</string>
-    <string name="bankrupt_message">Dang! You rolled %s and lost a life</string>
-    <string name="miss_turn_message">Yay! You rolled %s and gained a life</string>
-    <string name="extra_turn_message">Dang! You rolled %s and lost a your points :(</string>
+    <string name="miss_turn_message">Dang! You rolled "%s" and lost a life</string>
+    <string name="extra_turn_message">Yay! You rolled "%s" and gained a life</string>
+    <string name="bankrupt_message">Dang! You rolled "%s" and lost a your points :(</string>
     <string name="wrong_guess">Oh no! Wrong Guess.</string>
 
     <string-array name="category_and_words">
@@ -30,7 +30,7 @@
         <item>Movies,Django Unchained</item>
         <item>Movies,Inception</item>
         <item>Movies,The Green Mile</item>
-        <item>Movies,Untouchable</item>
+        <item>Movies,The Intouchables</item>
         <item>Movies,Gladiator</item>
     </string-array>
 </resources>

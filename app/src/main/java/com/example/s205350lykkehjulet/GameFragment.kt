@@ -89,24 +89,14 @@ class GameFragment : Fragment() {
         binding.LetterInput.setText("")
 
         if (viewModel.isUserInputMatch(playerInputLetter)) {
-            viewModel.doWheelResultAction()
             setErrorTextField(false)
-
-            if (viewModel.isWon) {
-                findNavController().navigate(R.id.action_gameFragment_to_gameWonFragment)
-                return
-            }
+            if (viewModel.isWon) { findNavController().navigate(R.id.action_gameFragment_to_gameWonFragment) }
             viewModel.spinLuckyWheel()
-            if (!viewModel.wheelResult.value?.isDigitsOnly()!!) {
-                showJokerDialog()
-            }
+            if (!viewModel.wheelResult.value?.isDigitsOnly()!!) { showJokerDialog() }
         } else {
-            if (viewModel.lives.value!! <= 0) {
-                findNavController().navigate(R.id.action_gameFragment_to_gameLostFragment)
-                return
-            }
             viewModel.spinLuckyWheel()
             setErrorTextField(true)
+            if (viewModel.lives.value!! <= 0) { findNavController().navigate(R.id.action_gameFragment_to_gameLostFragment)}
         }
         updateWordToBeGuessedOnScreen()
     }
@@ -119,9 +109,9 @@ class GameFragment : Fragment() {
 
         val message: String = when (viewModel.wheelResult.value) {
             //TODO: brug string xml, behøver nok ikke engang interpolation
-            MISS_TURN ->  String.format(resources.getString(R.string.miss_turn_message), viewModel.wheelResult)
-            EXTRA_TURN -> String.format(resources.getString(R.string.extra_turn_message), viewModel.wheelResult)
-            BANKRUPT ->   String.format(resources.getString(R.string.bankrupt_message), viewModel.wheelResult)
+            MISS_TURN ->  String.format(resources.getString(R.string.miss_turn_message), MISS_TURN)
+            EXTRA_TURN -> String.format(resources.getString(R.string.extra_turn_message), EXTRA_TURN)
+            BANKRUPT ->   String.format(resources.getString(R.string.bankrupt_message), BANKRUPT)
             else -> throw Exception("WheelResult is not an expected value") //TODO: Det her ok?
         }
         MaterialAlertDialogBuilder(requireContext())
@@ -139,10 +129,7 @@ class GameFragment : Fragment() {
         Log.d("GameFragment", "continueGameAfterJokerDialog() called")
 
         viewModel.doWheelResultAction()
-        if (viewModel.lives.value!! <= 0) {
-            findNavController().navigate(R.id.action_gameFragment_to_gameLostFragment)
-            return
-        }
+        if (viewModel.lives.value!! <= 0) { findNavController().navigate(R.id.action_gameFragment_to_gameLostFragment)}
         viewModel.spinLuckyWheel()
 
         //In case of rolling this again
