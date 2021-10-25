@@ -85,17 +85,20 @@ class GameFragment : Fragment() {
         //PlayerInputLetter cannot be null beyond this point
         playerInputLetter ?: return
 
-        //Resets LetterInput field
         binding.LetterInput.setText("")
 
+        //TODO det her kan gøres pænere
         if (viewModel.isUserInputMatch(playerInputLetter)) {
             setErrorTextField(false)
             if (viewModel.isWon) { findNavController().navigate(R.id.action_gameFragment_to_gameWonFragment) }
             viewModel.spinLuckyWheel()
             if (!viewModel.wheelResult.value?.isDigitsOnly()!!) { showJokerDialog() }
         } else {
-            viewModel.spinLuckyWheel()
             setErrorTextField(true)
+            viewModel.spinLuckyWheel()
+            if (!viewModel.wheelResult.value?.isDigitsOnly()!!) {
+                showJokerDialog()
+            }
             if (viewModel.lives.value!! <= 0) { findNavController().navigate(R.id.action_gameFragment_to_gameLostFragment)}
         }
         updateWordToBeGuessedOnScreen()
@@ -114,6 +117,7 @@ class GameFragment : Fragment() {
             BANKRUPT ->   String.format(resources.getString(R.string.bankrupt_message), BANKRUPT)
             else -> throw Exception("WheelResult is not an expected value") //TODO: Det her ok?
         }
+
         MaterialAlertDialogBuilder(requireContext())
             .setTitle(viewModel.wheelResult.value)
             .setMessage(message)

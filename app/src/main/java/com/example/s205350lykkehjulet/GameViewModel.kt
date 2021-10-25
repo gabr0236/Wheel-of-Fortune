@@ -171,7 +171,7 @@ class GameViewModel : ViewModel() {
     fun newGame() {
         Log.d("GameViewModel", "newGame")
 
-        _lives.value = 1
+        _lives.value = 5
         _score.value = 0
         _isWon = false
         timesOfLuckyWheelSpins = 0
