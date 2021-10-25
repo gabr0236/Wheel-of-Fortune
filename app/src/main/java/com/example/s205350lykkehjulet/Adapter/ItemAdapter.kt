@@ -33,7 +33,7 @@ class ItemAdapter(private var letterList: CharArray) :
     override fun getItemCount() = letterList.size
 
     fun updateItems(letterList: CharArray){
-        //TODO skal det her ligge her?
+        //TODO skal det her ligge her, og hvordan gør man?
         for(i in this.letterList.indices) {
             if (this.letterList[i] != letterList[i]) this.letterList[i] = letterList[i]
         }

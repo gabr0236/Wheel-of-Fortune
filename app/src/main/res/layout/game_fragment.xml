@@ -4,7 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:context=".GameFragment">
 
-    <!-- TODO måske slet layout og bare hav det hele i scrollview -->
     <data>
         <variable
             name="gameViewModel"
@@ -74,8 +73,11 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/Catagory"
-                tools:listitem="@android:layout/simple_list_item_1"
-                tools:itemCount="1"/>
+                tools:listitem="@layout/item_view"
+                tools:itemCount="10"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                android:orientation="horizontal"
+                />
 
             <RelativeLayout
                 android:id="@+id/relativelayout"
@@ -161,9 +163,6 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/textField"
                 />
-
-
-
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>
 </layout>

@@ -111,7 +111,6 @@ class GameFragment : Fragment() {
         Log.d("GameFragment", "showJokerDialog() called")
 
         val message: String = when (viewModel.wheelResult.value) {
-            //TODO: brug string xml, behøver nok ikke engang interpolation
             MISS_TURN ->  String.format(resources.getString(R.string.miss_turn_message), MISS_TURN)
             EXTRA_TURN -> String.format(resources.getString(R.string.extra_turn_message), EXTRA_TURN)
             BANKRUPT ->   String.format(resources.getString(R.string.bankrupt_message), BANKRUPT)
