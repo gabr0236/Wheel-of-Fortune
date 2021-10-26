@@ -45,7 +45,7 @@ class GameViewModel : ViewModel() {
         }
 
     init {
-        Log.d("GameViewModel", "ViewModel initialized")
+        Log.d(TAG, "ViewModel initialized")
     }
 
     /**
@@ -159,7 +159,7 @@ class GameViewModel : ViewModel() {
      * Resets all appropriate values for a fresh game
      */
     fun newGame() {
-        Log.d("GameViewModel", "newGame")
+        Log.d(TAG, "newGame")
         _lives.value = 5
         _score.value = 0
         _isWon = false
@@ -177,5 +177,9 @@ class GameViewModel : ViewModel() {
         val tempArray = randomCategoryAndWord.split(",").toTypedArray()
         _category.value = tempArray[0]
         _currentWordToBeGuessed = tempArray[1]
+    }
+
+    companion object {
+        private const val TAG = "GameViewModel"
     }
 }

@@ -44,7 +44,7 @@ class GameWonFragment : Fragment() {
             wordReveal.text = getString(R.string.word_reveal, viewModel.currentWordToBeGuessed)
             numberOfGuesses.text = getString(R.string.number_of_guesses, viewModel.numberOfGuesses.toString())
 
-            Log.d("GameWonFragment","Score: ${viewModel.score}")
+            Log.d(TAG,"Score: ${viewModel.score}")
             //Assign navigation to button
             playAgainButton.setOnClickListener {
                 findNavController().navigate(R.id.action_gameWonFragment_to_gameFragment)
@@ -54,5 +54,9 @@ class GameWonFragment : Fragment() {
     override fun onDestroyView() {
         super.onDestroyView()
         _binding=null
+    }
+
+    companion object {
+        private const val TAG = "GameWonFragment"
     }
 }

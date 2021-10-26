@@ -29,7 +29,7 @@ class GameFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        Log.d("GameFragment", "On CreateView")
+        Log.d(TAG, "On CreateView")
 
         //Inflate the layout XML file and return a binding object instance
         _binding = DataBindingUtil.inflate(inflater, R.layout.game_fragment, container, false)
@@ -49,7 +49,7 @@ class GameFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         binding.apply {
-            Log.d("GameFragment", "On ViewCreated")
+            Log.d(TAG, "On ViewCreated")
             //Specify the fragment as the lifecycle owner
             lifecycleOwner = viewLifecycleOwner
 
@@ -65,13 +65,13 @@ class GameFragment : Fragment() {
     }
 
     override fun onDestroyView() {
-        Log.d("GameFragment", "On Destroy")
+        Log.d(TAG, "On Destroy")
         super.onDestroyView()
         _binding = null
     }
 
     override fun onPause() {
-        Log.d("GameFragment", "On Pause")
+        Log.d(TAG, "On Pause")
         super.onPause()
     }
 
@@ -109,7 +109,7 @@ class GameFragment : Fragment() {
      * Display a dialog if player rolled a joker
      */
     private fun showJokerDialog() {
-        Log.d("GameFragment", "showJokerDialog() called")
+        Log.d(TAG, "showJokerDialog() called")
         val message: String = when (viewModel.wheelResult.value) {
             MISS_TURN -> String.format(resources.getString(R.string.miss_turn_message), MISS_TURN)
             EXTRA_TURN -> String.format(resources.getString(R.string.extra_turn_message), EXTRA_TURN)
@@ -128,7 +128,7 @@ class GameFragment : Fragment() {
      * Continuation of the game loop after player rolled a joker
      */
     private fun continueGameAfterJokerDialog() {
-        Log.d("GameFragment", "continueGameAfterJokerDialog() called")
+        Log.d(TAG, "continueGameAfterJokerDialog() called")
 
         viewModel.doWheelResultAction()
         if (viewModel.lives.value!! <= 0) { findNavController().navigate(R.id.action_gameFragment_to_gameLostFragment) }
@@ -156,5 +156,9 @@ class GameFragment : Fragment() {
             binding.textField.isErrorEnabled = false
             binding.LetterInput.text = null
         }
+    }
+
+    companion object {
+        private const val TAG = "GameFragment"
     }
 }
