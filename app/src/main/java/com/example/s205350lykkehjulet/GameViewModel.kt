@@ -34,6 +34,10 @@ class GameViewModel : ViewModel() {
 
     private var timesOfLuckyWheelSpins = 0
     private var guessedCharacters = mutableListOf<Char>()
+
+    private val _guessedCharacterString = MutableLiveData("Letters\n")
+    val guessedCharacterString: LiveData<String> = _guessedCharacterString
+
     val numberOfGuesses: Int = guessedCharacters.size
 
     private lateinit var _currentWordToBeGuessed: String
@@ -104,7 +108,7 @@ class GameViewModel : ViewModel() {
         return if (_currentWordToBeGuessed.contains(playerInputLetterLC, ignoreCase = true)
             && !guessedCharacters.contains(playerInputLetterLC)
         ) {
-            guessedCharacters.add(playerInputLetterLC)
+            saveGuessedChar(playerInputLetterLC)
             _shownWordToBeGuessedAsArray = updateShownWordToBeGuessedForDisplay()
             if (!shownWordToBeGuessedAsArray.contains('_')) {
                 _isWon = true
@@ -112,12 +116,16 @@ class GameViewModel : ViewModel() {
             doWheelResultAction()
             true
         } else {
-            guessedCharacters.add(playerInputLetterLC)
+            saveGuessedChar(playerInputLetterLC)
             _lives.value = _lives.value?.minus(1)
             false
         }
     }
 
+    private fun saveGuessedChar(playerInputLetter: Char){
+        guessedCharacters.add(playerInputLetter)
+        _guessedCharacterString.value = _guessedCharacterString.value.plus(playerInputLetter.toString() + "\n")
+    }
     /**
      * Updates and returns the _shownWordToBeGuessedAsArray
      */

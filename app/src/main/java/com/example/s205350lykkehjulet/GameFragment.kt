@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.text.isDigitsOnly
+import androidx.core.view.children
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
@@ -58,9 +59,6 @@ class GameFragment : Fragment() {
 
             //Assign this fragment
             gameFragment = this@GameFragment
-
-            //Setup a click listener for the Submit
-            guessAndSpinButton.setOnClickListener { submitGuessAndSpinWheel() }
         }
     }
 
@@ -79,7 +77,7 @@ class GameFragment : Fragment() {
      * Main function for the game loop
      * Submits the players input and updates the view accordingly
      */
-    private fun submitGuessAndSpinWheel() {
+    fun submitGuessAndSpinWheel() {
         val playerInputLetter = binding.letterInput.text?.firstOrNull()
 
         //PlayerInputLetter cannot be null beyond this point

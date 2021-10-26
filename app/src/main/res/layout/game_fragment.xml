@@ -56,43 +56,44 @@
                 android:background="@drawable/category_border"
                 android:padding="8dp"
                 android:text="@{@string/category(gameViewModel.category)}"
+                android:textAlignment="center"
                 android:textAppearance="@style/TextAppearance.MaterialComponents.Body1"
                 android:textColor="@color/white"
                 android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/score"
-                tools:text="Category: Animals"
-                android:textAlignment="center"/>
+                tools:text="Category: Animals" />
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/hiddenWord"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
+                android:layout_marginBottom="16dp"
+                android:orientation="horizontal"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/category"
-                tools:listitem="@layout/item_view"
                 tools:itemCount="10"
-                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                android:orientation="horizontal"
-                />
+                tools:listitem="@layout/item_view" />
 
             <RelativeLayout
                 android:id="@+id/relativelayout"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_width="280dp"
+                android:layout_height="250dp"
+                android:layout_marginTop="16dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/hiddenWord"
-                android:layout_marginTop="@dimen/default_padding">
+                app:layout_constraintTop_toBottomOf="@+id/hiddenWord">
 
                 <ImageView
                     android:id="@+id/luckyWheel"
-                    android:layout_width="250dp"
-                    android:layout_height="250dp"
-                    android:layout_centerHorizontal="true"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_marginEnd="3dp"
                     android:gravity="center"
                     android:src="@drawable/lucky_wheel" />
 
@@ -147,10 +148,10 @@
                     android:id="@+id/letterInput"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:padding="10dp"
                     android:digits="ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz"
                     android:gravity="center_horizontal"
-                    android:maxLength="1" />
+                    android:maxLength="1"
+                    android:padding="10dp" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <Button
@@ -158,11 +159,25 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/default_padding"
+                android:onClick="@{() -> gameFragment.submitGuessAndSpinWheel()}"
                 android:text="@string/guess_and_spin"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/letterInputContainer"
-                />
+                app:layout_constraintTop_toBottomOf="@+id/letterInputContainer" />
+
+            <TextView
+                android:id="@+id/guessedCharacters"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:lineSpacingExtra="5dp"
+                android:text="@{gameViewModel.guessedCharacterString}"
+                android:textAlignment="center"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/relativelayout"
+                app:layout_constraintTop_toBottomOf="@+id/hiddenWord"
+                tools:text="Letters\na" />
+
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>
 </layout>
