@@ -113,6 +113,7 @@
                     android:background="@drawable/wheel_result_border"
                     android:gravity="center"
                     android:text="@{gameViewModel.wheelResult}"
+                    android:textAppearance="@style/TextAppearance.MaterialComponents.Body2"
                     android:textAlignment="center"
                     tools:text="1000" />
             </RelativeLayout>
