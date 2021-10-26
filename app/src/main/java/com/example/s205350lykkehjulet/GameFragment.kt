@@ -39,7 +39,7 @@ class GameFragment : Fragment() {
         viewModel.newGame()
 
         //Setup recyclerview
-        recyclerView = binding.recyclerView
+        recyclerView = binding.hiddenWord
         recyclerView.layoutManager = LinearLayoutManager(context, RecyclerView.HORIZONTAL, false)
         recyclerView.adapter = ItemAdapter(viewModel.shownWordToBeGuessedAsArray)
         return binding.root
@@ -60,7 +60,7 @@ class GameFragment : Fragment() {
             gameFragment = this@GameFragment
 
             //Setup a click listener for the Submit
-            GuessButton.setOnClickListener { submitGuessAndSpinWheel() }
+            guessAndSpinButton.setOnClickListener { submitGuessAndSpinWheel() }
         }
     }
 
@@ -80,12 +80,12 @@ class GameFragment : Fragment() {
      * Submits the players input and updates the view accordingly
      */
     private fun submitGuessAndSpinWheel() {
-        val playerInputLetter = binding.LetterInput.text?.firstOrNull()
+        val playerInputLetter = binding.letterInput.text?.firstOrNull()
 
         //PlayerInputLetter cannot be null beyond this point
         playerInputLetter ?: return
 
-        binding.LetterInput.setText("")
+        binding.letterInput.setText("")
 
         if (viewModel.isUserInputMatch(playerInputLetter)) {
             setErrorTextField(false)
@@ -150,11 +150,11 @@ class GameFragment : Fragment() {
 
     private fun setErrorTextField(error: Boolean) {
         if (error) {
-            binding.textField.isErrorEnabled = true
-            binding.LetterInput.error = getString(R.string.wrong_guess)
+            binding.letterInputContainer.isErrorEnabled = true
+            binding.letterInput.error = getString(R.string.wrong_guess)
         } else {
-            binding.textField.isErrorEnabled = false
-            binding.LetterInput.text = null
+            binding.letterInputContainer.isErrorEnabled = false
+            binding.letterInput.text = null
         }
     }
 

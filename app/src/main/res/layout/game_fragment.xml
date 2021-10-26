@@ -25,7 +25,7 @@
             android:padding="@dimen/default_padding">
 
             <TextView
-                android:id="@+id/Score"
+                android:id="@+id/score"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/default_padding"
@@ -37,7 +37,7 @@
                 tools:text="Points: 1400" />
 
             <TextView
-                android:id="@+id/Lives"
+                android:id="@+id/lives"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="@dimen/default_padding"
@@ -49,7 +49,7 @@
                 tools:text="Lives: 4" />
 
             <TextView
-                android:id="@+id/Catagory"
+                android:id="@+id/category"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/default_padding"
@@ -61,18 +61,18 @@
                 android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/Score"
+                app:layout_constraintTop_toBottomOf="@+id/score"
                 tools:text="Category: Animals"
                 android:textAlignment="center"/>
 
             <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/recyclerView"
+                android:id="@+id/hiddenWord"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/Catagory"
+                app:layout_constraintTop_toBottomOf="@+id/category"
                 tools:listitem="@layout/item_view"
                 tools:itemCount="10"
                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
@@ -85,11 +85,11 @@
                 android:layout_height="wrap_content"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/recyclerView"
+                app:layout_constraintTop_toBottomOf="@+id/hiddenWord"
                 android:layout_marginTop="@dimen/default_padding">
 
                 <ImageView
-                    android:id="@+id/LuckyWheel"
+                    android:id="@+id/luckyWheel"
                     android:layout_width="250dp"
                     android:layout_height="250dp"
                     android:layout_centerHorizontal="true"
@@ -97,13 +97,13 @@
                     android:src="@drawable/lucky_wheel" />
 
                 <TextView
-                    android:id="@+id/WheelResult"
+                    android:id="@+id/wheelResult"
                     android:layout_width="103dp"
                     android:layout_height="31dp"
-                    android:layout_alignLeft="@id/LuckyWheel"
-                    android:layout_alignTop="@id/LuckyWheel"
-                    android:layout_alignEnd="@id/LuckyWheel"
-                    android:layout_alignBottom="@id/LuckyWheel"
+                    android:layout_alignLeft="@id/luckyWheel"
+                    android:layout_alignTop="@id/luckyWheel"
+                    android:layout_alignEnd="@id/luckyWheel"
+                    android:layout_alignBottom="@id/luckyWheel"
                     android:layout_marginStart="1dp"
                     android:layout_marginLeft="149dp"
                     android:layout_marginTop="113dp"
@@ -117,7 +117,7 @@
             </RelativeLayout>
 
             <TextView
-                android:id="@+id/GameQuote"
+                android:id="@+id/gameQuote"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/default_padding"
@@ -129,7 +129,7 @@
                 tools:text="You rolled 1000! Guess a letter!" />
 
             <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/textField"
+                android:id="@+id/letterInputContainer"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="100dp"
                 android:layout_height="wrap_content"
@@ -141,10 +141,10 @@
                 android:textAppearance="@style/TextAppearance.MaterialComponents.Body2"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/GameQuote">
+                app:layout_constraintTop_toBottomOf="@+id/gameQuote">
 
                 <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/LetterInput"
+                    android:id="@+id/letterInput"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:padding="10dp"
@@ -154,14 +154,14 @@
             </com.google.android.material.textfield.TextInputLayout>
 
             <Button
-                android:id="@+id/GuessButton"
+                android:id="@+id/guessAndSpinButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/default_padding"
                 android:text="@string/guess_and_spin"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textField"
+                app:layout_constraintTop_toBottomOf="@+id/letterInputContainer"
                 />
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>
