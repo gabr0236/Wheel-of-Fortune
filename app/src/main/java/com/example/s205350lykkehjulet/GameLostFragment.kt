@@ -29,15 +29,11 @@ class GameLostFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         binding.apply {
-            //Specify the fragment as the lifecycle owner
             lifecycleOwner = viewLifecycleOwner
-
-            //Assign the view model to a property in the binding class
             gameViewModel = viewModel
-
-            //Assign this fragment
             gameLostFragment = this@GameLostFragment
 
+            //TODO: det her kan ligge i xml?
             finalScore.text = getString(R.string.score, viewModel.score.toString())
             wordReveal.text = getString(R.string.word_reveal, viewModel.currentWordToBeGuessed)
             numberOfGuesses.text = getString(R.string.number_of_guesses, viewModel.numberOfGuesses.toString())

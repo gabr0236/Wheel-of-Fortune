@@ -30,15 +30,11 @@ class GameWonFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         binding.apply {
-            //Specify the fragment as the lifecycle owner
             lifecycleOwner = viewLifecycleOwner
-
-            //Assign the view model to a property in the binding class
             gameViewModel = viewModel
-
-            //Assign this fragment
             gameWonFragment = this@GameWonFragment
 
+            //TODO: det her kan ligge i xml?
             finalScore.text = getString(R.string.score, viewModel.score.toString())
             livesLeft.text = getString(R.string.lives, viewModel.lives.toString())
             wordReveal.text = getString(R.string.word_reveal, viewModel.currentWordToBeGuessed)
@@ -51,6 +47,7 @@ class GameWonFragment : Fragment() {
             }
         }
     }
+
     override fun onDestroyView() {
         super.onDestroyView()
         _binding=null

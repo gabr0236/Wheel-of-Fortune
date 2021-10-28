@@ -80,6 +80,10 @@
                 android:text="@string/play_again"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
+                android:textSize="35sp"
+                android:padding="@dimen/default_padding"
+                android:textStyle="bold"
+                style="@style/Widget.MaterialComponents.FloatingActionButton"
                 app:layout_constraintTop_toBottomOf="@+id/numberOfGuesses" />
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>

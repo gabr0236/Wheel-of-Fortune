@@ -34,14 +34,12 @@
         <item>Movies,The Green Mile</item>
         <item>Movies,Star Wars</item>
         <!--Sports-->
-        <item>Sport,Cycling</item>
-        <item>Sport,Volleyball</item>
-        <item>Sport,Swimming</item>
-        <item>Sport,Tennis</item>
-        <item>Sport,Badminton</item>
-        <item>Sport,Soccer</item>
-        <item>Sport,Ice Hockey</item>
-
-
+        <item>Sports,Cycling</item>
+        <item>Sports,Volleyball</item>
+        <item>Sports,Swimming</item>
+        <item>Sports,Tennis</item>
+        <item>Sports,Badminton</item>
+        <item>Sports,Soccer</item>
+        <item>Sports,Ice Hockey</item>
     </string-array>
 </resources>

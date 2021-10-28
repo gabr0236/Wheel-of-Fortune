@@ -119,6 +119,19 @@
             </RelativeLayout>
 
             <TextView
+                android:id="@+id/guessedCharacters"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:lineSpacingExtra="5dp"
+                android:text="@{gameViewModel.guessedCharacterString}"
+                android:textAlignment="center"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/relativelayout"
+                app:layout_constraintTop_toBottomOf="@+id/hiddenWord"
+                tools:text="Letters\na" />
+
+            <TextView
                 android:id="@+id/gameQuote"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -164,21 +177,11 @@
                 android:text="@string/guess_and_spin"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
+                android:textSize="15dp"
+                android:padding="12dp"
+                android:textStyle="bold"
+                style="@style/Widget.MaterialComponents.FloatingActionButton"
                 app:layout_constraintTop_toBottomOf="@+id/letterInputContainer" />
-
-            <TextView
-                android:id="@+id/guessedCharacters"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:lineSpacingExtra="5dp"
-                android:text="@{gameViewModel.guessedCharacterString}"
-                android:textAlignment="center"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/relativelayout"
-                app:layout_constraintTop_toBottomOf="@+id/hiddenWord"
-                tools:text="Letters\na" />
-
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>
 </layout>
