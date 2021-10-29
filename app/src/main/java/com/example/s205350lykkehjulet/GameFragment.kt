@@ -6,7 +6,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.text.isDigitsOnly
-import androidx.core.view.children
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
@@ -42,7 +41,7 @@ class GameFragment : Fragment() {
         //Setup recyclerview
         recyclerView = binding.hiddenWord
         recyclerView.layoutManager = LinearLayoutManager(context, RecyclerView.HORIZONTAL, false)
-        recyclerView.adapter = ItemAdapter(viewModel.shownWordToBeGuessedAsArray)
+        recyclerView.adapter = ItemAdapter(viewModel.letterCardList.value)
         return binding.root
     }
 
@@ -101,6 +100,8 @@ class GameFragment : Fragment() {
             findNavController().navigate(R.id.action_gameFragment_to_gameWonFragment)
         }
         updateWordToBeGuessedOnScreen()
+        viewModel.testChangeHiddenWord()
+        recyclerView.adapter?.notifyDataSetChanged()
     }
 
     /**
@@ -143,7 +144,7 @@ class GameFragment : Fragment() {
 
     private fun updateWordToBeGuessedOnScreen() {
         //TODO det her skal ændres
-        recyclerView.adapter = ItemAdapter(viewModel.shownWordToBeGuessedAsArray)
+        //recyclerView.adapter = ItemAdapter(viewModel.letterCardList)
     }
 
     private fun setErrorTextField(error: Boolean) {

@@ -1,10 +1,11 @@
 package com.example.s205350lykkehjulet
 
-import android.util.Log
+ import android.util.Log
 import androidx.core.text.isDigitsOnly
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.example.s205350lykkehjulet.Data.LetterCard
 
 const val BANKRUPT = "Bankrupt"
 const val MISS_TURN = "Miss Turn"
@@ -25,9 +26,8 @@ class GameViewModel : ViewModel() {
     private val _category = MutableLiveData<String>()
     val category: LiveData<String> = _category
 
-    private lateinit var _shownWordToBeGuessedAsArray: CharArray
-    val shownWordToBeGuessedAsArray: CharArray
-        get() = _shownWordToBeGuessedAsArray
+    private val _letterCardList = MutableLiveData<List<LetterCard>>()
+    val letterCardList: LiveData<List<LetterCard>> = _letterCardList
 
     private val _wheelResult = MutableLiveData<String>()
     val wheelResult: LiveData<String> = _wheelResult
@@ -56,15 +56,15 @@ class GameViewModel : ViewModel() {
      * Creates a char array of currentWordToBeGuessed where all chars are substituted by '_'
      * This is used for the initial creation of the RecyclerView
      */
-    private fun createHiddenWordForDisplay() {
-        var tempString =""
-        for (i in _currentWordToBeGuessed.indices) {
-            tempString += if (_currentWordToBeGuessed[i] == ' ') {
-                " "
-            } else "_"
-        }
-        _shownWordToBeGuessedAsArray = tempString.toCharArray()
-    }
+    //private fun createHiddenWordForDisplay() {
+    //    var tempString =""
+    //    for (i in _currentWordToBeGuessed.indices) {
+    //        tempString += if (_currentWordToBeGuessed[i] == ' ') {
+    //            " "
+    //        } else "_"
+    //    }
+    //    _letterCardList = tempString.toCharArray()
+    //}
 
     /**
      * Sets _wheelResult to random wheel property
@@ -109,10 +109,11 @@ class GameViewModel : ViewModel() {
             && !guessedCharacters.contains(playerInputLetterLC)
         ) {
             saveGuessedChar(playerInputLetterLC)
-            _shownWordToBeGuessedAsArray = updateShownWordToBeGuessedForDisplay()
-            if (!shownWordToBeGuessedAsArray.contains('_')) {
-                _isWon = true
-            }
+
+            //_shownWordToBeGuessedAsArray = updateShownWordToBeGuessedForDisplay()
+            //if (!shownWordToBeGuessedAsArray.contains('_')) {
+            //    _isWon = true
+            //} todo nu kan man ikke vinde
             doWheelResultAction()
             true
         } else {
@@ -129,18 +130,18 @@ class GameViewModel : ViewModel() {
     /**
      * Updates and returns the _shownWordToBeGuessedAsArray
      */
-    private fun updateShownWordToBeGuessedForDisplay(): CharArray {
-        var tempUpdatedShownWord = ""
-        for (i in _currentWordToBeGuessed.indices) {
-            if (guessedCharacters.contains(_currentWordToBeGuessed[i].lowercaseChar())
-                || _currentWordToBeGuessed[i].toString() == " "
-            ) {
-                tempUpdatedShownWord += _currentWordToBeGuessed[i]
-            } else tempUpdatedShownWord += "_"
-        }
-        _shownWordToBeGuessedAsArray = tempUpdatedShownWord.toCharArray()
-        return _shownWordToBeGuessedAsArray
-    }
+    //private fun updateShownWordToBeGuessedForDisplay(): CharArray {
+    //    var tempUpdatedShownWord = ""
+    //    for (i in _currentWordToBeGuessed.indices) {
+    //        if (guessedCharacters.contains(_currentWordToBeGuessed[i].lowercaseChar())
+    //            || _currentWordToBeGuessed[i].toString() == " "
+    //        ) {
+    //            tempUpdatedShownWord += _currentWordToBeGuessed[i]
+    //        } else tempUpdatedShownWord += "_"
+    //    }
+    //    _letterCardList = tempUpdatedShownWord.toCharArray()
+    //    return _letterCardList
+    //}
 
     /**
      * Updates the player score or lives depending on the wheelResult
@@ -174,7 +175,7 @@ class GameViewModel : ViewModel() {
         timesOfLuckyWheelSpins = 0
         guessedCharacters = mutableListOf()
         if (guessedCharacters.isNotEmpty()) throw Exception("PlayerGuessedCharacter array doesn't reset")
-        createHiddenWordForDisplay()
+        //createHiddenWordForDisplay()
         spinLuckyWheel()
     }
 
@@ -185,6 +186,22 @@ class GameViewModel : ViewModel() {
         val tempArray = randomCategoryAndWord.split(",").toTypedArray()
         _category.value = tempArray[0]
         _currentWordToBeGuessed = tempArray[1]
+
+        val tempLetterCardList = mutableListOf<LetterCard>()
+        for (i in _currentWordToBeGuessed.indices){
+            if (_currentWordToBeGuessed[i]==' '){
+                tempLetterCardList.add(LetterCard('_'))
+            } else tempLetterCardList.add(LetterCard(_currentWordToBeGuessed[i]))
+        }
+        _letterCardList.value=tempLetterCardList
+    }
+
+    fun testChangeHiddenWord(){
+        _letterCardList.value?.get(0)?.letter ='X'
+        _letterCardList.value?.get(1)?.letter ='X'
+        _letterCardList.value?.get(2)?.letter ='X'
+        _letterCardList.value?.get(3)?.letter ='X'
+        _letterCardList.value?.get(4)?.letter ='X'
     }
 
     companion object {
