@@ -112,7 +112,7 @@ class GameViewModel : ViewModel() {
             _letterCardList.value?.filter{
                 it.letter.lowercaseChar() == playerInputLetterLC }
                 ?.forEach { it.isHidden=false }
-            if (_letterCardList.value?.all { !it.isHidden } == true) {
+            if (_letterCardList.value?.all { !it.isHidden || it.equals(' ') } == true) {
                 _isWon = true
             }
             doWheelResultAction()
@@ -176,7 +176,7 @@ class GameViewModel : ViewModel() {
         timesOfLuckyWheelSpins = 0
         guessedCharacters = mutableListOf()
         if (guessedCharacters.isNotEmpty()) throw Exception("PlayerGuessedCharacter array doesn't reset")
-        //createHiddenWordForDisplay()
+        _guessedCharacterString.value="Letters\n"
         spinLuckyWheel()
     }
 
