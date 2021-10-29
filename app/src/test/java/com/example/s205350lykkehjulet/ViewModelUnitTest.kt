@@ -16,15 +16,4 @@ class ViewModelUnitTest {
     fun init() {
         viewModel = GameViewModel()
     }
-
-    @Test
-    fun loseLifeTest(){
-        val lives = viewModel.lives
-        val char: Char = 'ë'
-        viewModel.isUserInputMatch((char))
-        assertTrue(viewModel.lives==lives-1)
-    }
-
-
-
 }

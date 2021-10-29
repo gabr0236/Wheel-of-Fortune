@@ -13,9 +13,9 @@
         app:cardCornerRadius="3dp"
         app:cardUseCompatPadding="true"
         app:cardElevation="2dp"
-        app:cardBackgroundColor="@android:color/holo_red_dark"
+        app:cardBackgroundColor="@color/orange_500"
         tools:ignore="MissingConstraints"
-        app:strokeColor="@android:color/holo_red_dark"
+        app:strokeColor="@color/orange_700"
         app:strokeWidth="2dp">
 
         <TextView
