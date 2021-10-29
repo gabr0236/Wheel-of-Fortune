@@ -10,6 +10,7 @@ import androidx.cardview.widget.CardView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.s205350lykkehjulet.Data.LetterCard
 import com.example.s205350lykkehjulet.R
+import com.google.android.material.card.MaterialCardView
 
 class ItemAdapter(private var letterCardList: List<LetterCard>?) :
     RecyclerView.Adapter<ItemAdapter.ViewHolder>(){
@@ -17,11 +18,15 @@ class ItemAdapter(private var letterCardList: List<LetterCard>?) :
     class ViewHolder(itemView: View) :RecyclerView.ViewHolder(itemView){
         //TODO ikke brug findview by id (pass context som param?)
         private val letterTextView: TextView = itemView.findViewById(R.id.letter_textView)
-        private val cardView: CardView = itemView.findViewById(R.id.letter_cardView)
+        private val cardView: MaterialCardView = itemView.findViewById(R.id.letter_cardView)
 
         fun bind(letterCard: LetterCard) {
-            if (letterCard.letter=='_' || !letterCard.isHidden) {
+            if (letterCard.letter==' '){
+                cardView.visibility = View.INVISIBLE
+            }
+            else if (!letterCard.isHidden) {
                 letterTextView.text = letterCard.letter.toString()
+                cardView.setCardBackgroundColor(Color.WHITE)
             } else if (letterCard.isHidden){
                 letterTextView.text = " "
             }

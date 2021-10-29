@@ -6,23 +6,25 @@
     android:layout_width="wrap_content"
     android:layout_height="wrap_content">
 
-    <androidx.cardview.widget.CardView
+    <com.google.android.material.card.MaterialCardView
         android:id="@+id/letter_cardView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:cardCornerRadius="2dp"
+        android:layout_width="25dp"
+        android:layout_height="40dp"
+        app:cardCornerRadius="3dp"
         app:cardUseCompatPadding="true"
         app:cardElevation="2dp"
-        app:cardBackgroundColor="@color/white"
-        tools:ignore="MissingConstraints">
+        app:cardBackgroundColor="@android:color/holo_red_dark"
+        tools:ignore="MissingConstraints"
+        app:strokeColor="@android:color/holo_red_dark"
+        app:strokeWidth="2dp">
 
         <TextView
             android:id="@+id/letter_textView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="_"
-            android:paddingHorizontal="6dp"
-            android:paddingVertical="3dp"
-            android:textAlignment="center" />
-   </androidx.cardview.widget.CardView>
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text=""
+            android:gravity="center_vertical"
+            android:textAlignment="center"
+            tools:ignore="RtlCompat" />
+   </com.google.android.material.card.MaterialCardView>
 </FrameLayout>

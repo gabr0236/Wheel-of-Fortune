@@ -19,7 +19,6 @@
     <string-array name="category_and_words">
         <!--Animals-->
         <item>Animals,Mountain Lion</item>
-        <item>Animals,Spiny Lumpsucker</item>
         <item>Animals,Blobfish</item>
         <item>Animals,Chicken Turtle</item>
         <item>Animals,Leafy Seadragon</item>
@@ -27,9 +26,7 @@
         <item>Animals,Goblin Shark</item>
         <!--Movies-->
         <item>Movies,The Dark Knight</item>
-        <item>Movies,Django Unchained</item>
         <item>Movies,Inception</item>
-        <item>Movies,The Intouchables</item>
         <item>Movies,Gladiator</item>
         <item>Movies,The Green Mile</item>
         <item>Movies,Star Wars</item>
