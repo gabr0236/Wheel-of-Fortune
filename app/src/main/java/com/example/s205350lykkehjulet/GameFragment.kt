@@ -99,12 +99,16 @@ class GameFragment : Fragment() {
         //TODO: kunne kaldes tidligere?
         if (viewModel.lives.value!! <= 0) {
             findNavController().navigate(R.id.action_gameFragment_to_gameLostFragment)
-        }
-        else if (viewModel.isWon) {
+        } else if (viewModel.isWon) {
             findNavController().navigate(R.id.action_gameFragment_to_gameWonFragment)
         }
-        updateWordToBeGuessedOnScreen()
-        recyclerView.adapter?.notifyDataSetChanged()
+        updateLetterCards()
+    }
+
+    private fun updateLetterCards() {
+        val posOfLastGuessedChars = viewModel.getPosOfLastGuessedChars()
+        for(i in posOfLastGuessedChars.indices)
+        recyclerView.adapter?.notifyItemChanged(posOfLastGuessedChars[i])
     }
 
     /**

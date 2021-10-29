@@ -26,6 +26,7 @@ class GameViewModel : ViewModel() {
     private val _category = MutableLiveData<String>()
     val category: LiveData<String> = _category
 
+    //TODO: er der nogen grund til at det her skal bruge binding?
     private val _letterCardList = MutableLiveData<List<LetterCard>>()
     val letterCardList: LiveData<List<LetterCard>> = _letterCardList
 
@@ -33,12 +34,14 @@ class GameViewModel : ViewModel() {
     val wheelResult: LiveData<String> = _wheelResult
 
     private var timesOfLuckyWheelSpins = 0
-    private var guessedCharacters = mutableListOf<Char>()
+    private var _guessedCharacters = mutableListOf<Char>()
+    val guessedCharacters: List<Char>
+        get() = _guessedCharacters
 
     private val _guessedCharacterString = MutableLiveData("Letters\n")
     val guessedCharacterString: LiveData<String> = _guessedCharacterString
 
-    val numberOfGuesses: Int = guessedCharacters.size
+    val numberOfGuesses: Int = _guessedCharacters.size
 
     private lateinit var _currentWordToBeGuessed: String
     //Only return currentWordToBeGuessed if the game is over
@@ -52,6 +55,14 @@ class GameViewModel : ViewModel() {
         Log.d(TAG, "ViewModel initialized")
     }
 
+    fun getPosOfLastGuessedChars(): List<Int>{
+        var positions = mutableListOf<Int>()
+        for (i in _currentWordToBeGuessed.indices){
+        if (_currentWordToBeGuessed[i].lowercaseChar() == _guessedCharacters.last().lowercaseChar())
+            positions.add(i)
+        }
+        return positions
+    }
     /**
      * Creates a char array of currentWordToBeGuessed where all chars are substituted by '_'
      * This is used for the initial creation of the RecyclerView
@@ -106,12 +117,14 @@ class GameViewModel : ViewModel() {
     fun isUserInputMatch(playerInputLetter: Char): Boolean {
         val playerInputLetterLC = playerInputLetter.lowercaseChar()
         return if (_currentWordToBeGuessed.contains(playerInputLetterLC, ignoreCase = true)
-            && !guessedCharacters.contains(playerInputLetterLC)
+            && !_guessedCharacters.contains(playerInputLetterLC)
         ) {
             saveGuessedChar(playerInputLetterLC)
             _letterCardList.value?.filter{
                 it.letter.lowercaseChar() == playerInputLetterLC }
-                ?.forEach { it.isHidden=false }
+                ?.forEach {
+                    it.isHidden=false
+                }
             if (_letterCardList.value?.all { !it.isHidden || it.equals(' ') } == true) {
                 _isWon = true
             }
@@ -125,7 +138,7 @@ class GameViewModel : ViewModel() {
     }
 
     private fun saveGuessedChar(playerInputLetter: Char){
-        guessedCharacters.add(playerInputLetter)
+        _guessedCharacters.add(playerInputLetter)
         _guessedCharacterString.value = _guessedCharacterString.value.plus(playerInputLetter.toString() + "\n")
     }
     /**
@@ -154,7 +167,7 @@ class GameViewModel : ViewModel() {
                 if (wheelValue != null) {
                     val multiplier =
                         _currentWordToBeGuessed.filter{
-                            it.equals(guessedCharacters.last(), ignoreCase = true) }.count()
+                            it.equals(_guessedCharacters.last(), ignoreCase = true) }.count()
 
                     _score.value = _score.value?.plus(wheelValue * multiplier)
                 }
@@ -174,8 +187,8 @@ class GameViewModel : ViewModel() {
         _score.value = 0
         _isWon = false
         timesOfLuckyWheelSpins = 0
-        guessedCharacters = mutableListOf()
-        if (guessedCharacters.isNotEmpty()) throw Exception("PlayerGuessedCharacter array doesn't reset")
+        _guessedCharacters = mutableListOf()
+        if (_guessedCharacters.isNotEmpty()) throw Exception("PlayerGuessedCharacter array doesn't reset")
         _guessedCharacterString.value="Letters\n"
         spinLuckyWheel()
     }
