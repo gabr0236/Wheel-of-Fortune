@@ -116,7 +116,7 @@ class GameViewModel : ViewModel() {
                 ?.forEach {
                     it.isHidden=false
                 }
-            if (_letterCardList.value?.all { !it.isHidden || it.equals(' ') } == true) {
+            if (_letterCardList.value?.all { !it.isHidden || it.letter==' ' } == true) {
                 _isWon = true
             }
             doWheelResultAction()
