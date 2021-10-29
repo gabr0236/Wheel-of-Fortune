@@ -67,15 +67,6 @@ class GameViewModel : ViewModel() {
      * Creates a char array of currentWordToBeGuessed where all chars are substituted by '_'
      * This is used for the initial creation of the RecyclerView
      */
-    //private fun createHiddenWordForDisplay() {
-    //    var tempString =""
-    //    for (i in _currentWordToBeGuessed.indices) {
-    //        tempString += if (_currentWordToBeGuessed[i] == ' ') {
-    //            " "
-    //        } else "_"
-    //    }
-    //    _letterCardList = tempString.toCharArray()
-    //}
 
     /**
      * Sets _wheelResult to random wheel property
@@ -141,21 +132,6 @@ class GameViewModel : ViewModel() {
         _guessedCharacters.add(playerInputLetter)
         _guessedCharacterString.value = _guessedCharacterString.value.plus(playerInputLetter.toString() + "\n")
     }
-    /**
-     * Updates and returns the _shownWordToBeGuessedAsArray
-     */
-    //private fun updateShownWordToBeGuessedForDisplay(): CharArray {
-    //    var tempUpdatedShownWord = ""
-    //    for (i in _currentWordToBeGuessed.indices) {
-    //        if (guessedCharacters.contains(_currentWordToBeGuessed[i].lowercaseChar())
-    //            || _currentWordToBeGuessed[i].toString() == " "
-    //        ) {
-    //            tempUpdatedShownWord += _currentWordToBeGuessed[i]
-    //        } else tempUpdatedShownWord += "_"
-    //    }
-    //    _letterCardList = tempUpdatedShownWord.toCharArray()
-    //    return _letterCardList
-    //}
 
     /**
      * Updates the player score or lives depending on the wheelResult

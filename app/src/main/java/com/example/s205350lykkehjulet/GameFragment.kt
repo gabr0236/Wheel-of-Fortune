@@ -149,11 +149,6 @@ class GameFragment : Fragment() {
         }
     }
 
-    private fun updateWordToBeGuessedOnScreen() {
-        //TODO det her skal ændres
-        //recyclerView.adapter = ItemAdapter(viewModel.letterCardList)
-    }
-
     private fun setErrorTextField(error: Boolean) {
         if (error) {
             binding.letterInputContainer.isErrorEnabled = true
