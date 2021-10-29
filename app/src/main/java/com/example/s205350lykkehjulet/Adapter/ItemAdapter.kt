@@ -1,6 +1,7 @@
 package com.example.s205350lykkehjulet.Adapter
 
 import android.graphics.Color
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -19,7 +20,11 @@ class ItemAdapter(private var letterCardList: List<LetterCard>?) :
         private val cardView: CardView = itemView.findViewById(R.id.letter_cardView)
 
         fun bind(letterCard: LetterCard) {
-            letterTextView.text = letterCard.letter.toString()
+            if (letterCard.letter=='_' || !letterCard.isHidden) {
+                letterTextView.text = letterCard.letter.toString()
+            } else if (letterCard.isHidden){
+                letterTextView.text = " "
+            }
         }
     }
 
@@ -32,6 +37,7 @@ class ItemAdapter(private var letterCardList: List<LetterCard>?) :
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.bind(letterCardList?.get(position)!!)
+        Log.d("Adapter", "bind called")
     }
 
     override fun getItemCount(): Int {

@@ -109,11 +109,12 @@ class GameViewModel : ViewModel() {
             && !guessedCharacters.contains(playerInputLetterLC)
         ) {
             saveGuessedChar(playerInputLetterLC)
-
-            //_shownWordToBeGuessedAsArray = updateShownWordToBeGuessedForDisplay()
-            //if (!shownWordToBeGuessedAsArray.contains('_')) {
-            //    _isWon = true
-            //} todo nu kan man ikke vinde
+            _letterCardList.value?.filter{
+                it.letter.lowercaseChar() == playerInputLetterLC }
+                ?.forEach { it.isHidden=false }
+            if (_letterCardList.value?.all { !it.isHidden || it.letter==' ' } == true) {
+                _isWon = true
+            }
             doWheelResultAction()
             true
         } else {
@@ -187,21 +188,12 @@ class GameViewModel : ViewModel() {
         _category.value = tempArray[0]
         _currentWordToBeGuessed = tempArray[1]
 
+        //TODO kortere
         val tempLetterCardList = mutableListOf<LetterCard>()
         for (i in _currentWordToBeGuessed.indices){
-            if (_currentWordToBeGuessed[i]==' '){
-                tempLetterCardList.add(LetterCard('_'))
-            } else tempLetterCardList.add(LetterCard(_currentWordToBeGuessed[i]))
+            tempLetterCardList.add(LetterCard(_currentWordToBeGuessed[i]))
         }
         _letterCardList.value=tempLetterCardList
-    }
-
-    fun testChangeHiddenWord(){
-        _letterCardList.value?.get(0)?.letter ='X'
-        _letterCardList.value?.get(1)?.letter ='X'
-        _letterCardList.value?.get(2)?.letter ='X'
-        _letterCardList.value?.get(3)?.letter ='X'
-        _letterCardList.value?.get(4)?.letter ='X'
     }
 
     companion object {

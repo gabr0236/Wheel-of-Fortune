@@ -94,13 +94,14 @@ class GameFragment : Fragment() {
         if (!viewModel.wheelResult.value?.isDigitsOnly()!!) {
             showJokerDialog()
         }
+        //TODO: kunne kaldes tidligere?
         if (viewModel.lives.value!! <= 0) {
             findNavController().navigate(R.id.action_gameFragment_to_gameLostFragment)
-        } else if (viewModel.isWon) {
+        }
+        if (viewModel.isWon) {
             findNavController().navigate(R.id.action_gameFragment_to_gameWonFragment)
         }
         updateWordToBeGuessedOnScreen()
-        viewModel.testChangeHiddenWord()
         recyclerView.adapter?.notifyDataSetChanged()
     }
 
