@@ -13,7 +13,6 @@ const val EXTRA_TURN = "Extra Turn"
 
 class GameViewModel : ViewModel() {
 
-    //Use of Backing Properties to return immutable values
     private val _score = MutableLiveData<Int>()
     val score: LiveData<Int> = _score
 
@@ -21,7 +20,8 @@ class GameViewModel : ViewModel() {
     val lives: LiveData<Int> = _lives
 
     private var _isWon = false
-    val isWon: Boolean = _isWon
+    val isWon: Boolean
+        get() = _isWon
 
     private val _category = MutableLiveData<String>()
     val category: LiveData<String> = _category
@@ -112,7 +112,7 @@ class GameViewModel : ViewModel() {
             _letterCardList.value?.filter{
                 it.letter.lowercaseChar() == playerInputLetterLC }
                 ?.forEach { it.isHidden=false }
-            if (_letterCardList.value?.all { !it.isHidden || it.letter==' ' } == true) {
+            if (_letterCardList.value?.all { !it.isHidden } == true) {
                 _isWon = true
             }
             doWheelResultAction()

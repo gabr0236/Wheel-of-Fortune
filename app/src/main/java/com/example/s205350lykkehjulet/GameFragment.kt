@@ -91,6 +91,8 @@ class GameFragment : Fragment() {
             setErrorTextField(true)
             viewModel.spinLuckyWheel()
         }
+        //TODO: sådan nogle calls burde måske ikke ske,
+        // måske istedet lav metode der hedder isJoker
         if (!viewModel.wheelResult.value?.isDigitsOnly()!!) {
             showJokerDialog()
         }
@@ -98,7 +100,7 @@ class GameFragment : Fragment() {
         if (viewModel.lives.value!! <= 0) {
             findNavController().navigate(R.id.action_gameFragment_to_gameLostFragment)
         }
-        if (viewModel.isWon) {
+        else if (viewModel.isWon) {
             findNavController().navigate(R.id.action_gameFragment_to_gameWonFragment)
         }
         updateWordToBeGuessedOnScreen()
