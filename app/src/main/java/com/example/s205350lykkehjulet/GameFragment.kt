@@ -76,33 +76,39 @@ class GameFragment : Fragment() {
      * Main function for the game loop
      * Submits the players input and updates the view accordingly
      */
-    fun submitGuessAndSpinWheel() {
-        val playerInputLetter = binding.letterInput.text?.firstOrNull()
+    fun submitGuess() {
+        if (viewModel.gameStage.value==GameStage.IS_GUESS) {
+            val playerInputLetter = binding.letterInput.text?.firstOrNull()
 
-        //PlayerInputLetter cannot be null beyond this point
-        playerInputLetter ?: return
+            //PlayerInputLetter cannot be null beyond this point
+            playerInputLetter ?: return
 
-        binding.letterInput.setText("")
+            binding.letterInput.setText("")
 
-        if (viewModel.isUserInputMatch(playerInputLetter)) {
-            setErrorTextField(false)
+            if (viewModel.isUserInputMatch(playerInputLetter)) {
+                setErrorTextField(false)
+            } else {
+                setErrorTextField(true)
+            }
+            //TODO: kunne kaldes tidligere?
+            if (viewModel.lives.value!! <= 0) {
+                findNavController().navigate(R.id.action_gameFragment_to_gameLostFragment)
+            } else if (viewModel.isWon) {
+                findNavController().navigate(R.id.action_gameFragment_to_gameWonFragment)
+            }
+            updateLetterCards()
+        }
+    }
+
+    fun spinWheel(){
+        if (viewModel.gameStage.value==GameStage.IS_SPIN) {
+            //TODO: sådan nogle calls burde måske ikke ske,
+            // måske istedet lav metode der hedder isJoker
             viewModel.spinLuckyWheel()
-        } else {
-            setErrorTextField(true)
-            viewModel.spinLuckyWheel()
+            if (!viewModel.wheelResult.value?.isDigitsOnly()!!) {
+                showJokerDialog()
+            }
         }
-        //TODO: sådan nogle calls burde måske ikke ske,
-        // måske istedet lav metode der hedder isJoker
-        if (!viewModel.wheelResult.value?.isDigitsOnly()!!) {
-            showJokerDialog()
-        }
-        //TODO: kunne kaldes tidligere?
-        if (viewModel.lives.value!! <= 0) {
-            findNavController().navigate(R.id.action_gameFragment_to_gameLostFragment)
-        } else if (viewModel.isWon) {
-            findNavController().navigate(R.id.action_gameFragment_to_gameWonFragment)
-        }
-        updateLetterCards()
     }
 
     private fun updateLetterCards() {

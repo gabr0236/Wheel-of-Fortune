@@ -4,7 +4,8 @@
     <string name="word_reveal">Word: %s</string>
     <string name="number_of_guesses">Number of Guesses: %s</string>
     <string name="lives">Lives: %s</string>
-    <string name="guess_and_spin">Guess &amp; Spin</string>
+    <string name="guess_button">Guess</string>
+    <string name="spin_button">Spin</string>
     <string name="category">Category: %s</string>
     <string name="game_quote">You rolled %s! Guess a letter!</string>
     <string name="letter_hint">Letter</string>

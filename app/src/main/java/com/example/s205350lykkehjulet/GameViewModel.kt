@@ -7,11 +7,20 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.s205350lykkehjulet.Data.LetterCard
 
+//TODO resources
 const val BANKRUPT = "Bankrupt"
 const val MISS_TURN = "Miss Turn"
 const val EXTRA_TURN = "Extra Turn"
 
+enum class GameStage {
+    IS_SPIN, IS_GUESS;
+}
+
 class GameViewModel : ViewModel() {
+
+    private var _gameStage = MutableLiveData<GameStage>()
+    val gameStage: LiveData<GameStage>
+        get() = _gameStage
 
     private val _score = MutableLiveData<Int>()
     val score: LiveData<Int> = _score
@@ -63,10 +72,6 @@ class GameViewModel : ViewModel() {
         }
         return positions
     }
-    /**
-     * Creates a char array of currentWordToBeGuessed where all chars are substituted by '_'
-     * This is used for the initial creation of the RecyclerView
-     */
 
     /**
      * Sets _wheelResult to random wheel property
@@ -90,6 +95,11 @@ class GameViewModel : ViewModel() {
         }
         timesOfLuckyWheelSpins++
 
+        //Switch to guessing stage if result is digits else spin again
+        _gameStage.value = if (wheelResult.value?.isDigitsOnly()==true){
+            GameStage.IS_GUESS
+        } else GameStage.IS_SPIN
+
         //Avoid getting bankrupt when player is already bankrupt (eg. at game start)
         //This is not part of the original game but a design decision for a better user experience
         if ((score.value == 0 && wheelResult.value == BANKRUPT)
@@ -106,6 +116,7 @@ class GameViewModel : ViewModel() {
      * Return whether the currentWordToBeGuessed contains the player input
      */
     fun isUserInputMatch(playerInputLetter: Char): Boolean {
+        _gameStage.value=GameStage.IS_SPIN
         val playerInputLetterLC = playerInputLetter.lowercaseChar()
         return if (_currentWordToBeGuessed.contains(playerInputLetterLC, ignoreCase = true)
             && !_guessedCharacters.contains(playerInputLetterLC)
@@ -166,6 +177,7 @@ class GameViewModel : ViewModel() {
         _guessedCharacters = mutableListOf()
         if (_guessedCharacters.isNotEmpty()) throw Exception("PlayerGuessedCharacter array doesn't reset")
         _guessedCharacterString.value="Letters\n"
+        _gameStage.value=GameStage.IS_GUESS
         spinLuckyWheel()
     }
 

@@ -12,6 +12,7 @@
         <variable
             name="gameFragment"
             type="com.example.s205350lykkehjulet.GameFragment" />
+        <import type="com.example.s205350lykkehjulet.GameStage"/>
     </data>
 
     <ScrollView
@@ -113,8 +114,8 @@
                     android:background="@drawable/wheel_result_border"
                     android:gravity="center"
                     android:text="@{gameViewModel.wheelResult}"
-                    android:textAppearance="@style/TextAppearance.MaterialComponents.Body2"
                     android:textAlignment="center"
+                    android:textAppearance="@style/TextAppearance.MaterialComponents.Body2"
                     tools:text="1000" />
             </RelativeLayout>
 
@@ -155,6 +156,7 @@
                 android:textAlignment="center"
                 android:textAppearance="@style/TextAppearance.MaterialComponents.Body2"
                 app:layout_constraintEnd_toEndOf="parent"
+                android:enabled="@{gameViewModel.gameStage==GameStage.IS_GUESS ? true : false}"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/gameQuote">
 
@@ -169,12 +171,26 @@
             </com.google.android.material.textfield.TextInputLayout>
 
             <Button
-                android:id="@+id/guessAndSpinButton"
-                android:onClick="@{() -> gameFragment.submitGuessAndSpinWheel()}"
-                android:text="@string/guess_and_spin"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
+                android:id="@+id/guessButton"
                 style="@style/buttonStyle"
+                android:onClick="@{() -> gameFragment.submitGuess()}"
+                android:text="@string/guess_button"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/spinButton"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toStartOf="parent"
+                android:enabled="@{gameViewModel.gameStage==GameStage.IS_GUESS ? true : false}"
+                app:layout_constraintTop_toBottomOf="@+id/letterInputContainer" />
+
+            <Button
+                android:id="@+id/spinButton"
+                style="@style/buttonStyle"
+                android:onClick="@{() -> gameFragment.spinWheel()}"
+                android:text="@string/spin_button"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.5"
+                android:enabled="@{gameViewModel.gameStage==GameStage.IS_SPIN ? true : false}"
+                app:layout_constraintStart_toEndOf="@+id/guessButton"
                 app:layout_constraintTop_toBottomOf="@+id/letterInputContainer" />
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>
