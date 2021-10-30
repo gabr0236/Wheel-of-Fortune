@@ -94,7 +94,8 @@ class GameViewModel : ViewModel() {
             else -> throw Exception("Random generator not generating a number from 1 to 22")
         }
         timesOfLuckyWheelSpins++
-        if (timesOfLuckyWheelSpins>2) _wheelResult.value = EXTRA_TURN
+        //TODO test
+        //if (timesOfLuckyWheelSpins>2) _wheelResult.value = EXTRA_TURN
         //Switch to guessing stage if result is digits else spin again
         _gameStage.value = if (wheelResult.value?.isDigitsOnly()==true){
             GameStage.IS_GUESS
@@ -177,8 +178,7 @@ class GameViewModel : ViewModel() {
         _guessedCharacters = mutableListOf()
         if (_guessedCharacters.isNotEmpty()) throw Exception("PlayerGuessedCharacter array doesn't reset")
         _guessedCharacterString.value="Letters\n"
-        _gameStage.value=GameStage.IS_GUESS
-        spinLuckyWheel()
+        _gameStage.value=GameStage.IS_SPIN
     }
 
     /**

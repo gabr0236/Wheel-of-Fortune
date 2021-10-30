@@ -90,11 +90,13 @@ class GameFragment : Fragment() {
                     findNavController().navigate(R.id.action_gameFragment_to_gameWonFragment)
                 }
             } else {
+                binding.gameQuote.text=resources.getString(R.string.wrong_guess)
                 if (viewModel.lives.value!! <= 0) {
                     findNavController().navigate(R.id.action_gameFragment_to_gameLostFragment)
                 }
             }
             updateLetterCards()
+            binding.gameQuote.text=resources.getString(R.string.spin_again)
         }
     }
 
@@ -107,6 +109,7 @@ class GameFragment : Fragment() {
                 showJokerDialog()
             }
         }
+
     }
 
     private fun updateLetterCards() {
@@ -126,12 +129,14 @@ class GameFragment : Fragment() {
             BANKRUPT -> String.format(resources.getString(R.string.bankrupt_message), BANKRUPT)
             else -> throw Exception("WheelResult is not an expected value") //TODO: Det her ok?
         }
+
         MaterialAlertDialogBuilder(requireContext())
             .setTitle(viewModel.wheelResult.value)
             .setMessage(message)
             .setCancelable(true)
             .show()
         viewModel.doWheelResultAction()
+
         //continueGameAfterJokerDialog()
         if (viewModel.lives.value!! <= 0) {
             findNavController().navigate(R.id.action_gameFragment_to_gameLostFragment)

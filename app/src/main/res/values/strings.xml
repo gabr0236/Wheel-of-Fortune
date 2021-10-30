@@ -16,6 +16,9 @@
     <string name="extra_turn_message">Yay! You rolled "%s" and gained a life</string>
     <string name="bankrupt_message">Dang! You rolled "%s" and lost a your points :(</string>
     <string name="wrong_guess">Oh no! Wrong Guess.</string>
+    <string name="spin_again">Spin again!</string>
+    <string name="correct_guess_spin_again">Correct. Spin again!</string>
+
 
     <string-array name="category_and_words">
         <!--Animals-->
