@@ -84,8 +84,8 @@
 
             <RelativeLayout
                 android:id="@+id/relativelayout"
-                android:layout_width="280dp"
-                android:layout_height="250dp"
+                android:layout_width="230dp"
+                android:layout_height="230dp"
                 android:layout_marginTop="16dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -96,23 +96,22 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentEnd="true"
-                    android:layout_marginEnd="3dp"
+                    android:layout_marginEnd="2dp"
                     android:gravity="center"
                     android:src="@drawable/lucky_wheel" />
 
                 <TextView
                     android:id="@+id/wheelResult"
-                    android:layout_width="103dp"
-                    android:layout_height="31dp"
+                    android:layout_width="90dp"
+                    android:layout_height="30dp"
                     android:layout_alignLeft="@id/luckyWheel"
                     android:layout_alignTop="@id/luckyWheel"
                     android:layout_alignEnd="@id/luckyWheel"
                     android:layout_alignBottom="@id/luckyWheel"
-                    android:layout_marginStart="1dp"
-                    android:layout_marginLeft="149dp"
-                    android:layout_marginTop="113dp"
-                    android:layout_marginEnd="-1dp"
-                    android:layout_marginBottom="106dp"
+                    android:layout_marginLeft="134dp"
+                    android:layout_marginTop="105dp"
+                    android:layout_marginEnd="4dp"
+                    android:layout_marginBottom="95dp"
                     android:background="@drawable/wheel_result_border"
                     android:gravity="center"
                     android:text="@{gameViewModel.wheelResult}"
@@ -137,13 +136,15 @@
             <TextView
                 android:id="@+id/gameQuote"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="44dp"
                 android:layout_marginTop="@dimen/default_padding"
-                android:text="@{@string/game_quote(gameViewModel.wheelResult)}"
+                android:layout_marginHorizontal="@dimen/default_padding"
+                android:text="@{gameViewModel.gameQuote}"
                 android:textAppearance="@style/TextAppearance.MaterialComponents.Body1"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/relativelayout"
+                android:textAlignment="center"
                 tools:text="You rolled 1000! Guess a letter!" />
 
             <com.google.android.material.textfield.TextInputLayout

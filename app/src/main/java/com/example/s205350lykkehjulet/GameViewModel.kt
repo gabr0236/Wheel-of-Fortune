@@ -50,16 +50,24 @@ class GameViewModel : ViewModel() {
     private val _guessedCharacterString = MutableLiveData("Letters\n")
     val guessedCharacterString: LiveData<String> = _guessedCharacterString
 
-    val numberOfGuesses: Int = _guessedCharacters.size
+    private var _gameQuote = MutableLiveData<String>()
+    val gameQuote: LiveData<String>
+        get() = _gameQuote
+    fun setGameQuote(newGameQuote: String){
+        _gameQuote.value=newGameQuote
+    }
 
     private lateinit var _currentWordToBeGuessed: String
-
     //Only return currentWordToBeGuessed if the game is over
     val currentWordToBeGuessed: String
         get() {
             return if (isWon || lives.value!! <= 0) _currentWordToBeGuessed
             else "It's a secret!"
         }
+
+    val numberOfGuesses: Int
+    get() = _guessedCharacters.size
+
 
     init {
         Log.d(TAG, "ViewModel initialized")
@@ -202,6 +210,8 @@ class GameViewModel : ViewModel() {
         }
         _letterCardList.value = tempLetterCardList
     }
+
+
 
     companion object {
         private const val TAG = "GameViewModel"

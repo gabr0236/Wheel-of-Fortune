@@ -37,6 +37,7 @@ class GameFragment : Fragment() {
         //Get random category and word from datasource and set in viewModel
         viewModel.setRandomCategoryAndWord(Datasource(requireContext()).getRandomCategoryAndWord())
         viewModel.newGame()
+        viewModel.setGameQuote(getString(R.string.initial_game_quote))
 
         //Setup recyclerview
         recyclerView = binding.hiddenWord
@@ -86,17 +87,17 @@ class GameFragment : Fragment() {
             binding.letterInput.setText("")
 
             if (viewModel.isUserInputMatch(playerInputLetter)) {
+                viewModel.setGameQuote(getString(R.string.correct_guess_game_quote))
                 if (viewModel.isWon) {
                     findNavController().navigate(R.id.action_gameFragment_to_gameWonFragment)
                 }
             } else {
-                binding.gameQuote.text = resources.getString(R.string.wrong_guess)
+                viewModel.setGameQuote(getString(R.string.wrong_guess_game_quote))
                 if (viewModel.lives.value!! <= 0) {
                     findNavController().navigate(R.id.action_gameFragment_to_gameLostFragment)
                 }
             }
             updateLetterCards()
-            binding.gameQuote.text = resources.getString(R.string.spin_again)
         }
     }
 
@@ -107,7 +108,10 @@ class GameFragment : Fragment() {
             viewModel.spinLuckyWheel()
             if (!viewModel.wheelResult.value?.isDigitsOnly()!!) {
                 showJokerDialog()
+            } else {
+                viewModel.setGameQuote(String.format(getString(R.string.is_guess_game_quote),viewModel.wheelResult.value))
             }
+
         }
 
     }
@@ -135,6 +139,7 @@ class GameFragment : Fragment() {
             .setMessage(message)
             .setCancelable(true)
             .show()
+        viewModel.setGameQuote(getString(R.string.spin_again_game_quote))
         viewModel.doWheelResultAction()
 
         //continueGameAfterJokerDialog()
