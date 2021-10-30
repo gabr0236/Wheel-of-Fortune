@@ -1,4 +1,4 @@
-package com.example.s205350lykkehjulet.data
+package com.example.s205350lykkehjulet.Data
 
 class LetterCard(
     var letter: Char
