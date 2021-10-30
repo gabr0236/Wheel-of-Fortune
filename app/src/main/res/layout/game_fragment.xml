@@ -51,13 +51,13 @@
                 app:layout_constraintTop_toTopOf="parent"
                 tools:text="Lives: 4" />
 
-            <TextView
+            <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/category"
-                android:layout_width="0dp"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/default_padding"
-                android:background="@drawable/category_border"
                 android:padding="8dp"
+                android:background="@color/orange_500"
                 android:text="@{@string/category(gameViewModel.category)}"
                 android:textAlignment="center"
                 android:textAppearance="@style/TextAppearance.MaterialComponents.Body1"
