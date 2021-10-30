@@ -38,9 +38,10 @@ class GameWonFragment : Fragment() {
             finalScore.text = getString(R.string.score, viewModel.score.toString())
             livesLeft.text = getString(R.string.lives, viewModel.lives.toString())
             wordReveal.text = getString(R.string.word_reveal, viewModel.currentWordToBeGuessed)
-            numberOfGuesses.text = getString(R.string.number_of_guesses, viewModel.numberOfGuesses.toString())
+            numberOfGuesses.text =
+                getString(R.string.number_of_guesses, viewModel.numberOfGuesses.toString())
 
-            Log.d(TAG,"Score: ${viewModel.score}")
+            Log.d(TAG, "Score: ${viewModel.score}")
             //Assign navigation to button
             playAgainButton.setOnClickListener {
                 findNavController().navigate(R.id.action_gameWonFragment_to_gameFragment)
@@ -50,7 +51,7 @@ class GameWonFragment : Fragment() {
 
     override fun onDestroyView() {
         super.onDestroyView()
-        _binding=null
+        _binding = null
     }
 
     companion object {

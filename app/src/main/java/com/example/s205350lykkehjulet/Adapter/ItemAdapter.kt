@@ -6,37 +6,35 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
-import androidx.cardview.widget.CardView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.s205350lykkehjulet.Data.LetterCard
 import com.example.s205350lykkehjulet.R
 import com.google.android.material.card.MaterialCardView
 
 class ItemAdapter(private var letterCardList: List<LetterCard>?) :
-    RecyclerView.Adapter<ItemAdapter.ViewHolder>(){
+    RecyclerView.Adapter<ItemAdapter.ViewHolder>() {
 
-    class ViewHolder(itemView: View) :RecyclerView.ViewHolder(itemView){
+    class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         //TODO ikke brug findview by id (pass context som param?)
         private val letterTextView: TextView = itemView.findViewById(R.id.letter_textView)
         private val cardView: MaterialCardView = itemView.findViewById(R.id.letter_cardView)
 
         fun bind(letterCard: LetterCard) {
-            if (letterCard.letter==' '){
+            if (letterCard.letter == ' ') {
                 cardView.visibility = View.INVISIBLE
-            }
-            else if (!letterCard.isHidden) {
+            } else if (!letterCard.isHidden) {
                 letterTextView.text = letterCard.letter.toString()
                 cardView.setCardBackgroundColor(Color.WHITE)
-            } else if (letterCard.isHidden){
+            } else if (letterCard.isHidden) {
                 letterTextView.text = " "
             }
         }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int)
-    : ViewHolder {
+            : ViewHolder {
         val view = LayoutInflater.from(parent.context)
-            .inflate(R.layout.item_view,parent,false)
+            .inflate(R.layout.item_view, parent, false)
         return ViewHolder(view)
     }
 

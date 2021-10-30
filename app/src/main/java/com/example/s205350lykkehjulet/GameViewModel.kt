@@ -1,6 +1,6 @@
 package com.example.s205350lykkehjulet
 
- import android.util.Log
+import android.util.Log
 import androidx.core.text.isDigitsOnly
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -53,10 +53,11 @@ class GameViewModel : ViewModel() {
     val numberOfGuesses: Int = _guessedCharacters.size
 
     private lateinit var _currentWordToBeGuessed: String
+
     //Only return currentWordToBeGuessed if the game is over
     val currentWordToBeGuessed: String
         get() {
-            return if (isWon || lives.value!!<=0) _currentWordToBeGuessed
+            return if (isWon || lives.value!! <= 0) _currentWordToBeGuessed
             else "It's a secret!"
         }
 
@@ -64,11 +65,13 @@ class GameViewModel : ViewModel() {
         Log.d(TAG, "ViewModel initialized")
     }
 
-    fun getPosOfLastGuessedChars(): List<Int>{
+    fun getPosOfLastGuessedChars(): List<Int> {
         var positions = mutableListOf<Int>()
-        for (i in _currentWordToBeGuessed.indices){
-        if (_currentWordToBeGuessed[i].lowercaseChar() == _guessedCharacters.last().lowercaseChar())
-            positions.add(i)
+        for (i in _currentWordToBeGuessed.indices) {
+            if (_currentWordToBeGuessed[i].lowercaseChar() == _guessedCharacters.last()
+                    .lowercaseChar()
+            )
+                positions.add(i)
         }
         return positions
     }
@@ -97,7 +100,7 @@ class GameViewModel : ViewModel() {
         //TODO test
         //if (timesOfLuckyWheelSpins>2) _wheelResult.value = EXTRA_TURN
         //Switch to guessing stage if result is digits else spin again
-        _gameStage.value = if (wheelResult.value?.isDigitsOnly()==true){
+        _gameStage.value = if (wheelResult.value?.isDigitsOnly() == true) {
             GameStage.IS_GUESS
         } else GameStage.IS_SPIN
 
@@ -108,7 +111,7 @@ class GameViewModel : ViewModel() {
             || ((timesOfLuckyWheelSpins == 1)
                     && (wheelResult.value == EXTRA_TURN || wheelResult.value == MISS_TURN))
         ) {
-            timesOfLuckyWheelSpins=0
+            timesOfLuckyWheelSpins = 0
             spinLuckyWheel()
         }
     }
@@ -117,18 +120,19 @@ class GameViewModel : ViewModel() {
      * Return whether the currentWordToBeGuessed contains the player input
      */
     fun isUserInputMatch(playerInputLetter: Char): Boolean {
-        _gameStage.value=GameStage.IS_SPIN
+        _gameStage.value = GameStage.IS_SPIN
         val playerInputLetterLC = playerInputLetter.lowercaseChar()
         return if (_currentWordToBeGuessed.contains(playerInputLetterLC, ignoreCase = true)
             && !_guessedCharacters.contains(playerInputLetterLC)
         ) {
             saveGuessedChar(playerInputLetterLC)
-            _letterCardList.value?.filter{
-                it.letter.lowercaseChar() == playerInputLetterLC }
+            _letterCardList.value?.filter {
+                it.letter.lowercaseChar() == playerInputLetterLC
+            }
                 ?.forEach {
-                    it.isHidden=false
+                    it.isHidden = false
                 }
-            if (_letterCardList.value?.all { !it.isHidden || it.letter==' ' } == true) {
+            if (_letterCardList.value?.all { !it.isHidden || it.letter == ' ' } == true) {
                 _isWon = true
             }
             doWheelResultAction()
@@ -140,9 +144,10 @@ class GameViewModel : ViewModel() {
         }
     }
 
-    private fun saveGuessedChar(playerInputLetter: Char){
+    private fun saveGuessedChar(playerInputLetter: Char) {
         _guessedCharacters.add(playerInputLetter)
-        _guessedCharacterString.value = _guessedCharacterString.value.plus(playerInputLetter.toString() + "\n")
+        _guessedCharacterString.value =
+            _guessedCharacterString.value.plus(playerInputLetter.toString() + "\n")
     }
 
     /**
@@ -154,8 +159,9 @@ class GameViewModel : ViewModel() {
                 val wheelValue = wheelResult.value?.toInt()
                 if (wheelValue != null) {
                     val multiplier =
-                        _currentWordToBeGuessed.filter{
-                            it.equals(_guessedCharacters.last(), ignoreCase = true) }.count()
+                        _currentWordToBeGuessed.filter {
+                            it.equals(_guessedCharacters.last(), ignoreCase = true)
+                        }.count()
 
                     _score.value = _score.value?.plus(wheelValue * multiplier)
                 }
@@ -177,8 +183,8 @@ class GameViewModel : ViewModel() {
         timesOfLuckyWheelSpins = 0
         _guessedCharacters = mutableListOf()
         if (_guessedCharacters.isNotEmpty()) throw Exception("PlayerGuessedCharacter array doesn't reset")
-        _guessedCharacterString.value="Letters\n"
-        _gameStage.value=GameStage.IS_SPIN
+        _guessedCharacterString.value = "Letters\n"
+        _gameStage.value = GameStage.IS_SPIN
     }
 
     /**
@@ -191,10 +197,10 @@ class GameViewModel : ViewModel() {
 
         //TODO kortere
         val tempLetterCardList = mutableListOf<LetterCard>()
-        for (i in _currentWordToBeGuessed.indices){
+        for (i in _currentWordToBeGuessed.indices) {
             tempLetterCardList.add(LetterCard(_currentWordToBeGuessed[i]))
         }
-        _letterCardList.value=tempLetterCardList
+        _letterCardList.value = tempLetterCardList
     }
 
     companion object {

@@ -77,7 +77,7 @@ class GameFragment : Fragment() {
      * Submits the players input and updates the view accordingly
      */
     fun submitGuess() {
-        if (viewModel.gameStage.value==GameStage.IS_GUESS) {
+        if (viewModel.gameStage.value == GameStage.IS_GUESS) {
             val playerInputLetter = binding.letterInput.text?.firstOrNull()
 
             //PlayerInputLetter cannot be null beyond this point
@@ -90,18 +90,18 @@ class GameFragment : Fragment() {
                     findNavController().navigate(R.id.action_gameFragment_to_gameWonFragment)
                 }
             } else {
-                binding.gameQuote.text=resources.getString(R.string.wrong_guess)
+                binding.gameQuote.text = resources.getString(R.string.wrong_guess)
                 if (viewModel.lives.value!! <= 0) {
                     findNavController().navigate(R.id.action_gameFragment_to_gameLostFragment)
                 }
             }
             updateLetterCards()
-            binding.gameQuote.text=resources.getString(R.string.spin_again)
+            binding.gameQuote.text = resources.getString(R.string.spin_again)
         }
     }
 
-    fun spinWheel(){
-        if (viewModel.gameStage.value==GameStage.IS_SPIN) {
+    fun spinWheel() {
+        if (viewModel.gameStage.value == GameStage.IS_SPIN) {
             //TODO: sådan nogle calls burde måske ikke ske,
             // måske istedet lav metode der hedder isJoker
             viewModel.spinLuckyWheel()
@@ -114,8 +114,8 @@ class GameFragment : Fragment() {
 
     private fun updateLetterCards() {
         val posOfLastGuessedChars = viewModel.getPosOfLastGuessedChars()
-        for(i in posOfLastGuessedChars.indices)
-        recyclerView.adapter?.notifyItemChanged(posOfLastGuessedChars[i])
+        for (i in posOfLastGuessedChars.indices)
+            recyclerView.adapter?.notifyItemChanged(posOfLastGuessedChars[i])
     }
 
     /**
