@@ -5,7 +5,7 @@ import androidx.core.text.isDigitsOnly
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.example.s205350lykkehjulet.Data.LetterCard
+import com.example.s205350lykkehjulet.data.LetterCard
 
 //TODO resources
 const val BANKRUPT = "Bankrupt"

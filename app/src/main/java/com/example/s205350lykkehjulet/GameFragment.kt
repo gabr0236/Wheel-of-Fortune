@@ -10,10 +10,10 @@ import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
-import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.s205350lykkehjulet.Adapter.ItemAdapter
+import com.example.s205350lykkehjulet.adapter.ItemAdapter
 import com.example.s205350lykkehjulet.databinding.GameFragmentBinding
+import com.google.android.flexbox.*
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 
 class GameFragment : Fragment() {
@@ -40,8 +40,15 @@ class GameFragment : Fragment() {
         viewModel.setGameQuote(getString(R.string.initial_game_quote))
 
         //Setup recyclerview
+        //TODO: måske fjern binding? vv
         recyclerView = binding.hiddenWord
-        recyclerView.layoutManager = LinearLayoutManager(context, RecyclerView.HORIZONTAL, false)
+        val layoutManager = FlexboxLayoutManager(context)
+        layoutManager.justifyContent = JustifyContent.CENTER
+        layoutManager.alignItems = AlignItems.CENTER
+        layoutManager.flexDirection = FlexDirection.ROW
+        layoutManager.flexWrap = FlexWrap.WRAP
+        recyclerView.layoutManager = layoutManager
+        //recyclerView.layoutManager = GridLayoutManager(context,2, RecyclerView.HORIZONTAL, false)
         recyclerView.adapter = ItemAdapter(viewModel.letterCardList.value)
         return binding.root
     }
@@ -111,9 +118,7 @@ class GameFragment : Fragment() {
             } else {
                 viewModel.setGameQuote(String.format(getString(R.string.is_guess_game_quote),viewModel.wheelResult.value))
             }
-
         }
-
     }
 
     private fun updateLetterCards() {
