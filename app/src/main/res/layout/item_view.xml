@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="wrap_content"
@@ -10,21 +9,21 @@
         android:id="@+id/letter_cardView"
         android:layout_width="25dp"
         android:layout_height="40dp"
-        app:cardCornerRadius="3dp"
-        app:cardUseCompatPadding="true"
-        app:cardElevation="2dp"
         app:cardBackgroundColor="@color/orange_500"
-        tools:ignore="MissingConstraints"
+        app:cardCornerRadius="3dp"
+        app:cardElevation="2dp"
+        app:cardUseCompatPadding="true"
         app:strokeColor="@color/orange_700"
-        app:strokeWidth="2dp">
+        app:strokeWidth="2dp"
+        tools:ignore="MissingConstraints">
 
         <TextView
             android:id="@+id/letter_textView"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:text=""
             android:gravity="center_vertical"
+            android:text=""
             android:textAlignment="center"
             tools:ignore="RtlCompat" />
-   </com.google.android.material.card.MaterialCardView>
+    </com.google.android.material.card.MaterialCardView>
 </FrameLayout>

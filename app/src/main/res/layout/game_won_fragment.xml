@@ -59,7 +59,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/wordReveal"
-                tools:text="Score: 3500"/>
+                tools:text="Score: 3500" />
 
             <TextView
                 android:id="@+id/livesLeft"
@@ -71,7 +71,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/finalScore"
-                tools:text="Lives: 2"/>
+                tools:text="Lives: 2" />
 
             <TextView
                 android:id="@+id/numberOfGuesses"
@@ -87,10 +87,10 @@
 
             <Button
                 android:id="@+id/playAgainButton"
+                style="@style/buttonStyle"
                 android:text="@string/play_again"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                style="@style/buttonStyle"
                 app:layout_constraintTop_toBottomOf="@+id/numberOfGuesses" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
