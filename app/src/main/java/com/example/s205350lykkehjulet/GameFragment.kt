@@ -138,25 +138,6 @@ class GameFragment : Fragment() {
         }
     }
 
-    /**
-     * Continuation of the game loop after player rolled a joker
-     */
-    //private fun continueGameAfterJokerDialog() {
-    //    Log.d(TAG, "continueGameAfterJokerDialog() called")
-//
-    //    viewModel.doWheelResultAction()
-    //    if (viewModel.lives.value!! <= 0) { findNavController().navigate(R.id.action_gameFragment_to_gameLostFragment) }
-    //    viewModel.spinLuckyWheel()
-//
-    //    //In case of rolling this again
-    //    if (viewModel.wheelResult.value == EXTRA_TURN
-    //        || viewModel.wheelResult.value == MISS_TURN
-    //        || viewModel.wheelResult.value == BANKRUPT
-    //    ) {
-    //        showJokerDialog()
-    //    }
-    //}
-
     companion object {
         private const val TAG = "GameFragment"
     }

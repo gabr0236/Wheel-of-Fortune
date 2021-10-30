@@ -49,12 +49,4 @@ class ItemAdapter(private var letterCardList: List<LetterCard>?) :
         return if (letterCardList.isNullOrEmpty()) 0
         else letterCardList!!.size
     }
-
-    //fun updateItems(letterList: CharArray){
-    //    //TODO skal det her ligge her, og hvordan gør man?
-    //    for(i in this.letterCardList?.indices!!) {
-    //        if (this.letterCardList[i] != letterList[i]) this.letterCardList[i] = letterList[i]
-    //    }
-    //    notifyDataSetChanged()
-    //}
 }
