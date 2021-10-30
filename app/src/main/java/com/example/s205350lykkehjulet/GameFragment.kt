@@ -10,6 +10,7 @@ import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.s205350lykkehjulet.Adapter.ItemAdapter
@@ -40,8 +41,9 @@ class GameFragment : Fragment() {
         viewModel.setGameQuote(getString(R.string.initial_game_quote))
 
         //Setup recyclerview
-        recyclerView = binding.hiddenWord
-        recyclerView.layoutManager = LinearLayoutManager(context, RecyclerView.HORIZONTAL, false)
+        recyclerView = binding.letterCardView
+        //TODO: lav util fun til at finde det optimale nummer af columns
+        recyclerView.layoutManager = GridLayoutManager(context,11, RecyclerView.VERTICAL, false)
         recyclerView.adapter = ItemAdapter(viewModel.letterCardList.value)
         return binding.root
     }

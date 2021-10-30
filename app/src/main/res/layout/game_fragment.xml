@@ -29,25 +29,22 @@
 
             <TextView
                 android:id="@+id/score"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/default_padding"
+                style="@style/statTextStyle"
                 android:includeFontPadding="false"
                 android:text="@{@string/score(Integer.toString(gameViewModel.score))}"
-                android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6"
+                app:layout_constraintEnd_toStartOf="@+id/category"
+                app:layout_constraintHorizontal_chainStyle="spread_inside"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 tools:text="Points: 1400" />
 
             <TextView
                 android:id="@+id/lives"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="@dimen/default_padding"
+                style="@style/statTextStyle"
                 android:includeFontPadding="false"
                 android:text="@{@string/lives(gameViewModel.lives)}"
-                android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6"
                 app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/category"
                 app:layout_constraintTop_toTopOf="parent"
                 tools:text="Lives: 4" />
 
@@ -55,21 +52,18 @@
                 android:id="@+id/category"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/default_padding"
-                android:padding="8dp"
-                android:background="@color/orange_500"
+                android:padding="0dp"
                 android:text="@{@string/category(gameViewModel.category)}"
                 android:textAlignment="center"
                 android:textAppearance="@style/TextAppearance.MaterialComponents.Body1"
-                android:textColor="@color/white"
                 android:textStyle="bold"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/score"
+                app:layout_constraintEnd_toStartOf="@+id/lives"
+                app:layout_constraintStart_toEndOf="@+id/score"
+                app:layout_constraintTop_toTopOf="parent"
                 tools:text="Category: Animals" />
 
             <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/hiddenWord"
+                android:id="@+id/letter_card_view"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
@@ -79,7 +73,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/category"
-                tools:itemCount="10"
+                tools:itemCount="11"
                 tools:listitem="@layout/item_view" />
 
             <RelativeLayout
@@ -89,7 +83,7 @@
                 android:layout_marginTop="16dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/hiddenWord">
+                app:layout_constraintTop_toBottomOf="@+id/letter_card_view">
 
                 <ImageView
                     android:id="@+id/luckyWheel"
@@ -130,21 +124,21 @@
                 android:textAlignment="center"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/relativelayout"
-                app:layout_constraintTop_toBottomOf="@+id/hiddenWord"
+                app:layout_constraintTop_toBottomOf="@+id/letter_card_view"
                 tools:text="Letters\na" />
 
             <TextView
                 android:id="@+id/gameQuote"
                 android:layout_width="wrap_content"
                 android:layout_height="44dp"
-                android:layout_marginTop="@dimen/default_padding"
                 android:layout_marginHorizontal="@dimen/default_padding"
+                android:layout_marginTop="@dimen/default_padding"
                 android:text="@{gameViewModel.gameQuote}"
+                android:textAlignment="center"
                 android:textAppearance="@style/TextAppearance.MaterialComponents.Body1"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/relativelayout"
-                android:textAlignment="center"
                 tools:text="You rolled 1000! Guess a letter!" />
 
             <com.google.android.material.textfield.TextInputLayout
