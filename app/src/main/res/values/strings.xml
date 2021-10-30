@@ -8,9 +8,9 @@
     <string name="spin_button">Spin</string>
     <string name="category">Category: %s</string>
     <string name="letter_hint">Letter</string>
-    <string name="you_won">You won!</string>
+    <string name="you_won">You Won!</string>
     <string name="you_lost">You Lost!</string>
-    <string name="play_again">Play again</string>
+    <string name="play_again">Play Again</string>
 
     <!-- Joker Dialog -->
     <string name="miss_turn_message">Bummer! You Rolled "%s" and Lost a Life</string>
