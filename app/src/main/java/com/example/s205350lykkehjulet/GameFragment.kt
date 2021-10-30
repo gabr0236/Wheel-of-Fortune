@@ -86,15 +86,13 @@ class GameFragment : Fragment() {
             binding.letterInput.setText("")
 
             if (viewModel.isUserInputMatch(playerInputLetter)) {
-                setErrorTextField(false)
+                if (viewModel.isWon) {
+                    findNavController().navigate(R.id.action_gameFragment_to_gameWonFragment)
+                }
             } else {
-                setErrorTextField(true)
-            }
-            //TODO: kunne kaldes tidligere?
-            if (viewModel.lives.value!! <= 0) {
-                findNavController().navigate(R.id.action_gameFragment_to_gameLostFragment)
-            } else if (viewModel.isWon) {
-                findNavController().navigate(R.id.action_gameFragment_to_gameWonFragment)
+                if (viewModel.lives.value!! <= 0) {
+                    findNavController().navigate(R.id.action_gameFragment_to_gameLostFragment)
+                }
             }
             updateLetterCards()
         }
@@ -133,37 +131,31 @@ class GameFragment : Fragment() {
             .setMessage(message)
             .setCancelable(true)
             .show()
-        continueGameAfterJokerDialog()
+        viewModel.doWheelResultAction()
+        //continueGameAfterJokerDialog()
+        if (viewModel.lives.value!! <= 0) {
+            findNavController().navigate(R.id.action_gameFragment_to_gameLostFragment)
+        }
     }
 
     /**
      * Continuation of the game loop after player rolled a joker
      */
-    private fun continueGameAfterJokerDialog() {
-        Log.d(TAG, "continueGameAfterJokerDialog() called")
-
-        viewModel.doWheelResultAction()
-        if (viewModel.lives.value!! <= 0) { findNavController().navigate(R.id.action_gameFragment_to_gameLostFragment) }
-        viewModel.spinLuckyWheel()
-
-        //In case of rolling this again
-        if (viewModel.wheelResult.value == EXTRA_TURN
-            || viewModel.wheelResult.value == MISS_TURN
-            || viewModel.wheelResult.value == BANKRUPT
-        ) {
-            showJokerDialog()
-        }
-    }
-
-    private fun setErrorTextField(error: Boolean) {
-        if (error) {
-            binding.letterInputContainer.isErrorEnabled = true
-            binding.letterInput.error = getString(R.string.wrong_guess)
-        } else {
-            binding.letterInputContainer.isErrorEnabled = false
-            binding.letterInput.text = null
-        }
-    }
+    //private fun continueGameAfterJokerDialog() {
+    //    Log.d(TAG, "continueGameAfterJokerDialog() called")
+//
+    //    viewModel.doWheelResultAction()
+    //    if (viewModel.lives.value!! <= 0) { findNavController().navigate(R.id.action_gameFragment_to_gameLostFragment) }
+    //    viewModel.spinLuckyWheel()
+//
+    //    //In case of rolling this again
+    //    if (viewModel.wheelResult.value == EXTRA_TURN
+    //        || viewModel.wheelResult.value == MISS_TURN
+    //        || viewModel.wheelResult.value == BANKRUPT
+    //    ) {
+    //        showJokerDialog()
+    //    }
+    //}
 
     companion object {
         private const val TAG = "GameFragment"
