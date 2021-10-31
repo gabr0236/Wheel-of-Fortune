@@ -11,9 +11,9 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.s205350lykkehjulet.Adapter.ItemAdapter
+import com.example.s205350lykkehjulet.Data.LetterCard
 import com.example.s205350lykkehjulet.databinding.GameFragmentBinding
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 
@@ -22,6 +22,7 @@ class GameFragment : Fragment() {
     //Source: https://developer.android.com/topic/libraries/view-binding#fragments
     private var _binding: GameFragmentBinding? = null
     private val binding get() = _binding!!
+    private val MAX_NUMBER_OF_COLUMNS = 11
 
     private lateinit var recyclerView: RecyclerView
     private val viewModel: GameViewModel by activityViewModels()
@@ -43,9 +44,24 @@ class GameFragment : Fragment() {
         //Setup recyclerview
         recyclerView = binding.letterCardView
         //TODO: lav util fun til at finde det optimale nummer af columns
-        recyclerView.layoutManager = GridLayoutManager(context,11, RecyclerView.VERTICAL, false)
-        recyclerView.adapter = ItemAdapter(viewModel.letterCardList.value)
+        recyclerView.layoutManager = GridLayoutManager(context,letterCardsColumns(), RecyclerView.VERTICAL, false)
+        recyclerView.adapter = ItemAdapter(viewModel.letterCardList.value!!)
         return binding.root
+    }
+
+    private fun letterCardsColumns(): Int {
+        val letterCardList = viewModel.letterCardList.value!!
+        return if (letterCardList.size<=MAX_NUMBER_OF_COLUMNS) MAX_NUMBER_OF_COLUMNS
+        else {
+            var lastSpaceBeforeMaxColumns: Int? = null
+            for (i in 0 until MAX_NUMBER_OF_COLUMNS) {
+                if (letterCardList[i].letter == ' '){
+                    lastSpaceBeforeMaxColumns = i
+                }
+            }//TODO nået til how to remove view from recycler ## evt remove her fra viewmodel liste:
+            if (lastSpaceBeforeMaxColumns!=null){ letterCardList.removeAt(lastSpaceBeforeMaxColumns)}
+            lastSpaceBeforeMaxColumns ?: MAX_NUMBER_OF_COLUMNS
+        }
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

@@ -11,7 +11,7 @@ import com.example.s205350lykkehjulet.Data.LetterCard
 import com.example.s205350lykkehjulet.R
 import com.google.android.material.card.MaterialCardView
 
-class ItemAdapter(private var letterCardList: List<LetterCard>?) :
+class ItemAdapter(private var letterCardList: List<LetterCard>) :
     RecyclerView.Adapter<ItemAdapter.ViewHolder>() {
 
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
@@ -40,7 +40,6 @@ class ItemAdapter(private var letterCardList: List<LetterCard>?) :
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.bind(letterCardList?.get(position)!!)
-        Log.d("Adapter", "bind called")
     }
 
     override fun getItemCount(): Int {

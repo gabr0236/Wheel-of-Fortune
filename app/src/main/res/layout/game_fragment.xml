@@ -29,19 +29,19 @@
 
             <TextView
                 android:id="@+id/score"
-                style="@style/statTextStyle"
-                android:includeFontPadding="false"
+                android:layout_width="80dp"
+                android:layout_height="wrap_content"
                 android:text="@{@string/score(Integer.toString(gameViewModel.score))}"
                 app:layout_constraintEnd_toStartOf="@+id/category"
-                app:layout_constraintHorizontal_chainStyle="spread_inside"
+                app:layout_constraintHorizontal_chainStyle="spread"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 tools:text="Points: 1400" />
 
             <TextView
                 android:id="@+id/lives"
-                style="@style/statTextStyle"
-                android:includeFontPadding="false"
+                android:layout_width="80dp"
+                android:layout_height="wrap_content"
                 android:text="@{@string/lives(gameViewModel.lives)}"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/category"
@@ -52,7 +52,6 @@
                 android:id="@+id/category"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:padding="0dp"
                 android:text="@{@string/category(gameViewModel.category)}"
                 android:textAlignment="center"
                 android:textAppearance="@style/TextAppearance.MaterialComponents.Body1"

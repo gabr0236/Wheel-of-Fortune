@@ -36,8 +36,8 @@ class GameViewModel : ViewModel() {
     val category: LiveData<String> = _category
 
     //TODO: er der nogen grund til at det her skal bruge binding?
-    private val _letterCardList = MutableLiveData<List<LetterCard>>()
-    val letterCardList: LiveData<List<LetterCard>> = _letterCardList
+    private val _letterCardList = MutableLiveData<MutableList<LetterCard>>()
+    val letterCardList: LiveData<MutableList<LetterCard>> = _letterCardList
 
     private val _wheelResult = MutableLiveData<String>()
     val wheelResult: LiveData<String> = _wheelResult

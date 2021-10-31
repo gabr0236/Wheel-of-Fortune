@@ -24,10 +24,8 @@
     <string name="initial_game_quote">Welcome!\nSpin the Wheel by Pressing "Spin" Below</string>
     <string name="is_guess_game_quote">You Rolled %s! Guess a Letter!</string>
 
-
-
     <string-array name="category_and_words">
-        <item>Test,ABCDEFGHIGKXXXXXX</item>
+        <item>Test,ABCDEFGH IGKXXXXXXX</item>
         <!--<item>Animals,Mountain Lion</item>
         <item>Animals,Blobfish</item>
         <item>Animals,Chicken Turtle</item>
