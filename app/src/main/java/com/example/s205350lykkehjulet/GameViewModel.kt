@@ -6,6 +6,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.s205350lykkehjulet.Data.LetterCard
+import org.jetbrains.annotations.TestOnly
 
 //TODO resources
 const val BANKRUPT = "Bankrupt"
@@ -190,7 +191,6 @@ class GameViewModel : ViewModel() {
         _isWon = false
         timesOfLuckyWheelSpins = 0
         _guessedCharacters = mutableListOf()
-        if (_guessedCharacters.isNotEmpty()) throw Exception("PlayerGuessedCharacter array doesn't reset")
         _guessedCharacterString.value = "Letters\n"
         _gameStage.value = GameStage.IS_SPIN
     }
@@ -198,7 +198,7 @@ class GameViewModel : ViewModel() {
     /**
      * Sets the _category and the currentWordToBeGuessed from randomCategoryAndWord
      */
-    fun setRandomCategoryAndWord(randomCategoryAndWord: String) {
+    fun setCategoryAndCurrentWordToBeGuessed(randomCategoryAndWord: String) {
         val tempArray = randomCategoryAndWord.split(",").toTypedArray()
         _category.value = tempArray[0]
         _currentWordToBeGuessed = tempArray[1]
@@ -211,7 +211,19 @@ class GameViewModel : ViewModel() {
         _letterCardList.value = tempLetterCardList
     }
 
+    /**
+     * For testing purposes
+     */
+    @TestOnly
+    fun setWheelResult(newValue: String){
+        _wheelResult.value=newValue
 
+        timesOfLuckyWheelSpins++
+
+        _gameStage.value = if (this.wheelResult.value?.isDigitsOnly() == true) {
+            GameStage.IS_GUESS
+        } else GameStage.IS_SPIN
+    }
 
     companion object {
         private const val TAG = "GameViewModel"

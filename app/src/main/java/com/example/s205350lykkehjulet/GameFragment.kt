@@ -10,20 +10,13 @@ import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
-import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.s205350lykkehjulet.Adapter.ItemAdapter
-import com.example.s205350lykkehjulet.Data.LetterCard
 import com.example.s205350lykkehjulet.databinding.GameFragmentBinding
 import com.google.android.flexbox.*
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
-import com.google.android.flexbox.FlexboxLayout
 
 import android.R.*
-
-import android.widget.TextView
-
-
 
 
 class GameFragment : Fragment() {
@@ -46,7 +39,7 @@ class GameFragment : Fragment() {
         _binding = DataBindingUtil.inflate(inflater, R.layout.game_fragment, container, false)
 
         //Get random category and word from datasource and set in viewModel
-        viewModel.setRandomCategoryAndWord(Datasource(requireContext()).getRandomCategoryAndWord())
+        viewModel.setCategoryAndCurrentWordToBeGuessed(Datasource(requireContext()).getRandomCategoryAndWord())
         viewModel.newGame()
         viewModel.setGameQuote(getString(R.string.initial_game_quote))
 
