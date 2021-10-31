@@ -15,7 +15,16 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.s205350lykkehjulet.Adapter.ItemAdapter
 import com.example.s205350lykkehjulet.Data.LetterCard
 import com.example.s205350lykkehjulet.databinding.GameFragmentBinding
+import com.google.android.flexbox.*
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
+import com.google.android.flexbox.FlexboxLayout
+
+import android.R.*
+
+import android.widget.TextView
+
+
+
 
 class GameFragment : Fragment() {
     //Recommended way for implementing view binding in fragments
@@ -43,9 +52,16 @@ class GameFragment : Fragment() {
 
         //Setup recyclerview
         recyclerView = binding.letterCardView
+        val layoutManager = FlexboxLayoutManager(context)
+        layoutManager.justifyContent = JustifyContent.CENTER
+        layoutManager.alignItems = AlignItems.CENTER
+        layoutManager.flexDirection = FlexDirection.ROW
+        layoutManager.flexWrap = FlexWrap.WRAP
+        recyclerView.layoutManager = layoutManager
         //TODO: lav util fun til at finde det optimale nummer af columns
-        recyclerView.layoutManager = GridLayoutManager(context,letterCardsColumns(), RecyclerView.VERTICAL, false)
+        //recyclerView.layoutManager = GridLayoutManager(context,letterCardsColumns(), RecyclerView.VERTICAL, false)
         recyclerView.adapter = ItemAdapter(viewModel.letterCardList.value!!)
+
         return binding.root
     }
 
