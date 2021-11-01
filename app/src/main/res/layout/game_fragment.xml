@@ -110,7 +110,7 @@
                 android:layout_width="230dp"
                 android:layout_height="230dp"
                 android:layout_alignParentEnd="true"
-                android:rotation="8"
+                android:rotation="16.4"
                 android:scaleType="centerInside"
                 android:adjustViewBounds="true"
                 android:gravity="center"
