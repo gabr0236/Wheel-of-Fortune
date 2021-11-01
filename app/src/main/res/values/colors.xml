@@ -7,4 +7,8 @@
     <color name="orange_700">#F57C00</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+    <color name="pink_light">#E23C52</color>
+    <color name="pink_dark">#BD3244</color>
+    <color name="light_blue">#BDFFF6</color>
+
 </resources>

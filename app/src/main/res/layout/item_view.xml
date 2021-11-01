@@ -10,11 +10,11 @@
         android:id="@+id/letter_card_view"
         android:layout_width="33dp"
         android:layout_height="50dp"
-        app:cardBackgroundColor="@color/orange_500"
+        app:cardBackgroundColor="@color/pink_light"
         app:cardCornerRadius="3dp"
         app:cardElevation="2dp"
         app:cardUseCompatPadding="true"
-        app:strokeColor="@color/orange_700"
+        app:strokeColor="@color/pink_dark"
         app:strokeWidth="2dp"
         tools:ignore="MissingConstraints">
 

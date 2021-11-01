@@ -15,7 +15,6 @@ class ItemAdapter(private var letterCardList: List<LetterCard>) :
     RecyclerView.Adapter<ItemAdapter.ViewHolder>() {
 
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        //TODO ikke brug findview by id (pass context som param?)
         private val letterTextView: TextView = itemView.findViewById(R.id.letter_textView)
         private val cardView: MaterialCardView = itemView.findViewById(R.id.letter_card_view)
 
@@ -39,11 +38,11 @@ class ItemAdapter(private var letterCardList: List<LetterCard>) :
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.bind(letterCardList?.get(position)!!)
+        holder.bind(letterCardList[position])
     }
 
     override fun getItemCount(): Int {
         return if (letterCardList.isNullOrEmpty()) 0
-        else letterCardList!!.size
+        else letterCardList.size
     }
 }
