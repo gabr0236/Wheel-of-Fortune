@@ -111,6 +111,8 @@
                 android:layout_height="230dp"
                 android:layout_alignParentEnd="true"
                 android:rotation="8"
+                android:scaleType="centerInside"
+                android:adjustViewBounds="true"
                 android:gravity="center"
                 android:src="@drawable/lucky_wheel"
                 app:layout_constraintEnd_toEndOf="parent"
