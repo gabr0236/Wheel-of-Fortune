@@ -172,7 +172,7 @@ class GameViewModel : ViewModel() {
     }
 
 
-    fun setWheelResult(newValue: String?){
+    fun setWheelResult(newValue: String){
         _wheelResult.value=newValue
 
         timesOfLuckyWheelSpins++
@@ -180,6 +180,11 @@ class GameViewModel : ViewModel() {
         _gameStage.value = if (this.wheelResult.value?.isDigitsOnly() == true) {
             GameStage.IS_GUESS
         } else GameStage.IS_SPIN
+    }
+
+    fun setGameStage(stage: GameStage){
+        if (stage==GameStage.IS_SPIN) _gameStage.value=GameStage.IS_SPIN
+        else if (stage==GameStage.IS_GUESS) _gameStage.value=GameStage.IS_GUESS
     }
 
     companion object {

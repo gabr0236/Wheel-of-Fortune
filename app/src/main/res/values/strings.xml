@@ -19,7 +19,7 @@
 
     <!-- Game Quotes -->
     <string name="wrong_guess_game_quote">Wrong Guess!\nYou Lost a Life</string>
-    <string name="spin_again_game_quote">Spin Again!</string>
+    <string name="spin_again_game_quote">You Rolled "%s"\nSpin Again!</string>
     <string name="correct_guess_game_quote">Correct Guess!\n Spin Again</string>
     <string name="initial_game_quote">Welcome!\nSpin the Wheel by Pressing "Spin" Below</string>
     <string name="is_guess_game_quote">You Rolled %s! Guess a Letter!</string>

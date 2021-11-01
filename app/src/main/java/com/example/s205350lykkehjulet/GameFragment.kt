@@ -15,16 +15,7 @@ import com.example.s205350lykkehjulet.Adapter.ItemAdapter
 import com.example.s205350lykkehjulet.databinding.GameFragmentBinding
 import com.google.android.flexbox.*
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
-
-import android.R.*
 import butterknife.ButterKnife
-import android.view.animation.Animation
-
-import android.view.animation.DecelerateInterpolator
-
-import android.view.animation.RotateAnimation
-import kotlin.concurrent.thread
-import kotlin.random.Random
 
 
 class GameFragment : Fragment() {
@@ -53,9 +44,9 @@ class GameFragment : Fragment() {
         viewModel.newGame()
         viewModel.setGameQuote(getString(R.string.initial_game_quote))
 
-        //TODO: er edet her rigtigt?
+        //Bind to ButterKnife (For animated wheel spin)
         activity?.let { ButterKnife.bind(it) };
-        luckyWheel= LuckyWheel(binding.luckyWheel, this)
+        luckyWheel = LuckyWheel(binding.luckyWheel, this)
 
         //Setup recyclerview
         recyclerView = binding.letterCardView
@@ -81,7 +72,7 @@ class GameFragment : Fragment() {
                 if (letterCardList[i].letter == ' '){
                     lastSpaceBeforeMaxColumns = i
                 }
-            }//TODO nået til how to remove view from recycler ## evt remove her fra viewmodel liste:
+            }
             if (lastSpaceBeforeMaxColumns!=null){ letterCardList.removeAt(lastSpaceBeforeMaxColumns)}
             lastSpaceBeforeMaxColumns ?: MAX_NUMBER_OF_COLUMNS
         }
@@ -144,6 +135,7 @@ class GameFragment : Fragment() {
 
     fun spinWheel() {
         if (viewModel.gameStage.value == GameStage.IS_SPIN) {
+        viewModel.setGameStage(GameStage.IS_GUESS)
             luckyWheel?.spinWheelImage()
         }
     }
@@ -180,7 +172,7 @@ class GameFragment : Fragment() {
             .setMessage(message)
             .setCancelable(true)
             .show()
-        viewModel.setGameQuote(getString(R.string.spin_again_game_quote))
+        viewModel.setGameQuote(String.format(getString(R.string.spin_again_game_quote), viewModel.wheelResult.value))
         viewModel.doWheelResultAction()
 
         //continueGameAfterJokerDialog()
