@@ -17,6 +17,14 @@ import com.google.android.flexbox.*
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 
 import android.R.*
+import butterknife.ButterKnife
+import android.view.animation.Animation
+
+import android.view.animation.DecelerateInterpolator
+
+import android.view.animation.RotateAnimation
+import kotlin.concurrent.thread
+import kotlin.random.Random
 
 
 class GameFragment : Fragment() {
@@ -28,6 +36,8 @@ class GameFragment : Fragment() {
 
     private lateinit var recyclerView: RecyclerView
     private val viewModel: GameViewModel by activityViewModels()
+
+    private var luckyWheel: LuckyWheel? = null
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -42,6 +52,10 @@ class GameFragment : Fragment() {
         viewModel.setCategoryAndCurrentWordToBeGuessed(Datasource(requireContext()).getRandomCategoryAndWord())
         viewModel.newGame()
         viewModel.setGameQuote(getString(R.string.initial_game_quote))
+
+        //TODO: er edet her rigtigt?
+        activity?.let { ButterKnife.bind(it) };
+        luckyWheel= LuckyWheel(binding.luckyWheel, this)
 
         //Setup recyclerview
         recyclerView = binding.letterCardView
@@ -130,17 +144,17 @@ class GameFragment : Fragment() {
 
     fun spinWheel() {
         if (viewModel.gameStage.value == GameStage.IS_SPIN) {
-            //TODO: sådan nogle calls burde måske ikke ske,
-            // måske istedet lav metode der hedder isJoker
-            viewModel.spinLuckyWheel()
-            if (!viewModel.wheelResult.value?.isDigitsOnly()!!) {
-                showJokerDialog()
-            } else {
-                viewModel.setGameQuote(String.format(getString(R.string.is_guess_game_quote),viewModel.wheelResult.value))
-            }
-
+            luckyWheel?.spinWheelImage()
         }
+    }
 
+    fun continueGameAfterWheelSpin(wheelResult: String){
+        viewModel.setWheelResult(wheelResult)
+        if (!viewModel.wheelResult.value?.isDigitsOnly()!!) {
+            showJokerDialog()
+        } else {
+            viewModel.setGameQuote(String.format(getString(R.string.is_guess_game_quote),viewModel.wheelResult.value))
+        }
     }
 
     private fun updateLetterCards() {

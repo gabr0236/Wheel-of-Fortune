@@ -6,7 +6,6 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.s205350lykkehjulet.Data.LetterCard
-import org.jetbrains.annotations.TestOnly
 
 //TODO resources
 const val BANKRUPT = "Bankrupt"
@@ -85,45 +84,6 @@ class GameViewModel : ViewModel() {
         return positions
     }
 
-    /**
-     * Sets _wheelResult to random wheel property
-     * This method doesn't allow Joker values ("Bankrupt", "Miss Turn" or "Extra Turn") on the first roll
-     */
-    fun spinLuckyWheel() {
-        val random = (1..22).random()
-        _wheelResult.value = when (random) {
-            //TODO skal de her tal være const?
-            in 1..2 -> "100"           //2 x 100
-            3 -> "300"                 //1 x 300
-            in 4..9 -> "500"           //6 x 500
-            in 10..11 -> "600"         //2 x 600
-            in 12..16 -> "800"         //5 x 800
-            in 17..18 -> "1000"        //2 x 1000
-            19 -> "1500"               //1 x 1500
-            20 -> BANKRUPT             //1 x Bankrupt
-            21 -> EXTRA_TURN           //1 x Extra Turn
-            22 -> MISS_TURN            //1 x Lost Turn
-            else -> throw Exception("Random generator not generating a number from 1 to 22")
-        }
-        timesOfLuckyWheelSpins++
-        //TODO test
-        //if (timesOfLuckyWheelSpins>2) _wheelResult.value = EXTRA_TURN
-        //Switch to guessing stage if result is digits else spin again
-        _gameStage.value = if (wheelResult.value?.isDigitsOnly() == true) {
-            GameStage.IS_GUESS
-        } else GameStage.IS_SPIN
-
-        //Avoid getting bankrupt when player is already bankrupt (eg. at game start)
-        //This is not part of the original game but a design decision for a better user experience
-        if ((score.value == 0 && wheelResult.value == BANKRUPT)
-            //Avoid Extra Turn or Miss Turn when game is just started
-            || ((timesOfLuckyWheelSpins == 1)
-                    && (wheelResult.value == EXTRA_TURN || wheelResult.value == MISS_TURN))
-        ) {
-            timesOfLuckyWheelSpins = 0
-            spinLuckyWheel()
-        }
-    }
 
     /**
      * Return whether the currentWordToBeGuessed contains the player input
@@ -211,11 +171,8 @@ class GameViewModel : ViewModel() {
         _letterCardList.value = tempLetterCardList
     }
 
-    /**
-     * For testing purposes
-     */
-    @TestOnly
-    fun setWheelResult(newValue: String){
+
+    fun setWheelResult(newValue: String?){
         _wheelResult.value=newValue
 
         timesOfLuckyWheelSpins++

@@ -7,6 +7,7 @@
         <entry key="app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.14895833333333333" />
         <entry key="app/src/main/res/drawable/border.xml" value="0.27395833333333336" />
         <entry key="app/src/main/res/drawable/category_border.xml" value="0.15648148148148147" />
+        <entry key="app/src/main/res/drawable/ic_baseline_play_arrow_24.xml" value="0.2390625" />
         <entry key="app/src/main/res/drawable/ic_launcher_background.xml" value="0.27395833333333336" />
         <entry key="app/src/main/res/drawable/item_view.xml" value="0.1388888888888889" />
         <entry key="app/src/main/res/drawable/wheel_result_border.xml" value="0.20729166666666668" />
@@ -15,7 +16,7 @@
         <entry key="app/src/main/res/layout/fragment_game.xml" value="0.335" />
         <entry key="app/src/main/res/layout/fragment_losing_screen.xml" value="0.14935950316203836" />
         <entry key="app/src/main/res/layout/fragment_winning_screen.xml" value="0.1911231884057971" />
-        <entry key="app/src/main/res/layout/game_fragment.xml" value="0.335" />
+        <entry key="app/src/main/res/layout/game_fragment.xml" value="0.413961038961039" />
         <entry key="app/src/main/res/layout/game_lost_fragment.xml" value="0.37037037037037035" />
         <entry key="app/src/main/res/layout/game_won_fragment.xml" value="0.335" />
         <entry key="app/src/main/res/layout/item_view.xml" value="0.45" />
