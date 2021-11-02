@@ -78,6 +78,7 @@
                 android:id="@+id/playAgainButton"
                 style="@style/buttonStyle"
                 android:text="@string/play_again"
+                android:onClick="@{() -> gameLostFragment.playAgain()}"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/numberOfGuesses" />

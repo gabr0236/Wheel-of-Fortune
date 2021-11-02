@@ -32,12 +32,11 @@ class GameLostFragment : Fragment() {
             lifecycleOwner = viewLifecycleOwner
             gameViewModel = viewModel
             gameLostFragment = this@GameLostFragment
-
-            //Assign navigation to button
-            playAgainButton.setOnClickListener {
-                findNavController().navigate(R.id.action_gameLostFragment_to_gameFragment)
-            }
         }
+    }
+
+    fun playAgain(){
+        findNavController().navigate(R.id.action_gameWonFragment_to_gameFragment)
     }
 
     override fun onDestroyView() {

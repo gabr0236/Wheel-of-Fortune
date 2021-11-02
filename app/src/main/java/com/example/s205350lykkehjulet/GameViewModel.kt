@@ -106,8 +106,10 @@ class GameViewModel : ViewModel() {
         } else {
             saveGuessedChar(playerInputLetterLC)
             _lives.value = _lives.value?.minus(1)
-            if (lives.value!! <= 0){
-                _gameStage.value=GameStage.IS_LOST
+            lives.value?.let {
+                if (it <= 0) {
+                    _gameStage.value = GameStage.IS_LOST
+                }
             }
             false
         }

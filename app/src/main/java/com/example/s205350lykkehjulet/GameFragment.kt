@@ -59,7 +59,7 @@ class GameFragment : Fragment() {
         recyclerView.layoutManager = layoutManager
         //TODO: lav util fun til at finde det optimale nummer af columns
         //recyclerView.layoutManager = GridLayoutManager(context,letterCardsColumns(), RecyclerView.VERTICAL, false)
-        recyclerView.adapter = ItemAdapter(viewModel.letterCardList.value!!)
+        recyclerView.adapter = viewModel.letterCardList.value?.let { ItemAdapter(it) }
 
         return binding.root
     }
@@ -139,6 +139,8 @@ class GameFragment : Fragment() {
 
     fun spinWheel() {
         if (viewModel.gameStage.value == GameStage.IS_SPIN) {
+            //The gameStage needs to be set to IS_GUESS to prevent
+                // the user from respinning the wheel
             viewModel.setGameStage(GameStage.IS_GUESS)
             luckyWheel?.spinWheelImage()
         }
@@ -146,7 +148,7 @@ class GameFragment : Fragment() {
 
     fun continueGameAfterWheelSpin(wheelResult: String) {
         viewModel.setWheelResult(wheelResult)
-        if (!viewModel.wheelResult.value?.isDigitsOnly()!!) {
+        if (!wheelResult.isDigitsOnly()) {
             showJokerDialog()
         } else {
             viewModel.setGameQuote(
@@ -193,7 +195,7 @@ class GameFragment : Fragment() {
         viewModel.doWheelResultAction()
 
         //continueGameAfterJokerDialog()
-        if (viewModel.lives.value!! <= 0) {
+        if (viewModel.gameStage.value==GameStage.IS_LOST) {
             findNavController().navigate(R.id.action_gameFragment_to_gameLostFragment)
         }
     }
