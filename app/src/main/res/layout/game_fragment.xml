@@ -30,8 +30,8 @@
 
             <TextView
                 android:id="@+id/scoreTextView"
-                android:layout_height="wrap_content"
                 style="@style/gameStatHeadline"
+                android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
                 android:text="@string/score"
                 app:layout_constraintEnd_toStartOf="@+id/categoryTextView"
@@ -40,10 +40,10 @@
 
             <TextView
                 android:id="@+id/categoryTextView"
+                style="@style/gameStatHeadline"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
                 android:text="@string/category"
-                style="@style/gameStatHeadline"
                 app:layout_constraintEnd_toStartOf="@+id/livesTextView"
                 app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintStart_toEndOf="@+id/scoreTextView"
@@ -51,10 +51,10 @@
 
             <TextView
                 android:id="@+id/livesTextView"
+                style="@style/gameStatHeadline"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
                 android:text="@string/lives"
-                style="@style/gameStatHeadline"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintStart_toEndOf="@+id/categoryTextView"
@@ -62,8 +62,8 @@
 
             <TextView
                 android:id="@+id/score"
-                android:layout_height="wrap_content"
                 style="@style/gameStat"
+                android:layout_height="wrap_content"
                 android:text="@{gameViewModel.score.toString()}"
                 app:layout_constraintEnd_toStartOf="@+id/category"
                 app:layout_constraintHorizontal_chainStyle="spread"
@@ -73,9 +73,8 @@
 
             <TextView
                 android:id="@+id/lives"
-                android:layout_height="wrap_content"
-
                 style="@style/gameStat"
+                android:layout_height="wrap_content"
                 android:text="@{gameViewModel.lives.toString()}"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/category"
@@ -205,7 +204,6 @@
             <Button
                 android:id="@+id/spinButton"
                 style="@style/buttonStyle"
-
                 android:layout_marginTop="8dp"
                 android:enabled="@{gameViewModel.gameStage==GameStage.IS_SPIN ? true : false}"
                 android:onClick="@{() -> gameFragment.spinWheel()}"

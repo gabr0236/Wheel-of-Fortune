@@ -53,11 +53,13 @@ class GameViewModel : ViewModel() {
     private var _gameQuote = MutableLiveData<String>()
     val gameQuote: LiveData<String>
         get() = _gameQuote
-    fun setGameQuote(newGameQuote: String){
-        _gameQuote.value=newGameQuote
+
+    fun setGameQuote(newGameQuote: String) {
+        _gameQuote.value = newGameQuote
     }
 
     private lateinit var _currentWordToBeGuessed: String
+
     //Only return currentWordToBeGuessed if the game is over
     val currentWordToBeGuessed: String
         get() {
@@ -66,7 +68,7 @@ class GameViewModel : ViewModel() {
         }
 
     val numberOfGuesses: Int
-    get() = _guessedCharacters.size
+        get() = _guessedCharacters.size
 
 
     init {
@@ -172,8 +174,8 @@ class GameViewModel : ViewModel() {
     }
 
 
-    fun setWheelResult(newValue: String){
-        _wheelResult.value=newValue
+    fun setWheelResult(newValue: String) {
+        _wheelResult.value = newValue
 
         timesOfLuckyWheelSpins++
 
@@ -182,9 +184,9 @@ class GameViewModel : ViewModel() {
         } else GameStage.IS_SPIN
     }
 
-    fun setGameStage(stage: GameStage){
-        if (stage==GameStage.IS_SPIN) _gameStage.value=GameStage.IS_SPIN
-        else if (stage==GameStage.IS_GUESS) _gameStage.value=GameStage.IS_GUESS
+    fun setGameStage(stage: GameStage) {
+        if (stage == GameStage.IS_SPIN) _gameStage.value = GameStage.IS_SPIN
+        else if (stage == GameStage.IS_GUESS) _gameStage.value = GameStage.IS_GUESS
     }
 
     companion object {

@@ -11,11 +11,11 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.RecyclerView
+import butterknife.ButterKnife
 import com.example.s205350lykkehjulet.Adapter.ItemAdapter
 import com.example.s205350lykkehjulet.databinding.GameFragmentBinding
 import com.google.android.flexbox.*
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
-import butterknife.ButterKnife
 
 
 class GameFragment : Fragment() {
@@ -65,15 +65,17 @@ class GameFragment : Fragment() {
 
     private fun letterCardsColumns(): Int {
         val letterCardList = viewModel.letterCardList.value!!
-        return if (letterCardList.size<=MAX_NUMBER_OF_COLUMNS) MAX_NUMBER_OF_COLUMNS
+        return if (letterCardList.size <= MAX_NUMBER_OF_COLUMNS) MAX_NUMBER_OF_COLUMNS
         else {
             var lastSpaceBeforeMaxColumns: Int? = null
             for (i in 0 until MAX_NUMBER_OF_COLUMNS) {
-                if (letterCardList[i].letter == ' '){
+                if (letterCardList[i].letter == ' ') {
                     lastSpaceBeforeMaxColumns = i
                 }
             }
-            if (lastSpaceBeforeMaxColumns!=null){ letterCardList.removeAt(lastSpaceBeforeMaxColumns)}
+            if (lastSpaceBeforeMaxColumns != null) {
+                letterCardList.removeAt(lastSpaceBeforeMaxColumns)
+            }
             lastSpaceBeforeMaxColumns ?: MAX_NUMBER_OF_COLUMNS
         }
     }
@@ -135,17 +137,22 @@ class GameFragment : Fragment() {
 
     fun spinWheel() {
         if (viewModel.gameStage.value == GameStage.IS_SPIN) {
-        viewModel.setGameStage(GameStage.IS_GUESS)
+            viewModel.setGameStage(GameStage.IS_GUESS)
             luckyWheel?.spinWheelImage()
         }
     }
 
-    fun continueGameAfterWheelSpin(wheelResult: String){
+    fun continueGameAfterWheelSpin(wheelResult: String) {
         viewModel.setWheelResult(wheelResult)
         if (!viewModel.wheelResult.value?.isDigitsOnly()!!) {
             showJokerDialog()
         } else {
-            viewModel.setGameQuote(String.format(getString(R.string.is_guess_game_quote),viewModel.wheelResult.value))
+            viewModel.setGameQuote(
+                String.format(
+                    getString(R.string.is_guess_game_quote),
+                    viewModel.wheelResult.value
+                )
+            )
         }
     }
 
@@ -162,7 +169,10 @@ class GameFragment : Fragment() {
         Log.d(TAG, "showJokerDialog() called")
         val message: String = when (viewModel.wheelResult.value) {
             MISS_TURN -> String.format(resources.getString(R.string.miss_turn_message), MISS_TURN)
-            EXTRA_TURN -> String.format(resources.getString(R.string.extra_turn_message), EXTRA_TURN)
+            EXTRA_TURN -> String.format(
+                resources.getString(R.string.extra_turn_message),
+                EXTRA_TURN
+            )
             BANKRUPT -> String.format(resources.getString(R.string.bankrupt_message), BANKRUPT)
             else -> throw Exception("WheelResult is not an expected value") //TODO: Det her ok?
         }
@@ -172,7 +182,12 @@ class GameFragment : Fragment() {
             .setMessage(message)
             .setCancelable(true)
             .show()
-        viewModel.setGameQuote(String.format(getString(R.string.spin_again_game_quote), viewModel.wheelResult.value))
+        viewModel.setGameQuote(
+            String.format(
+                getString(R.string.spin_again_game_quote),
+                viewModel.wheelResult.value
+            )
+        )
         viewModel.doWheelResultAction()
 
         //continueGameAfterJokerDialog()
