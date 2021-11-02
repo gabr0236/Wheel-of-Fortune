@@ -1,7 +1,6 @@
 package com.example.s205350lykkehjulet.Adapter
 
 import android.graphics.Color
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -21,7 +20,7 @@ class ItemAdapter(private var letterCardList: List<LetterCard>) :
         fun bind(letterCard: LetterCard) {
             if (letterCard.letter == ' ') {
                 cardView.visibility = View.INVISIBLE
-            }else if (!letterCard.isHidden) {
+            } else if (!letterCard.isHidden) {
                 letterTextView.text = letterCard.letter.toString()
                 cardView.setCardBackgroundColor(Color.WHITE)
             } else if (letterCard.isHidden) {
