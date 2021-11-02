@@ -18,7 +18,6 @@ import org.junit.Rule
  */
 class ViewModelUnitTest {
 
-
     @get:Rule
     var instantTaskExecutorRule = InstantTaskExecutorRule()
 
@@ -27,16 +26,15 @@ class ViewModelUnitTest {
     @Before
     fun init() {
         viewModelTest = GameViewModel()
-        viewModelTest.setCategoryAndCurrentWordToBeGuessed("Animal,Doggo")
+        viewModelTest.setCategoryAndCurrentWordToBeGuessed("Test,Doggo")
         viewModelTest.newGame()
     }
 
     @Test
     fun testGameSetup(){
-        assertTrue(!viewModelTest.isWon)
         assertTrue(viewModelTest.lives.value==5)
         assertTrue(viewModelTest.score.value==0)
-        assertTrue(viewModelTest.category.value.equals("Animal"))
+        assertTrue(viewModelTest.category.value.equals("Test"))
         assertTrue(viewModelTest.numberOfGuesses==0)
         assertTrue(viewModelTest.gameStage.value==GameStage.IS_SPIN)
     }
@@ -51,7 +49,7 @@ class ViewModelUnitTest {
         assertNotNull("Lives is null",lives)
         assertTrue("Lives is not subtracted by 1",viewModelTest.lives.value==4)
         assertTrue("GameStage is not IS_SPIN",viewModelTest.gameStage.value==GameStage.IS_SPIN)
-        assertTrue("LetterCard is set to isHidden==false",viewModelTest.letterCardList.value!!.all { it.isHidden })
+        assertTrue("LetterCard is shown (isHidden==false)",viewModelTest.letterCardList.value!!.all { it.isHidden })
         assertTrue("Guessed char is not set to lowercase",viewModelTest.guessedCharacters.first()==guessedLetter.lowercaseChar())
     }
 
@@ -65,7 +63,7 @@ class ViewModelUnitTest {
         assertNotNull("Lives is null",lives)
         assertTrue("Lives is subtracted by 1",viewModelTest.lives.value==5)
         assertTrue("GameStage is not IS_SPIN",viewModelTest.gameStage.value==GameStage.IS_SPIN)
-        assertTrue("LetterCard is not set to isHidden==false", viewModelTest.letterCardList.value!!
+        assertTrue("LetterCard is not shown (isHidden==false)", viewModelTest.letterCardList.value!!
                 .filter { it.letter==guessedLetter.lowercaseChar() }
                 .all { !it.isHidden })
         assertTrue("Guessed char is not set to lowercase",viewModelTest.guessedCharacters.first()==guessedLetter.lowercaseChar())
@@ -73,5 +71,37 @@ class ViewModelUnitTest {
         //assertTrue("Player is not awarded 2*1000 for 2 correct letters", viewModelTest.score.value==2000)
     }
 
-    //TODO: test to be done: jokerresult, getPosOfLastGuessedChars,
+    @Test
+    fun testGameWon(){
+        val lives = viewModelTest.lives.value!!
+        val guessedLetter = 'T'
+        viewModelTest.setCategoryAndCurrentWordToBeGuessed("Test,T")
+        viewModelTest.setWheelResult("1000")
+        viewModelTest.isUserInputMatch(guessedLetter)
+
+        assertNotNull("Lives is null",lives)
+        assertTrue("Lives is subtracted by 1",viewModelTest.lives.value==5)
+        assertTrue("LetterCard is not shown (isHidden==false)", viewModelTest.letterCardList.value!!
+            .filter { it.letter==guessedLetter.lowercaseChar() }
+            .all { !it.isHidden })
+        assertTrue("Guessed char is not set to lowercase",viewModelTest.guessedCharacters.first()==guessedLetter.lowercaseChar())
+        //TODO: this is not working apparently
+        assertTrue("Player is not awarded 1000 points for correct guess", viewModelTest.score.value==1000)
+        assertTrue("Game is not won", viewModelTest.gameStage.value==GameStage.IS_WON)
+    }
+
+    @Test
+    fun testGameLost(){
+        val guessedLetter = 'K'
+        viewModelTest.setCategoryAndCurrentWordToBeGuessed("Test,T")
+        viewModelTest.setWheelResult("1000")
+
+        for (i in 1..5) viewModelTest.isUserInputMatch(guessedLetter)
+
+        assertNotNull("Lives is not 0",viewModelTest.lives.value==0)
+        assertTrue("GameStage is not IS_LOST",viewModelTest.gameStage.value==GameStage.IS_LOST)
+        assertTrue("LetterCard is shown (isHidden==false)",viewModelTest.letterCardList.value!!.all { it.isHidden })
+        assertTrue("Guessed char is not set to lowercase",viewModelTest.guessedCharacters.first()==guessedLetter.lowercaseChar())
+    }
+    //TODO: test to be done: jokerresult, getPosOfLastGuessedChars
 }

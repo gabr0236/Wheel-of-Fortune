@@ -34,13 +34,6 @@ class GameWonFragment : Fragment() {
             gameViewModel = viewModel
             gameWonFragment = this@GameWonFragment
 
-            //TODO: det her kan ligge i xml?
-            finalScore.text = getString(R.string.score, viewModel.score.toString())
-            livesLeft.text = getString(R.string.lives, viewModel.lives.toString())
-            wordReveal.text = getString(R.string.word_reveal, viewModel.currentWordToBeGuessed)
-            numberOfGuesses.text =
-                getString(R.string.number_of_guesses, viewModel.numberOfGuesses.toString())
-
             Log.d(TAG, "Score: ${viewModel.score}")
             //Assign navigation to button
             playAgainButton.setOnClickListener {

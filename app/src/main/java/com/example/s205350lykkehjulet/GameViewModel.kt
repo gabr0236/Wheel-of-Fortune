@@ -7,13 +7,12 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.s205350lykkehjulet.Data.LetterCard
 
-//TODO resources
 const val BANKRUPT = "Bankrupt"
 const val MISS_TURN = "Miss Turn"
 const val EXTRA_TURN = "Extra Turn"
 
 enum class GameStage {
-    IS_SPIN, IS_GUESS;
+    IS_SPIN, IS_GUESS, IS_WON, IS_LOST;
 }
 
 class GameViewModel : ViewModel() {
@@ -28,14 +27,9 @@ class GameViewModel : ViewModel() {
     private val _lives = MutableLiveData<Int>()
     val lives: LiveData<Int> = _lives
 
-    private var _isWon = false
-    val isWon: Boolean
-        get() = _isWon
-
     private val _category = MutableLiveData<String>()
     val category: LiveData<String> = _category
 
-    //TODO: er der nogen grund til at det her skal bruge binding?
     private val _letterCardList = MutableLiveData<MutableList<LetterCard>>()
     val letterCardList: LiveData<MutableList<LetterCard>> = _letterCardList
 
@@ -63,7 +57,8 @@ class GameViewModel : ViewModel() {
     //Only return currentWordToBeGuessed if the game is over
     val currentWordToBeGuessed: String
         get() {
-            return if (isWon || lives.value!! <= 0) _currentWordToBeGuessed
+            return if (gameStage.value==GameStage.IS_LOST
+                || gameStage.value==GameStage.IS_WON) _currentWordToBeGuessed
             else "It's a secret!"
         }
 
@@ -76,7 +71,7 @@ class GameViewModel : ViewModel() {
     }
 
     fun getPosOfLastGuessedChars(): List<Int> {
-        var positions = mutableListOf<Int>()
+        val positions = mutableListOf<Int>()
         for (i in _currentWordToBeGuessed.indices) {
             if (_currentWordToBeGuessed[i].lowercaseChar() == _guessedCharacters.last()
                     .lowercaseChar()
@@ -104,13 +99,16 @@ class GameViewModel : ViewModel() {
                     it.isHidden = false
                 }
             if (_letterCardList.value?.all { !it.isHidden || it.letter == ' ' } == true) {
-                _isWon = true
+                _gameStage.value=GameStage.IS_WON
             }
             doWheelResultAction()
             true
         } else {
             saveGuessedChar(playerInputLetterLC)
             _lives.value = _lives.value?.minus(1)
+            if (lives.value!! <= 0){
+                _gameStage.value=GameStage.IS_LOST
+            }
             false
         }
     }
@@ -126,7 +124,7 @@ class GameViewModel : ViewModel() {
      */
     fun doWheelResultAction() {
         when {
-            wheelResult.value?.isDigitsOnly() == true -> {
+            wheelResult.value?.all { it in '0'..'9' } == true -> {
                 val wheelValue = wheelResult.value?.toInt()
                 if (wheelValue != null) {
                     val multiplier =
@@ -150,7 +148,6 @@ class GameViewModel : ViewModel() {
         Log.d(TAG, "newGame")
         _lives.value = 5
         _score.value = 0
-        _isWon = false
         timesOfLuckyWheelSpins = 0
         _guessedCharacters = mutableListOf()
         _guessedCharacterString.value = "Letters\n"

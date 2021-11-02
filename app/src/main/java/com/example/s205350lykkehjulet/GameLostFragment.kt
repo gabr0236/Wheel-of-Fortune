@@ -33,11 +33,6 @@ class GameLostFragment : Fragment() {
             gameViewModel = viewModel
             gameLostFragment = this@GameLostFragment
 
-            //TODO: det her kan ligge i xml?
-            finalScore.text = getString(R.string.score, viewModel.score.toString())
-            wordReveal.text = getString(R.string.word_reveal, viewModel.currentWordToBeGuessed)
-            numberOfGuesses.text =
-                getString(R.string.number_of_guesses, viewModel.numberOfGuesses.toString())
             //Assign navigation to button
             playAgainButton.setOnClickListener {
                 findNavController().navigate(R.id.action_gameLostFragment_to_gameFragment)

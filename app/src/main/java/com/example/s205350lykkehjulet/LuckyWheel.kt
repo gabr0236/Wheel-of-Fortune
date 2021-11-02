@@ -15,7 +15,7 @@ class LuckyWheel(
     fun spinWheelImage() {
         val degreeOld = degree % 360
 
-        //calculate random angle for rotation of our wheel + amound of wheel round trips
+        //calculate random angle for rotation of our wheel + amount of wheel round trips
         degree = Random.nextInt(360) + 1080
 
         //Rotation effect on the center of the wheel

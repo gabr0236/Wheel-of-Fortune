@@ -23,7 +23,6 @@ class GameFragment : Fragment() {
     //Source: https://developer.android.com/topic/libraries/view-binding#fragments
     private var _binding: GameFragmentBinding? = null
     private val binding get() = _binding!!
-    private val MAX_NUMBER_OF_COLUMNS = 11
 
     private lateinit var recyclerView: RecyclerView
     private val viewModel: GameViewModel by activityViewModels()
@@ -45,11 +44,13 @@ class GameFragment : Fragment() {
         viewModel.setGameQuote(getString(R.string.initial_game_quote))
 
         //Bind to ButterKnife (For animated wheel spin)
-        activity?.let { ButterKnife.bind(it) };
+        activity?.let { ButterKnife.bind(it) }
         luckyWheel = LuckyWheel(binding.luckyWheel, this)
 
         //Setup recyclerview
         recyclerView = binding.letterCardView
+
+        //TODO flexbox atributes in xml
         val layoutManager = FlexboxLayoutManager(context)
         layoutManager.justifyContent = JustifyContent.CENTER
         layoutManager.alignItems = AlignItems.CENTER
@@ -64,6 +65,7 @@ class GameFragment : Fragment() {
     }
 
     private fun letterCardsColumns(): Int {
+        val MAX_NUMBER_OF_COLUMNS = 11
         val letterCardList = viewModel.letterCardList.value!!
         return if (letterCardList.size <= MAX_NUMBER_OF_COLUMNS) MAX_NUMBER_OF_COLUMNS
         else {
@@ -122,12 +124,12 @@ class GameFragment : Fragment() {
 
             if (viewModel.isUserInputMatch(playerInputLetter)) {
                 viewModel.setGameQuote(getString(R.string.correct_guess_game_quote))
-                if (viewModel.isWon) {
+                if (viewModel.gameStage.value==GameStage.IS_WON) {
                     findNavController().navigate(R.id.action_gameFragment_to_gameWonFragment)
                 }
             } else {
                 viewModel.setGameQuote(getString(R.string.wrong_guess_game_quote))
-                if (viewModel.lives.value!! <= 0) {
+                if (viewModel.gameStage.value==GameStage.IS_LOST) {
                     findNavController().navigate(R.id.action_gameFragment_to_gameLostFragment)
                 }
             }
@@ -174,7 +176,7 @@ class GameFragment : Fragment() {
                 EXTRA_TURN
             )
             BANKRUPT -> String.format(resources.getString(R.string.bankrupt_message), BANKRUPT)
-            else -> throw Exception("WheelResult is not an expected value") //TODO: Det her ok?
+            else -> ""
         }
 
         MaterialAlertDialogBuilder(requireContext())
