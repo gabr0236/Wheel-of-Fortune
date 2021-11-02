@@ -27,8 +27,9 @@
     <style name="gameStat">
         <item name="android:textAlignment">center</item>
         <item name="android:layout_width">130dp</item>
-        <item name="android:textAppearance">@style/TextAppearance.MaterialComponents.Headline6
+        <item name="android:textAppearance">@style/TextAppearance.MaterialComponents.Subtitle1
         </item>
+        <item name="android:textStyle">bold</item>
         <item name="android:textAllCaps">true</item>
     </style>
 </resources>

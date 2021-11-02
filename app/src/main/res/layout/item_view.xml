@@ -8,8 +8,8 @@
 
     <com.google.android.material.card.MaterialCardView
         android:id="@+id/letter_card_view"
-        android:layout_width="33dp"
-        android:layout_height="50dp"
+        android:layout_width="28dp"
+        android:layout_height="40dp"
         app:cardBackgroundColor="@color/pink_light"
         app:cardCornerRadius="3dp"
         app:cardElevation="2dp"
