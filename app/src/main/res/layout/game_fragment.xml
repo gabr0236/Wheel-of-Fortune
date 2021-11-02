@@ -26,29 +26,24 @@
             android:layout_height="wrap_content"
             android:background="@color/light_blue"
             android:orientation="vertical"
-            android:padding="@dimen/default_padding">
+            android:padding="8dp">
 
             <TextView
                 android:id="@+id/scoreTextView"
-                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:text="Score"
-                android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle1"
-                android:textStyle="bold"
+                style="@style/gameStatHeadline"
+                android:layout_marginTop="8dp"
+                android:text="@string/score"
                 app:layout_constraintEnd_toStartOf="@+id/categoryTextView"
-                app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
                 android:id="@+id/categoryTextView"
-                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:text="Category"
-                android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle1"
-                android:textStyle="bold"
+                android:layout_marginTop="8dp"
+                android:text="@string/category"
+                style="@style/gameStatHeadline"
                 app:layout_constraintEnd_toStartOf="@+id/livesTextView"
                 app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintStart_toEndOf="@+id/scoreTextView"
@@ -56,12 +51,10 @@
 
             <TextView
                 android:id="@+id/livesTextView"
-                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:text="Lives"
-                android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle1"
-                android:textStyle="bold"
+                android:layout_marginTop="8dp"
+                android:text="@string/lives"
+                style="@style/gameStatHeadline"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintStart_toEndOf="@+id/categoryTextView"
@@ -69,12 +62,9 @@
 
             <TextView
                 android:id="@+id/score"
-                android:layout_width="85dp"
                 android:layout_height="wrap_content"
-                android:gravity="center"
-                android:text="@{@string/score(Integer.toString(gameViewModel.score))}"
-                android:textAllCaps="true"
-                android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6"
+                style="@style/gameStat"
+                android:text="@{gameViewModel.score.toString()}"
                 app:layout_constraintEnd_toStartOf="@+id/category"
                 app:layout_constraintHorizontal_chainStyle="spread"
                 app:layout_constraintStart_toStartOf="parent"
@@ -83,12 +73,10 @@
 
             <TextView
                 android:id="@+id/lives"
-                android:layout_width="85dp"
                 android:layout_height="wrap_content"
-                android:gravity="center"
-                android:text="@{@string/lives(gameViewModel.lives)}"
-                android:textAllCaps="true"
-                android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6"
+
+                style="@style/gameStat"
+                android:text="@{gameViewModel.lives.toString()}"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/category"
                 app:layout_constraintTop_toBottomOf="@+id/livesTextView"
@@ -96,14 +84,9 @@
 
             <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/category"
-                android:layout_width="wrap_content"
+                style="@style/gameStat"
                 android:layout_height="wrap_content"
-                android:gravity="center"
-                android:text="@{@string/category(gameViewModel.category)}"
-                android:textAlignment="center"
-                android:textAllCaps="true"
-                android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6"
-                android:textStyle="bold"
+                android:text="@{gameViewModel.category}"
                 app:layout_constraintEnd_toStartOf="@+id/lives"
                 app:layout_constraintStart_toEndOf="@+id/score"
                 app:layout_constraintTop_toBottomOf="@+id/categoryTextView"
@@ -180,7 +163,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/relative_layout"
-                tools:text="You rolled 1000! Guess a letter!" />
+                tools:text="You rolled 1000!\n Guess a letter!" />
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/letterInputContainer"

@@ -1,12 +1,12 @@
 <resources>
     <string name="app_name">Wheel of Fortune</string>
-    <string name="score">Score\n %s</string>
+    <string name="score">Score</string>
     <string name="word_reveal">Word: %s</string>
     <string name="number_of_guesses">Number of Guesses: %s</string>
-    <string name="lives">Lives\n %s</string>
+    <string name="lives">Lives</string>
     <string name="guess_button">Guess</string>
     <string name="spin_button">Spin</string>
-    <string name="category">Category\n %s</string>
+    <string name="category">Category</string>
     <string name="letter_hint">Letter</string>
     <string name="you_won">You Won!</string>
     <string name="you_lost">You Lost!</string>
