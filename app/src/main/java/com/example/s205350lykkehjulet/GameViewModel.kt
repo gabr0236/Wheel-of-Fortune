@@ -12,7 +12,7 @@ const val MISS_TURN = "Miss Turn"
 const val EXTRA_TURN = "Extra Turn"
 
 enum class GameStage {
-    IS_SPIN, IS_GUESS, IS_WON, IS_LOST;
+    SPIN, GUESS, GAME_WON, GAME_LOST, WAITING;
 }
 
 class GameViewModel : ViewModel() {
@@ -57,8 +57,8 @@ class GameViewModel : ViewModel() {
     //Only return currentWordToBeGuessed if the game is over
     val currentWordToBeGuessed: String
         get() {
-            return if (gameStage.value==GameStage.IS_LOST
-                || gameStage.value==GameStage.IS_WON) _currentWordToBeGuessed
+            return if (gameStage.value==GameStage.GAME_LOST
+                || gameStage.value==GameStage.GAME_WON) _currentWordToBeGuessed
             else "It's a secret!"
         }
 
@@ -86,7 +86,7 @@ class GameViewModel : ViewModel() {
      * Return whether the currentWordToBeGuessed contains the player input
      */
     fun isUserInputMatch(playerInputLetter: Char): Boolean {
-        _gameStage.value = GameStage.IS_SPIN
+        _gameStage.value = GameStage.SPIN
         val playerInputLetterLC = playerInputLetter.lowercaseChar()
         return if (_currentWordToBeGuessed.contains(playerInputLetterLC, ignoreCase = true)
             && !_guessedCharacters.contains(playerInputLetterLC)
@@ -99,7 +99,7 @@ class GameViewModel : ViewModel() {
                     it.isHidden = false
                 }
             if (_letterCardList.value?.all { !it.isHidden || it.letter == ' ' } == true) {
-                _gameStage.value=GameStage.IS_WON
+                _gameStage.value=GameStage.GAME_WON
             }
             doWheelResultAction()
             true
@@ -108,7 +108,7 @@ class GameViewModel : ViewModel() {
             _lives.value = _lives.value?.minus(1)
             lives.value?.let {
                 if (it <= 0) {
-                    _gameStage.value = GameStage.IS_LOST
+                    _gameStage.value = GameStage.GAME_LOST
                 }
             }
             false
@@ -153,7 +153,7 @@ class GameViewModel : ViewModel() {
         timesOfLuckyWheelSpins = 0
         _guessedCharacters = mutableListOf()
         _guessedCharacterString.value = "Letters\n"
-        _gameStage.value = GameStage.IS_SPIN
+        _gameStage.value = GameStage.SPIN
     }
 
     /**
@@ -179,13 +179,16 @@ class GameViewModel : ViewModel() {
         timesOfLuckyWheelSpins++
 
         _gameStage.value = if (this.wheelResult.value?.isDigitsOnly() == true) {
-            GameStage.IS_GUESS
-        } else GameStage.IS_SPIN
+            GameStage.GUESS
+        } else GameStage.SPIN
     }
 
     fun setGameStage(stage: GameStage) {
-        if (stage == GameStage.IS_SPIN) _gameStage.value = GameStage.IS_SPIN
-        else if (stage == GameStage.IS_GUESS) _gameStage.value = GameStage.IS_GUESS
+        when (stage) {
+            GameStage.SPIN -> _gameStage.value = GameStage.SPIN
+            GameStage.GUESS -> _gameStage.value = GameStage.GUESS
+            GameStage.WAITING -> _gameStage.value = GameStage.WAITING
+        }
     }
 
     companion object {

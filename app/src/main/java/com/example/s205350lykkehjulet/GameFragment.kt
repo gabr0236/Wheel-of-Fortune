@@ -48,7 +48,7 @@ class GameFragment : Fragment() {
         luckyWheel = LuckyWheel(binding.luckyWheel, this)
 
         //Setup recyclerview
-        recyclerView = binding.letterCardView
+        recyclerView = binding.letterCardRecyclerview
 
         //TODO flexbox atributes in xml
         val layoutManager = FlexboxLayoutManager(context)
@@ -57,12 +57,18 @@ class GameFragment : Fragment() {
         layoutManager.flexDirection = FlexDirection.ROW
         layoutManager.flexWrap = FlexWrap.WRAP
         recyclerView.layoutManager = layoutManager
-        //TODO: lav util fun til at finde det optimale nummer af columns
-        //recyclerView.layoutManager = GridLayoutManager(context,letterCardsColumns(), RecyclerView.VERTICAL, false)
+
         recyclerView.adapter = viewModel.letterCardList.value?.let { ItemAdapter(it) }
+
+
+        //val letterCardView = (recyclerView.layoutManager as FlexboxLayoutManager).findViewByPosition(2)
+        //val lp = letterCardView?.layoutParams as? FlexboxLayout.LayoutParams
+        //lp?.isWrapBefore=true
+        //letterCardView?.layoutParams=lp
 
         return binding.root
     }
+
 
     private fun letterCardsColumns(): Int {
         val MAX_NUMBER_OF_COLUMNS = 11
@@ -114,7 +120,7 @@ class GameFragment : Fragment() {
      * Submits the players input and updates the view accordingly
      */
     fun submitGuess() {
-        if (viewModel.gameStage.value == GameStage.IS_GUESS) {
+        if (viewModel.gameStage.value == GameStage.GUESS) {
             val playerInputLetter = binding.letterInput.text?.firstOrNull()
 
             //PlayerInputLetter cannot be null beyond this point
@@ -124,12 +130,12 @@ class GameFragment : Fragment() {
 
             if (viewModel.isUserInputMatch(playerInputLetter)) {
                 viewModel.setGameQuote(getString(R.string.correct_guess_game_quote))
-                if (viewModel.gameStage.value==GameStage.IS_WON) {
+                if (viewModel.gameStage.value==GameStage.GAME_WON) {
                     findNavController().navigate(R.id.action_gameFragment_to_gameWonFragment)
                 }
             } else {
                 viewModel.setGameQuote(getString(R.string.wrong_guess_game_quote))
-                if (viewModel.gameStage.value==GameStage.IS_LOST) {
+                if (viewModel.gameStage.value==GameStage.GAME_LOST) {
                     findNavController().navigate(R.id.action_gameFragment_to_gameLostFragment)
                 }
             }
@@ -138,15 +144,16 @@ class GameFragment : Fragment() {
     }
 
     fun spinWheel() {
-        if (viewModel.gameStage.value == GameStage.IS_SPIN) {
-            //The gameStage needs to be set to IS_GUESS to prevent
-                // the user from respinning the wheel
-            viewModel.setGameStage(GameStage.IS_GUESS)
+        if (viewModel.gameStage.value == GameStage.SPIN) {
+            //The gameStage needs to be set to WAITING to prevent the
+                // user from respinning or guessing while wheel is turning
+                    viewModel.setGameStage(GameStage.WAITING)
             luckyWheel?.spinWheelImage()
         }
     }
 
     fun continueGameAfterWheelSpin(wheelResult: String) {
+        viewModel.setGameStage(GameStage.GUESS)
         viewModel.setWheelResult(wheelResult)
         if (!wheelResult.isDigitsOnly()) {
             showJokerDialog()
@@ -195,7 +202,7 @@ class GameFragment : Fragment() {
         viewModel.doWheelResultAction()
 
         //continueGameAfterJokerDialog()
-        if (viewModel.gameStage.value==GameStage.IS_LOST) {
+        if (viewModel.gameStage.value==GameStage.GAME_LOST) {
             findNavController().navigate(R.id.action_gameFragment_to_gameLostFragment)
         }
     }

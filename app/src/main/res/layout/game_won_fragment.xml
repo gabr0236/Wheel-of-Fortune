@@ -4,7 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-
         <variable
             name="gameViewModel"
             type="com.example.s205350lykkehjulet.GameViewModel" />
@@ -50,28 +49,34 @@
                 tools:text="Word: Panda" />
 
             <TextView
-                android:id="@+id/finalScore"
+                android:id="@+id/finalScoreText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginVertical="16dp"
-                android:text="@{@string/score(gameViewModel.score)}"
+                android:text="@{@string/score_game_over}"
                 android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6"
                 app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/finalScore"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintHorizontal_chainStyle="packed"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/wordReveal"
-                tools:text="Score: 3500" />
+                tools:text="Score:" />
 
             <TextView
-                android:id="@+id/livesLeft"
+                android:id="@+id/livesLeftText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginVertical="16dp"
-                android:text="@{@string/lives(gameViewModel.lives)}"
+                android:text="@{@string/lives_game_over}"
                 android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6"
                 app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/livesLeft"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintHorizontal_chainStyle="packed"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/finalScore"
-                tools:text="Lives: 2" />
+                app:layout_constraintTop_toBottomOf="@+id/finalScoreText"
+                tools:text="Lives:" />
 
             <TextView
                 android:id="@+id/numberOfGuesses"
@@ -82,17 +87,45 @@
                 android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/livesLeft"
+                app:layout_constraintTop_toBottomOf="@+id/livesLeftText"
                 tools:text="Number of Guesses: 13" />
 
             <Button
                 android:id="@+id/playAgainButton"
                 style="@style/buttonStyle"
-                android:text="@string/play_again"
                 android:onClick="@{() -> gameWonFragment.playAgain()}"
+                android:text="@string/play_again"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/numberOfGuesses" />
+
+            <TextView
+                android:id="@+id/finalScore"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="@{gameViewModel.score.toString()}"
+                android:layout_marginLeft="5dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.5"
+                android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6"
+                app:layout_constraintStart_toEndOf="@+id/finalScoreText"
+                app:layout_constraintTop_toBottomOf="@+id/wordReveal"
+                tools:text="5600"/>
+
+            <TextView
+                android:id="@+id/livesLeft"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:layout_marginLeft="5dp"
+                android:text="@{gameViewModel.lives.toString()}"
+                android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toEndOf="@+id/livesLeftText"
+                app:layout_constraintTop_toBottomOf="@+id/finalScoreText"
+                tools:text="3"/>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>

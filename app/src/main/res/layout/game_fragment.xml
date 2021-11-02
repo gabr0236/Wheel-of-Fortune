@@ -89,7 +89,7 @@
                 tools:text="Animals" />
 
             <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/letter_card_view"
+                android:id="@+id/letter_card_recyclerview"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
@@ -109,7 +109,7 @@
                 android:layout_marginTop="8dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/letter_card_view">
+                app:layout_constraintTop_toBottomOf="@+id/letter_card_recyclerview">
 
                 <ImageView
                     android:id="@+id/arrow"
@@ -144,7 +144,7 @@
                 android:textAlignment="center"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/relative_layout"
-                app:layout_constraintTop_toBottomOf="@+id/letter_card_view"
+                app:layout_constraintTop_toBottomOf="@+id/letter_card_recyclerview"
                 tools:text="Letters\na" />
 
             <TextView
@@ -167,7 +167,7 @@
                 android:layout_width="100dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
-                android:enabled="@{gameViewModel.gameStage==GameStage.IS_GUESS ? true : false}"
+                android:enabled="@{gameViewModel.gameStage==GameStage.GUESS ? true : false}"
                 android:hint="@string/letter_hint"
                 android:textAlignment="center"
                 android:textAppearance="@style/TextAppearance.MaterialComponents.Body2"
@@ -189,7 +189,7 @@
                 android:id="@+id/guessButton"
                 style="@style/buttonStyle"
                 android:layout_marginTop="8dp"
-                android:enabled="@{gameViewModel.gameStage==GameStage.IS_GUESS ? true : false}"
+                android:enabled="@{gameViewModel.gameStage==GameStage.GUESS ? true : false}"
                 android:onClick="@{() -> gameFragment.submitGuess()}"
                 android:text="@string/guess_button"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -202,7 +202,7 @@
                 android:id="@+id/spinButton"
                 style="@style/buttonStyle"
                 android:layout_marginTop="8dp"
-                android:enabled="@{gameViewModel.gameStage==GameStage.IS_SPIN ? true : false}"
+                android:enabled="@{gameViewModel.gameStage==GameStage.SPIN ? true : false}"
                 android:onClick="@{() -> gameFragment.spinWheel()}"
                 android:text="@string/spin_button"
                 app:layout_constraintEnd_toEndOf="parent"

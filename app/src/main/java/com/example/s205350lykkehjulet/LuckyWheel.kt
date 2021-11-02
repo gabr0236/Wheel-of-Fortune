@@ -4,6 +4,7 @@ import android.view.animation.Animation
 import android.view.animation.DecelerateInterpolator
 import android.view.animation.RotateAnimation
 import android.widget.ImageView
+import androidx.fragment.app.viewModels
 import kotlin.random.Random
 
 class LuckyWheel(
@@ -31,15 +32,12 @@ class LuckyWheel(
         //Decelerate spin speed at end of spin
         rotateAnim.interpolator = DecelerateInterpolator()
         rotateAnim.setAnimationListener(object : Animation.AnimationListener {
-            override fun onAnimationStart(animation: Animation) {
-            }
-
+            override fun onAnimationStart(animation: Animation) {}
+            override fun onAnimationRepeat(animation: Animation) {}
             override fun onAnimationEnd(animation: Animation) {
                 //Pass the random wheel sector value on to the GameFragment
                 getSector(360 - degree % 360)?.let { gameFragment.continueGameAfterWheelSpin(it) }
             }
-
-            override fun onAnimationRepeat(animation: Animation) {}
         })
         //Start the animation
         luckyWheelImage.startAnimation(rotateAnim)
