@@ -36,12 +36,11 @@ class GameViewModel : ViewModel() {
     private val _wheelResult = MutableLiveData<String>()
     val wheelResult: LiveData<String> = _wheelResult
 
-    private var timesOfLuckyWheelSpins = 0
     private var _guessedCharacters = mutableListOf<Char>()
     val guessedCharacters: List<Char>
         get() = _guessedCharacters
 
-    private val _guessedCharacterString = MutableLiveData("Letters\n")
+    private val _guessedCharacterString = MutableLiveData("")
     val guessedCharacterString: LiveData<String> = _guessedCharacterString
 
     private var _gameQuote = MutableLiveData<String>()
@@ -106,11 +105,7 @@ class GameViewModel : ViewModel() {
         } else {
             saveGuessedChar(playerInputLetterLC)
             _lives.value = _lives.value?.minus(1)
-            lives.value?.let {
-                if (it <= 0) {
-                    _gameStage.value = GameStage.GAME_LOST
-                }
-            }
+            checkGameLost()
             false
         }
     }
@@ -141,6 +136,15 @@ class GameViewModel : ViewModel() {
             wheelResult.value == MISS_TURN -> _lives.value = _lives.value?.minus(1)
             wheelResult.value == EXTRA_TURN -> _lives.value = _lives.value?.plus(1)
         }
+        checkGameLost()
+    }
+
+    private fun checkGameLost(){
+        lives.value?.let {
+            if (it <= 0) {
+                _gameStage.value = GameStage.GAME_LOST
+            }
+        }
     }
 
     /**
@@ -148,11 +152,10 @@ class GameViewModel : ViewModel() {
      */
     fun newGame() {
         Log.d(TAG, "newGame")
-        _lives.value = 5
+        _lives.value = 2
         _score.value = 0
-        timesOfLuckyWheelSpins = 0
         _guessedCharacters = mutableListOf()
-        _guessedCharacterString.value = "Letters\n"
+        _guessedCharacterString.value = ""
         _gameStage.value = GameStage.SPIN
     }
 
@@ -175,8 +178,6 @@ class GameViewModel : ViewModel() {
 
     fun setWheelResult(newValue: String) {
         _wheelResult.value = newValue
-
-        timesOfLuckyWheelSpins++
 
         _gameStage.value = if (this.wheelResult.value?.isDigitsOnly() == true) {
             GameStage.GUESS

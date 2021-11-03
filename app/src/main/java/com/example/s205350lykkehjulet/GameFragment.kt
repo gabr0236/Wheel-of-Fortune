@@ -45,10 +45,10 @@ class GameFragment : Fragment() {
 
         //Bind to ButterKnife (For animated wheel spin)
         activity?.let { ButterKnife.bind(it) }
-        luckyWheel = LuckyWheel(binding.luckyWheel, this)
+        luckyWheel = LuckyWheel(binding.imageLuckywheel, this)
 
         //Setup recyclerview
-        recyclerView = binding.letterCardRecyclerview
+        recyclerView = binding.recyclerviewLetterCards
 
         //TODO flexbox atributes in xml
         val layoutManager = FlexboxLayoutManager(context)
@@ -121,12 +121,12 @@ class GameFragment : Fragment() {
      */
     fun submitGuess() {
         if (viewModel.gameStage.value == GameStage.GUESS) {
-            val playerInputLetter = binding.letterInput.text?.firstOrNull()
+            val playerInputLetter = binding.editTextLetter.text?.firstOrNull()
 
             //PlayerInputLetter cannot be null beyond this point
             playerInputLetter ?: return
 
-            binding.letterInput.setText("")
+            binding.editTextLetter.setText("")
 
             if (viewModel.isUserInputMatch(playerInputLetter)) {
                 viewModel.setGameQuote(getString(R.string.correct_guess_game_quote))

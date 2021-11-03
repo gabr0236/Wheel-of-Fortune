@@ -12,7 +12,7 @@
     <string name="you_lost">You Lost!</string>
     <string name="play_again">Play Again</string>
     <string name="score_game_over">Score:</string>
-    <string name="lives_game_over">Lives</string>
+    <string name="lives_game_over">Lives:</string>
 
 
     <!-- Joker Dialog -->
@@ -26,6 +26,7 @@
     <string name="correct_guess_game_quote">Correct Guess!\n Spin Again</string>
     <string name="initial_game_quote">Welcome!\nSpin the Wheel by Pressing "Spin" Below</string>
     <string name="is_guess_game_quote">You Rolled %s! Guess a Letter!</string>
+    <string name="letters">Letters</string>
 
     <string-array name="category_and_words">
         <item>Test,AABB</item>

@@ -29,67 +29,67 @@
             android:padding="8dp">
 
             <TextView
-                android:id="@+id/scoreTextView"
+                android:id="@+id/text_score_headline"
                 style="@style/gameStatHeadline"
                 android:layout_height="wrap_content"
                 android:text="@string/score"
-                app:layout_constraintEnd_toStartOf="@+id/categoryTextView"
+                app:layout_constraintEnd_toStartOf="@+id/text_category_headline"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
-                android:id="@+id/categoryTextView"
+                android:id="@+id/text_category_headline"
                 style="@style/gameStatHeadline"
                 android:layout_height="wrap_content"
                 android:text="@string/category"
-                app:layout_constraintEnd_toStartOf="@+id/livesTextView"
+                app:layout_constraintEnd_toStartOf="@+id/text_lives_headline"
                 app:layout_constraintHorizontal_bias="0.5"
-                app:layout_constraintStart_toEndOf="@+id/scoreTextView"
+                app:layout_constraintStart_toEndOf="@+id/text_score_headline"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
-                android:id="@+id/livesTextView"
+                android:id="@+id/text_lives_headline"
                 style="@style/gameStatHeadline"
                 android:layout_height="wrap_content"
                 android:text="@string/lives"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.5"
-                app:layout_constraintStart_toEndOf="@+id/categoryTextView"
+                app:layout_constraintStart_toEndOf="@+id/text_category_headline"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
-                android:id="@+id/score"
+                android:id="@+id/text_score"
                 style="@style/gameStat"
                 android:layout_height="wrap_content"
                 android:text="@{gameViewModel.score.toString()}"
-                app:layout_constraintEnd_toStartOf="@+id/category"
+                app:layout_constraintEnd_toStartOf="@+id/text_category"
                 app:layout_constraintHorizontal_chainStyle="spread"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/scoreTextView"
+                app:layout_constraintTop_toBottomOf="@+id/text_score_headline"
                 tools:text="1400" />
 
             <TextView
-                android:id="@+id/lives"
+                android:id="@+id/text_lives"
                 style="@style/gameStat"
                 android:layout_height="wrap_content"
                 android:text="@{gameViewModel.lives.toString()}"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/category"
-                app:layout_constraintTop_toBottomOf="@+id/livesTextView"
+                app:layout_constraintStart_toEndOf="@+id/text_category"
+                app:layout_constraintTop_toBottomOf="@+id/text_lives_headline"
                 tools:text="4" />
 
             <com.google.android.material.textview.MaterialTextView
-                android:id="@+id/category"
+                android:id="@+id/text_category"
                 style="@style/gameStat"
                 android:layout_height="wrap_content"
                 android:text="@{gameViewModel.category}"
-                app:layout_constraintEnd_toStartOf="@+id/lives"
-                app:layout_constraintStart_toEndOf="@+id/score"
-                app:layout_constraintTop_toBottomOf="@+id/categoryTextView"
+                app:layout_constraintEnd_toStartOf="@+id/text_lives"
+                app:layout_constraintStart_toEndOf="@+id/text_score"
+                app:layout_constraintTop_toBottomOf="@+id/text_category_headline"
                 tools:text="Animals" />
 
             <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/letter_card_recyclerview"
+                android:id="@+id/cardview_letter_card"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
@@ -98,7 +98,7 @@
                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/category"
+                app:layout_constraintTop_toBottomOf="@+id/text_category"
                 tools:itemCount="11"
                 tools:listitem="@layout/item_view" />
 
@@ -109,10 +109,10 @@
                 android:layout_marginTop="8dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/letter_card_recyclerview">
+                app:layout_constraintTop_toBottomOf="@+id/cardview_letter_card">
 
                 <ImageView
-                    android:id="@+id/arrow"
+                    android:id="@+id/image_arrow"
                     android:layout_width="30dp"
                     android:layout_height="30dp"
                     android:layout_centerHorizontal="true"
@@ -123,7 +123,7 @@
                     app:tint="@color/pink_light" />
 
                 <ImageView
-                    android:id="@+id/luckyWheel"
+                    android:id="@+id/image_luckywheel"
                     android:layout_width="240dp"
                     android:layout_height="240dp"
                     android:layout_centerHorizontal="true"
@@ -135,20 +135,32 @@
             </RelativeLayout>
 
             <TextView
-                android:id="@+id/guessedCharacters"
+                android:id="@+id/text_letter"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
+                android:lineSpacingExtra="5dp"
+                android:text="@string/letters"
+                android:textAlignment="center"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/relative_layout"
+                app:layout_constraintTop_toBottomOf="@+id/cardview_letter_card"
+                tools:text="Letters" />
+
+            <TextView
+                android:id="@+id/text_guessed_characters"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:lineSpacingExtra="5dp"
                 android:text="@{gameViewModel.guessedCharacterString}"
                 android:textAlignment="center"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/relative_layout"
-                app:layout_constraintTop_toBottomOf="@+id/letter_card_recyclerview"
-                tools:text="Letters\na" />
+                app:layout_constraintTop_toBottomOf="@+id/text_letter"
+                tools:text="a\nb\nc" />
 
             <TextView
-                android:id="@+id/gameQuote"
+                android:id="@+id/text_game_quote"
                 android:layout_width="wrap_content"
                 android:layout_height="44dp"
                 android:layout_marginHorizontal="@dimen/default_padding"
@@ -162,7 +174,7 @@
                 tools:text="You rolled 1000!\n Guess a letter!" />
 
             <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/letterInputContainer"
+                android:id="@+id/text_input_letter"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="100dp"
                 android:layout_height="wrap_content"
@@ -173,10 +185,10 @@
                 android:textAppearance="@style/TextAppearance.MaterialComponents.Body2"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/gameQuote">
+                app:layout_constraintTop_toBottomOf="@+id/text_game_quote">
 
                 <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/letterInput"
+                    android:id="@+id/edit_text_letter"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:digits="ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz"
@@ -186,20 +198,20 @@
             </com.google.android.material.textfield.TextInputLayout>
 
             <Button
-                android:id="@+id/guessButton"
+                android:id="@+id/button_guess"
                 style="@style/buttonStyle"
                 android:layout_marginTop="8dp"
                 android:enabled="@{gameViewModel.gameStage==GameStage.GUESS ? true : false}"
                 android:onClick="@{() -> gameFragment.submitGuess()}"
                 android:text="@string/guess_button"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintEnd_toStartOf="@+id/spinButton"
+                app:layout_constraintEnd_toStartOf="@+id/button_spin"
                 app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/letterInputContainer" />
+                app:layout_constraintTop_toBottomOf="@+id/text_input_letter" />
 
             <Button
-                android:id="@+id/spinButton"
+                android:id="@+id/button_spin"
                 style="@style/buttonStyle"
                 android:layout_marginTop="8dp"
                 android:enabled="@{gameViewModel.gameStage==GameStage.SPIN ? true : false}"
@@ -207,8 +219,8 @@
                 android:text="@string/spin_button"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.5"
-                app:layout_constraintStart_toEndOf="@+id/guessButton"
-                app:layout_constraintTop_toBottomOf="@+id/letterInputContainer" />
+                app:layout_constraintStart_toEndOf="@+id/button_guess"
+                app:layout_constraintTop_toBottomOf="@+id/text_input_letter" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>

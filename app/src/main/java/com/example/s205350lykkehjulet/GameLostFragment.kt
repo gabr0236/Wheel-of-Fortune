@@ -36,7 +36,7 @@ class GameLostFragment : Fragment() {
     }
 
     fun playAgain(){
-        findNavController().navigate(R.id.action_gameWonFragment_to_gameFragment)
+        findNavController().navigate(R.id.action_gameLostFragment_to_gameFragment)
     }
 
     override fun onDestroyView() {

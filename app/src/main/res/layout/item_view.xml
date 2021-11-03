@@ -7,7 +7,7 @@
     android:layout_height="wrap_content">
 
     <com.google.android.material.card.MaterialCardView
-        android:id="@+id/letter_card_recyclerview"
+        android:id="@+id/cardview_letter_card"
         android:layout_width="28dp"
         android:layout_height="40dp"
         app:cardBackgroundColor="@color/pink_light"
@@ -19,7 +19,7 @@
         tools:ignore="MissingConstraints">
 
         <TextView
-            android:id="@+id/letter_textView"
+            android:id="@+id/text_card_letter"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:gravity="center_vertical"

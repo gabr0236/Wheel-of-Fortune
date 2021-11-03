@@ -24,7 +24,7 @@
             tools:context=".GameWonFragment">
 
             <TextView
-                android:id="@+id/youLost"
+                android:id="@+id/text_you_lost"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="16dp"
@@ -38,7 +38,7 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
-                android:id="@+id/wordReveal"
+                android:id="@+id/text_word_reveal"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginVertical="16dp"
@@ -46,48 +46,27 @@
                 android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/youLost"
+                app:layout_constraintTop_toBottomOf="@+id/text_you_lost"
                 tools:text="Word: Panda" />
 
 
             <TextView
-                android:id="@+id/finalScoreText"
+                android:id="@+id/text_final_score_headline"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginVertical="16dp"
                 android:text="@{@string/score_game_over}"
                 android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintEnd_toStartOf="@+id/finalScore"
+                app:layout_constraintEnd_toStartOf="@+id/text_final_score"
                 app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintHorizontal_chainStyle="packed"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/wordReveal"
-                tools:text="Score" />
+                app:layout_constraintTop_toBottomOf="@+id/text_word_reveal"
+                tools:text="Score:" />
 
             <TextView
-                android:id="@+id/numberOfGuesses"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginVertical="16dp"
-                android:text="@{@string/number_of_guesses(gameViewModel.numberOfGuesses)}"
-                android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/finalScoreText"
-                tools:text="Number of Guesses: 13" />
-
-            <Button
-                android:id="@+id/playAgainButton"
-                style="@style/buttonStyle"
-                android:onClick="@{() -> gameLostFragment.playAgain()}"
-                android:text="@string/play_again"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/numberOfGuesses" />
-
-            <TextView
-                android:id="@+id/finalScore"
+                android:id="@+id/text_final_score"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="5dp"
@@ -96,9 +75,30 @@
                 android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.5"
-                app:layout_constraintStart_toEndOf="@+id/finalScoreText"
-                app:layout_constraintTop_toBottomOf="@+id/wordReveal"
+                app:layout_constraintStart_toEndOf="@+id/text_final_score_headline"
+                app:layout_constraintTop_toBottomOf="@+id/text_word_reveal"
                 tools:text="5600" />
+
+            <TextView
+                android:id="@+id/text_number_of_guesses"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginVertical="16dp"
+                android:text="@{@string/number_of_guesses(gameViewModel.numberOfGuesses)}"
+                android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/text_final_score_headline"
+                tools:text="Number of Guesses: 13" />
+
+            <Button
+                android:id="@+id/button_play_again"
+                style="@style/buttonStyle"
+                android:onClick="@{() -> gameLostFragment.playAgain()}"
+                android:text="@string/play_again"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/text_number_of_guesses" />
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>
 </layout>
