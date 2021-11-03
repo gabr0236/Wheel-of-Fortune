@@ -14,8 +14,8 @@ class ItemAdapter(private var letterCardList: List<LetterCard>) :
     RecyclerView.Adapter<ItemAdapter.ViewHolder>() {
 
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        private val letterTextView: TextView = itemView.findViewById(R.id.letter_textView)
-        private val cardView: MaterialCardView = itemView.findViewById(R.id.letter_card_recyclerview)
+        private val letterTextView: TextView = itemView.findViewById(R.id.text_card_letter)
+        private val cardView: MaterialCardView = itemView.findViewById(R.id.cardview_letter_card)
 
         fun bind(letterCard: LetterCard) {
             if (letterCard.letter == ' ') {
