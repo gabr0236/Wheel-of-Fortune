@@ -13,3 +13,6 @@ bemærk punkter:
    dette bruges flere gange.
    
 
+Features:
+Player wont be able to get the same random category and word in one session except if all has been throug 
+

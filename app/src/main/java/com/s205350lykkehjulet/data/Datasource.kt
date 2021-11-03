@@ -10,4 +10,7 @@ class Datasource(private val context: Context) {
     fun getRandomCategoryAndWord(): String {
         return context.resources.getStringArray(R.array.category_and_words).random()
     }
+    fun getTotalAmountOfCategoriesAndWords(): Int{
+        return context.resources.getStringArray(R.array.category_and_words).size
+    }
 }

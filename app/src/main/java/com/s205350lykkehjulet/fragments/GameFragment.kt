@@ -46,8 +46,8 @@ class GameFragment : Fragment() {
         //Inflate the layout XML file and return a binding object instance
         _binding = DataBindingUtil.inflate(inflater, R.layout.fragment_game, container, false)
 
-        //Get random category and word from datasource and set in viewModel
-        viewModel.setCategoryAndCurrentWordToBeGuessed(Datasource(requireContext()).getRandomCategoryAndWord())
+        //Create nem game
+        setCategoryAndWord()
         viewModel.newGame()
         viewModel.setGameQuote(getString(R.string.initial_game_quote))
 
@@ -77,6 +77,18 @@ class GameFragment : Fragment() {
         //letterCardView?.layoutParams=lp
 
         return binding.root
+    }
+
+    /**
+     * TODO jdoc
+     */
+    private fun setCategoryAndWord() {
+        val datasource = Datasource(requireContext())
+        while (!viewModel
+                .setCategoryAndCurrentWordToBeGuessed(
+                    datasource.getRandomCategoryAndWord()
+                    ,datasource.getTotalAmountOfCategoriesAndWords())
+        ){}
     }
 
 

@@ -1,19 +1,24 @@
 <resources>
     <string name="app_name">Wheel of Fortune</string>
-    <string name="score">Score</string>
-    <string name="word_reveal">Word: %s</string>
-    <string name="number_of_guesses">Number of Guesses: %s</string>
-    <string name="lives">Lives</string>
+
+    <!-- Fragment_game -->
     <string name="guess_button">Guess</string>
     <string name="spin_button">Spin</string>
     <string name="category">Category</string>
     <string name="letter_hint">Letter</string>
+
+    <!-- All fragments -->
+    <string name="lives">Lives</string>
+    <string name="score">Score</string>
+
+    <!-- Fragment_game_won & fragment_game_lost -->
     <string name="you_won">You Won!</string>
     <string name="you_lost">You Lost!</string>
     <string name="play_again">Play Again</string>
     <string name="score_game_over">Score:</string>
     <string name="lives_game_over">Lives:</string>
-
+    <string name="number_of_guesses">Number of Guesses: %s</string>
+    <string name="word_reveal">Word: %s</string>
 
     <!-- Joker Dialog -->
     <string name="miss_turn_message">Bummer! You Rolled "%s" and Lost a Life</string>
@@ -28,8 +33,10 @@
     <string name="is_guess_game_quote">You Rolled %s! Guess a Letter!</string>
     <string name="letters">Letters</string>
 
+    <!-- Categories and words -->
     <string-array name="category_and_words">
-        <item>Test,AABB</item>
+        <item>Test1,AA</item>
+        <item>Test2,AA</item>
         <!--<item>Animals,Mountain Lion</item>
         <item>Animals,Blobfish</item>
         <item>Animals,Chicken Turtle</item>

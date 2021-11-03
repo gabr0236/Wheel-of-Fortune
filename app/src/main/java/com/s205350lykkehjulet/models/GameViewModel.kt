@@ -45,6 +45,9 @@ class GameViewModel : ViewModel() {
     val gameQuote: LiveData<String>
         get() = _gameQuote
 
+    private val _previousCategoriesAndWords = MutableLiveData<MutableList<String>>()
+    val previousCategoriesAndWords: LiveData<MutableList<String>> = _previousCategoriesAndWords
+
     fun setGameQuote(newGameQuote: String) {
         _gameQuote.value = newGameQuote
     }
@@ -176,20 +179,27 @@ class GameViewModel : ViewModel() {
     /**
      * Sets the category and the currentWordToBeGuessed from randomCategoryAndWord
      * Creates a LetterCard for each letter and adds this to letterCardList
-     *
+     * TODO update jdoc
      * @param randomCategoryAndWord from strings.xml
      */
-    fun setCategoryAndCurrentWordToBeGuessed(randomCategoryAndWord: String) {
-        val tempArray = randomCategoryAndWord.split(",").toTypedArray()
-        _category.value = tempArray[0]
-        _currentWordToBeGuessed = tempArray[1]
+    fun setCategoryAndCurrentWordToBeGuessed(randomCategoryAndWord: String, numberOfCategoryAndWords: Int): Boolean {
+        return if (previousCategoriesAndWords.value?.contains(randomCategoryAndWord) == false
+            || numberOfCategoryAndWords == previousCategoriesAndWords.value?.size
+            || previousCategoriesAndWords.value == null) {
+                _previousCategoriesAndWords.value?.add(randomCategoryAndWord)
 
-        //TODO kortere
-        val tempLetterCardList = mutableListOf<LetterCard>()
-        for (i in _currentWordToBeGuessed.indices) {
-            tempLetterCardList.add(LetterCard(_currentWordToBeGuessed[i]))
-        }
-        _letterCardList.value = tempLetterCardList
+            val tempArray = randomCategoryAndWord.split(",").toTypedArray()
+            _category.value = tempArray[0]
+            _currentWordToBeGuessed = tempArray[1]
+
+            //TODO kortere
+            val tempLetterCardList = mutableListOf<LetterCard>()
+            for (i in _currentWordToBeGuessed.indices) {
+                tempLetterCardList.add(LetterCard(_currentWordToBeGuessed[i]))
+            }
+            _letterCardList.value = tempLetterCardList
+            true
+        } else false
     }
 
     /**

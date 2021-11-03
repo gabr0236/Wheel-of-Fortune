@@ -32,4 +32,10 @@
         <item name="android:textStyle">bold</item>
         <item name="android:textAllCaps">true</item>
     </style>
+
+    <style name="gameOverHeadline">
+        <item name="android:textAppearance">@style/TextAppearance.MaterialComponents.Headline3</item>
+        <item name="android:textAllCaps">true</item>
+        <item name="android:textStyle">bold|italic</item>
+    </style>
 </resources>
