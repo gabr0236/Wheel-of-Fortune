@@ -108,11 +108,6 @@ class GameFragment : Fragment() {
         _binding = null
     }
 
-    override fun onPause() {
-        Log.d(TAG, "On Pause")
-        super.onPause()
-    }
-
     /**
      * Called when button_guess is clicked.
      *
@@ -133,12 +128,12 @@ class GameFragment : Fragment() {
 
             if (viewModel.isUserInputMatch(playerInputLetter)) {
                 viewModel.setGameQuote(getString(R.string.correct_guess_game_quote))
-                if (viewModel.gameStage.value==GameStage.GAME_WON) {
+                if (viewModel.gameStage.value == GameStage.GAME_WON) {
                     findNavController().navigate(R.id.action_gameFragment_to_gameWonFragment)
                 }
             } else {
                 viewModel.setGameQuote(getString(R.string.wrong_guess_game_quote))
-                if (viewModel.gameStage.value==GameStage.GAME_LOST) {
+                if (viewModel.gameStage.value == GameStage.GAME_LOST) {
                     findNavController().navigate(R.id.action_gameFragment_to_gameLostFragment)
                 }
             }
@@ -152,8 +147,8 @@ class GameFragment : Fragment() {
     fun spinWheel() {
         if (viewModel.gameStage.value == GameStage.SPIN) {
             //The gameStage needs to be set to WAITING to prevent the
-                //user from re-spinning or guessing while wheel is turning
-                    viewModel.setGameStage(GameStage.WAITING)
+            //user from re-spinning or guessing while wheel is turning
+            viewModel.setGameStage(GameStage.WAITING)
             luckyWheel?.spinWheelImage()
         }
     }
@@ -161,7 +156,7 @@ class GameFragment : Fragment() {
     /**
      * Function for continuing game after wheel spin.
      *
-     * If wheelResult is not digits, call showJokerDialog()
+     * If wheelResult is not digits, call showJokerDialog() and doWheelResultAction()
      * else set gameStage to GUESS
      *
      * @param wheelResult result of wheel spin
@@ -170,6 +165,16 @@ class GameFragment : Fragment() {
         viewModel.setWheelResult(wheelResult)
         if (!wheelResult.isDigitsOnly()) {
             showJokerDialog()
+            viewModel.setGameQuote(
+                String.format(
+                    getString(R.string.spin_again_game_quote),
+                    viewModel.wheelResult.value
+                )
+            )
+            viewModel.doWheelResultAction()
+            if (viewModel.gameStage.value == GameStage.GAME_LOST) {
+                findNavController().navigate(R.id.action_gameFragment_to_gameLostFragment)
+            }
         } else {
             viewModel.setGameStage(GameStage.GUESS)
             viewModel.setGameQuote(
@@ -193,36 +198,30 @@ class GameFragment : Fragment() {
     }
 
     /**
-     * Display a dialog if player rolled a joker
+     * Display a dialog if player rolled a joker (Extra turn, Miss turn or Bankrupt)
      */
     private fun showJokerDialog() {
-        Log.d(TAG, "showJokerDialog() called")
-        val message: String = when (viewModel.wheelResult.value) {
-            MISS_TURN -> String.format(resources.getString(R.string.miss_turn_message), MISS_TURN)
-            EXTRA_TURN -> String.format(
-                resources.getString(R.string.extra_turn_message),
-                EXTRA_TURN
-            )
-            BANKRUPT -> String.format(resources.getString(R.string.bankrupt_message), BANKRUPT)
-            else -> ""
-        }
-
-        MaterialAlertDialogBuilder(requireContext())
-            .setTitle(viewModel.wheelResult.value)
-            .setMessage(message)
-            .setCancelable(true)
-            .show()
-        viewModel.setGameQuote(
-            String.format(
-                getString(R.string.spin_again_game_quote),
-                viewModel.wheelResult.value
-            )
-        )
-        viewModel.doWheelResultAction()
-
-        //continueGameAfterJokerDialog()
-        if (viewModel.gameStage.value==GameStage.GAME_LOST) {
-            findNavController().navigate(R.id.action_gameFragment_to_gameLostFragment)
+        if (viewModel.wheelResult.value?.isDigitsOnly() == false) {
+            Log.d(TAG, "showJokerDialog() called")
+            //Construct message depending on joker value (Extra turn, Miss turn or Bankrupt)
+            val message: String = when (viewModel.wheelResult.value) {
+                MISS_TURN -> String.format(
+                    resources.getString(R.string.miss_turn_message),
+                    MISS_TURN
+                )
+                EXTRA_TURN -> String.format(
+                    resources.getString(R.string.extra_turn_message),
+                    EXTRA_TURN
+                )
+                BANKRUPT -> String.format(resources.getString(R.string.bankrupt_message), BANKRUPT)
+                else -> return
+            }
+            //Display constructed message
+            MaterialAlertDialogBuilder(requireContext())
+                .setTitle(viewModel.wheelResult.value)
+                .setMessage(message)
+                .setCancelable(true)
+                .show()
         }
     }
 
