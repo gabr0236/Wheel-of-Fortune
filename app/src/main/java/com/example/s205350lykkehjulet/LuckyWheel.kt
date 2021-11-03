@@ -6,6 +6,12 @@ import android.view.animation.RotateAnimation
 import android.widget.ImageView
 import kotlin.random.Random
 
+/**
+ * Responsible for spinning the luckyWheel Image and returning the appropriate random wheelResult
+ *
+ * @property luckyWheelImage the image to be spun
+ * @property gameFragment the current fragment
+ */
 class LuckyWheel(
     private val luckyWheelImage: ImageView,
     private val gameFragment: GameFragment

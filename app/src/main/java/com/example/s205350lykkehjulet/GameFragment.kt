@@ -12,12 +12,15 @@ import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import butterknife.ButterKnife
-import com.example.s205350lykkehjulet.Adapter.ItemAdapter
+import com.example.s205350lykkehjulet.Adapter.LetterCardAdapter
 import com.example.s205350lykkehjulet.databinding.FragmentGameBinding
 import com.google.android.flexbox.*
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 
 
+/**
+ * Main fragment responsible for letting the game play
+ */
 class GameFragment : Fragment() {
     //Recommended way for implementing view binding in fragments
     //Source: https://developer.android.com/topic/libraries/view-binding#fragments
@@ -61,7 +64,7 @@ class GameFragment : Fragment() {
         recyclerView.layoutManager = layoutManager
 
         //Pass LetterCards onto adapter
-        recyclerView.adapter = viewModel.letterCardList.value?.let { ItemAdapter(it) }
+        recyclerView.adapter = viewModel.letterCardList.value?.let { LetterCardAdapter(it) }
 
 
         //val letterCardView = (recyclerView.layoutManager as FlexboxLayoutManager).findViewByPosition(2)

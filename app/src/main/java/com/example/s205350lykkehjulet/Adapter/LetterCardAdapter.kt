@@ -6,17 +6,32 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import com.example.s205350lykkehjulet.Data.LetterCard
+import com.example.s205350lykkehjulet.data.LetterCard
 import com.example.s205350lykkehjulet.R
 import com.google.android.material.card.MaterialCardView
 
-class ItemAdapter(private var letterCardList: List<LetterCard>) :
-    RecyclerView.Adapter<ItemAdapter.ViewHolder>() {
+/**
+ * Custom adapter for holding LetterCards
+ *
+ * @property letterCardList a list of LetterCards
+ */
+class LetterCardAdapter(private var letterCardList: List<LetterCard>) :
+    RecyclerView.Adapter<LetterCardAdapter.ViewHolder>() {
 
-    class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        private val letterTextView: TextView = itemView.findViewById(R.id.text_card_letter)
-        private val cardView: MaterialCardView = itemView.findViewById(R.id.card_view_letter_cards)
+    /**
+     * Responsible for holding the view
+     *
+     *@property viewLetterCard the item view
+     */
+    class ViewHolder(viewLetterCard: View) : RecyclerView.ViewHolder(viewLetterCard) {
+        private val letterTextView: TextView = viewLetterCard.findViewById(R.id.text_card_letter)
+        private val cardView: MaterialCardView = viewLetterCard.findViewById(R.id.card_view_letter_cards)
 
+        /**
+         * Responsible controlling how the LetterCard appears
+         *
+         * @param letterCard the current lettercard
+         */
         fun bind(letterCard: LetterCard) {
             if (letterCard.letter == ' ') {
                 cardView.visibility = View.INVISIBLE
@@ -31,9 +46,9 @@ class ItemAdapter(private var letterCardList: List<LetterCard>) :
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int)
             : ViewHolder {
-        val view = LayoutInflater.from(parent.context)
+        val viewLetterCard = LayoutInflater.from(parent.context)
             .inflate(R.layout.view_letter_card, parent, false)
-        return ViewHolder(view)
+        return ViewHolder(viewLetterCard)
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {

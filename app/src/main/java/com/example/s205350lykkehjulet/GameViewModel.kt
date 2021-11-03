@@ -5,7 +5,7 @@ import androidx.core.text.isDigitsOnly
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.example.s205350lykkehjulet.Data.LetterCard
+import com.example.s205350lykkehjulet.data.LetterCard
 
 const val BANKRUPT = "Bankrupt"
 const val MISS_TURN = "Miss Turn"
@@ -81,7 +81,6 @@ class GameViewModel : ViewModel() {
         }
         return positions
     }
-
 
     /**
      * A function for checking if the character input matches the currentWordToBeGuessed

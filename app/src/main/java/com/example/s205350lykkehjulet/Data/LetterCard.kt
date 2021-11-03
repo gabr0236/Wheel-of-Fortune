@@ -1,7 +1,13 @@
-package com.example.s205350lykkehjulet.Data
+package com.example.s205350lykkehjulet.data
 
+/**
+ * Class for storing the letter and visibility of a LetterCard
+ *
+ * @property letter
+ */
 class LetterCard(
-    var letter: Char
+    val letter: Char
 ) {
     var isHidden = true
+
 }

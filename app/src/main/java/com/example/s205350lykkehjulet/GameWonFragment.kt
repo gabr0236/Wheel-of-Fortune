@@ -34,6 +34,7 @@ class GameWonFragment : Fragment() {
             gameWonFragment = this@GameWonFragment
         }
     }
+
     fun playAgain(){
         findNavController().navigate(R.id.action_gameWonFragment_to_gameFragment)
     }
