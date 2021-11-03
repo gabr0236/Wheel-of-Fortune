@@ -16,8 +16,8 @@
         <entry key="app/src/main/res/layout-v28/game_fragment.xml" value="0.19114583333333332" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.25" />
         <entry key="app/src/main/res/layout/fragment_game.xml" value="0.335" />
-        <entry key="app/src/main/res/layout/fragment_game_lost.xml" value="0.1046875" />
-        <entry key="app/src/main/res/layout/fragment_game_won.xml" value="0.1046875" />
+        <entry key="app/src/main/res/layout/fragment_game_lost.xml" value="0.335" />
+        <entry key="app/src/main/res/layout/fragment_game_won.xml" value="0.335" />
         <entry key="app/src/main/res/layout/fragment_losing_screen.xml" value="0.14935950316203836" />
         <entry key="app/src/main/res/layout/fragment_winning_screen.xml" value="0.1911231884057971" />
         <entry key="app/src/main/res/layout/game_fragment.xml" value="0.375" />

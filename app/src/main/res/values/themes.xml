@@ -2,8 +2,8 @@
     <!-- Base application theme. -->
     <style name="Theme.S205350Lykkehjulet" parent="Theme.MaterialComponents.DayNight.DarkActionBar">
         <!-- Primary brand color. -->
-        <item name="colorPrimary">#009688</item>
-        <item name="colorPrimaryVariant">#00796B</item>
+        <item name="colorPrimary">@color/green_blue_light</item>
+        <item name="colorPrimaryVariant">@color/green_blue_dark</item>
         <item name="colorOnPrimary">@color/white</item>
 
         <!-- Secondary brand color. -->

@@ -1,4 +1,4 @@
-package com.example.s205350lykkehjulet.models
+package com.s205350lykkehjulet.models
 
 /**
  * Enum for controlling the game flow

@@ -10,5 +10,8 @@
     <color name="pink_light">#E23C52</color>
     <color name="pink_dark">#BD3244</color>
     <color name="light_blue">#BDFFF6</color>
+    <color name="red">#C80C24</color>
+    <color name="green_blue_light">#009688</color>
+    <color name="green_blue_dark">#00796B</color>
 
 </resources>

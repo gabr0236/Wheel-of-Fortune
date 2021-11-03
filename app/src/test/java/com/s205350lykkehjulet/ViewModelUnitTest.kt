@@ -1,11 +1,11 @@
-package com.example.s205350lykkehjulet
+package com.s205350lykkehjulet
 
 import org.junit.Test
 
 import org.junit.Assert.*
 import org.junit.Before
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
-import com.example.s205350lykkehjulet.models.GameStage
+import com.s205350lykkehjulet.models.GameStage
 
 import org.junit.Rule
 

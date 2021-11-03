@@ -1,4 +1,4 @@
-package com.example.s205350lykkehjulet.models
+package com.s205350lykkehjulet.models
 
 import android.util.Log
 import androidx.core.text.isDigitsOnly

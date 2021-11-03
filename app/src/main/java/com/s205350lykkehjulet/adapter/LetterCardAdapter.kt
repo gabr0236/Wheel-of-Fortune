@@ -1,4 +1,4 @@
-package com.example.s205350lykkehjulet.adapter
+package com.s205350lykkehjulet.adapter
 
 import android.graphics.Color
 import android.view.LayoutInflater
@@ -6,8 +6,8 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import com.example.s205350lykkehjulet.models.LetterCard
-import com.example.s205350lykkehjulet.R
+import com.s205350lykkehjulet.models.LetterCard
+import com.s205350lykkehjulet.R
 import com.google.android.material.card.MaterialCardView
 
 /**
