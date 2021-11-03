@@ -29,6 +29,7 @@ class GameFragment : Fragment() {
 
     private var luckyWheel: LuckyWheel? = null
 
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -51,6 +52,7 @@ class GameFragment : Fragment() {
         recyclerView = binding.recyclerviewLetterCards
 
         //TODO flexbox atributes in xml
+        //Setup FlexboxLayout for auto fitting LetterCards in the recyclerview
         val layoutManager = FlexboxLayoutManager(context)
         layoutManager.justifyContent = JustifyContent.CENTER
         layoutManager.alignItems = AlignItems.CENTER
@@ -58,6 +60,7 @@ class GameFragment : Fragment() {
         layoutManager.flexWrap = FlexWrap.WRAP
         recyclerView.layoutManager = layoutManager
 
+        //Pass LetterCards onto adapter
         recyclerView.adapter = viewModel.letterCardList.value?.let { ItemAdapter(it) }
 
 
@@ -93,14 +96,9 @@ class GameFragment : Fragment() {
 
         binding.apply {
             Log.d(TAG, "On ViewCreated")
-            //Specify the fragment as the lifecycle owner
-            lifecycleOwner = viewLifecycleOwner
-
-            //Assign the view model to a property in the binding class
-            gameViewModel = viewModel
-
-            //Assign this fragment
-            gameFragment = this@GameFragment
+            lifecycleOwner = viewLifecycleOwner //Specify the fragment as the lifecycle owner
+            gameViewModel = viewModel //Assign the view model to a property in the binding class
+            gameFragment = this@GameFragment //Assign this fragment
         }
     }
 
@@ -116,8 +114,13 @@ class GameFragment : Fragment() {
     }
 
     /**
-     * Main function for the game loop
-     * Submits the players input and updates the view accordingly
+     * Called when button_guess is clicked.
+     *
+     * Passes player input onto the viewModel through isUserInputMatch()
+     * Updates the gameQuote.
+     * Navigates to fragment_game_won or fragment_game_lost
+     * if the gameStage is either.
+     * Lastly calls updateLetterCards()
      */
     fun submitGuess() {
         if (viewModel.gameStage.value == GameStage.GUESS) {
@@ -139,25 +142,36 @@ class GameFragment : Fragment() {
                     findNavController().navigate(R.id.action_gameFragment_to_gameLostFragment)
                 }
             }
-            updateLetterCards()
+            updateLetterCards(viewModel.getPosOfLastGuessedChars())
         }
     }
 
+    /**
+     * Calls luckyWheel.spinWheelImage()
+     */
     fun spinWheel() {
         if (viewModel.gameStage.value == GameStage.SPIN) {
             //The gameStage needs to be set to WAITING to prevent the
-                // user from respinning or guessing while wheel is turning
+                //user from re-spinning or guessing while wheel is turning
                     viewModel.setGameStage(GameStage.WAITING)
             luckyWheel?.spinWheelImage()
         }
     }
 
+    /**
+     * Function for continuing game after wheel spin.
+     *
+     * If wheelResult is not digits, call showJokerDialog()
+     * else set gameStage to GUESS
+     *
+     * @param wheelResult result of wheel spin
+     */
     fun continueGameAfterWheelSpin(wheelResult: String) {
-        viewModel.setGameStage(GameStage.GUESS)
         viewModel.setWheelResult(wheelResult)
         if (!wheelResult.isDigitsOnly()) {
             showJokerDialog()
         } else {
+            viewModel.setGameStage(GameStage.GUESS)
             viewModel.setGameQuote(
                 String.format(
                     getString(R.string.is_guess_game_quote),
@@ -167,8 +181,13 @@ class GameFragment : Fragment() {
         }
     }
 
-    private fun updateLetterCards() {
-        val posOfLastGuessedChars = viewModel.getPosOfLastGuessedChars()
+    /**
+     * Update LetterCards of the last guessed character(s)
+     * in recyclerview adapter
+     *
+     * @param posOfLastGuessedChars index of last guessed char
+     */
+    private fun updateLetterCards(posOfLastGuessedChars: List<Int>) {
         for (i in posOfLastGuessedChars.indices)
             recyclerView.adapter?.notifyItemChanged(posOfLastGuessedChars[i])
     }
