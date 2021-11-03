@@ -13,7 +13,7 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import butterknife.ButterKnife
 import com.example.s205350lykkehjulet.Adapter.ItemAdapter
-import com.example.s205350lykkehjulet.databinding.GameFragmentBinding
+import com.example.s205350lykkehjulet.databinding.FragmentGameBinding
 import com.google.android.flexbox.*
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 
@@ -21,7 +21,7 @@ import com.google.android.material.dialog.MaterialAlertDialogBuilder
 class GameFragment : Fragment() {
     //Recommended way for implementing view binding in fragments
     //Source: https://developer.android.com/topic/libraries/view-binding#fragments
-    private var _binding: GameFragmentBinding? = null
+    private var _binding: FragmentGameBinding? = null
     private val binding get() = _binding!!
 
     private lateinit var recyclerView: RecyclerView
@@ -36,7 +36,7 @@ class GameFragment : Fragment() {
         Log.d(TAG, "On CreateView")
 
         //Inflate the layout XML file and return a binding object instance
-        _binding = DataBindingUtil.inflate(inflater, R.layout.game_fragment, container, false)
+        _binding = DataBindingUtil.inflate(inflater, R.layout.fragment_game, container, false)
 
         //Get random category and word from datasource and set in viewModel
         viewModel.setCategoryAndCurrentWordToBeGuessed(Datasource(requireContext()).getRandomCategoryAndWord())

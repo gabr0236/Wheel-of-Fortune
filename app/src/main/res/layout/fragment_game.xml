@@ -89,7 +89,7 @@
                 tools:text="Animals" />
 
             <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/cardview_letter_card"
+                android:id="@+id/recyclerview_letter_cards"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
@@ -100,7 +100,7 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/text_category"
                 tools:itemCount="11"
-                tools:listitem="@layout/item_view" />
+                tools:listitem="@layout/view_letter_card" />
 
             <RelativeLayout
                 android:id="@+id/relative_layout"
@@ -109,7 +109,7 @@
                 android:layout_marginTop="8dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/cardview_letter_card">
+                app:layout_constraintTop_toBottomOf="@+id/recyclerview_letter_cards">
 
                 <ImageView
                     android:id="@+id/image_arrow"
@@ -144,7 +144,7 @@
                 android:textAlignment="center"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/relative_layout"
-                app:layout_constraintTop_toBottomOf="@+id/cardview_letter_card"
+                app:layout_constraintTop_toBottomOf="@+id/recyclerview_letter_cards"
                 tools:text="Letters" />
 
             <TextView

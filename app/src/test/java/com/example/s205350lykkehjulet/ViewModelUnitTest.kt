@@ -99,5 +99,5 @@ class ViewModelUnitTest {
         assertTrue("Guessed char is not set to lowercase",viewModelTest.guessedCharacters.first()==guessedLetter.lowercaseChar())
     }
 
-    //TODO: test to be done: jokerresult, getPosOfLastGuessedChars
+    //TODO: test to be done: getPosOfLastGuessedChars
 }

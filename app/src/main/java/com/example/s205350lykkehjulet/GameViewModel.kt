@@ -47,11 +47,11 @@ class GameViewModel : ViewModel() {
     val gameQuote: LiveData<String>
         get() = _gameQuote
 
+    private lateinit var _currentWordToBeGuessed: String
+
     fun setGameQuote(newGameQuote: String) {
         _gameQuote.value = newGameQuote
     }
-
-    private lateinit var _currentWordToBeGuessed: String
 
     //Only return currentWordToBeGuessed if the game is over
     val currentWordToBeGuessed: String
@@ -152,7 +152,7 @@ class GameViewModel : ViewModel() {
      */
     fun newGame() {
         Log.d(TAG, "newGame")
-        _lives.value = 2
+        _lives.value = 5
         _score.value = 0
         _guessedCharacters = mutableListOf()
         _guessedCharacterString.value = ""
@@ -178,7 +178,6 @@ class GameViewModel : ViewModel() {
 
     fun setWheelResult(newValue: String) {
         _wheelResult.value = newValue
-
         _gameStage.value = if (this.wheelResult.value?.isDigitsOnly() == true) {
             GameStage.GUESS
         } else GameStage.SPIN

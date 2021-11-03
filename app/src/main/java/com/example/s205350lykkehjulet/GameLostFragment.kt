@@ -7,10 +7,10 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
-import com.example.s205350lykkehjulet.databinding.GameLostFragmentBinding
+import com.example.s205350lykkehjulet.databinding.FragmentGameLostBinding
 
 class GameLostFragment : Fragment() {
-    private var _binding: GameLostFragmentBinding? = null
+    private var _binding: FragmentGameLostBinding? = null
     private val binding get() = _binding!!
 
     private val viewModel: GameViewModel by activityViewModels()
@@ -20,7 +20,7 @@ class GameLostFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         //Inflate the layout XML file and return a binding object instance
-        val fragmentBinding = GameLostFragmentBinding.inflate(inflater, container, false)
+        val fragmentBinding = FragmentGameLostBinding.inflate(inflater, container, false)
         _binding = fragmentBinding
         return fragmentBinding.root
     }

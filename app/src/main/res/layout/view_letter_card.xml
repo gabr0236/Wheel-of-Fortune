@@ -7,7 +7,7 @@
     android:layout_height="wrap_content">
 
     <com.google.android.material.card.MaterialCardView
-        android:id="@+id/cardview_letter_card"
+        android:id="@+id/card_view_letter_cards"
         android:layout_width="28dp"
         android:layout_height="40dp"
         app:cardBackgroundColor="@color/pink_light"

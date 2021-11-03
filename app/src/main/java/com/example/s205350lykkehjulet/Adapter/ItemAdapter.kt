@@ -15,7 +15,7 @@ class ItemAdapter(private var letterCardList: List<LetterCard>) :
 
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         private val letterTextView: TextView = itemView.findViewById(R.id.text_card_letter)
-        private val cardView: MaterialCardView = itemView.findViewById(R.id.cardview_letter_card)
+        private val cardView: MaterialCardView = itemView.findViewById(R.id.card_view_letter_cards)
 
         fun bind(letterCard: LetterCard) {
             if (letterCard.letter == ' ') {
@@ -32,7 +32,7 @@ class ItemAdapter(private var letterCardList: List<LetterCard>) :
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int)
             : ViewHolder {
         val view = LayoutInflater.from(parent.context)
-            .inflate(R.layout.item_view, parent, false)
+            .inflate(R.layout.view_letter_card, parent, false)
         return ViewHolder(view)
     }
 
