@@ -36,7 +36,7 @@
     <!-- Categories and words -->
     <string-array name="category_and_words">
         <item>Test1,AA</item>
-        <item>Test2,AA</item>
+
         <!--<item>Animals,Mountain Lion</item>
         <item>Animals,Blobfish</item>
         <item>Animals,Chicken Turtle</item>

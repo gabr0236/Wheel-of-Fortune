@@ -45,8 +45,7 @@ class GameViewModel : ViewModel() {
     val gameQuote: LiveData<String>
         get() = _gameQuote
 
-    private val _previousCategoriesAndWords = MutableLiveData<MutableList<String>>()
-    val previousCategoriesAndWords: LiveData<MutableList<String>> = _previousCategoriesAndWords
+    private var previousCategoriesAndWords = mutableListOf<String>()
 
     fun setGameQuote(newGameQuote: String) {
         _gameQuote.value = newGameQuote
@@ -183,10 +182,10 @@ class GameViewModel : ViewModel() {
      * @param randomCategoryAndWord from strings.xml
      */
     fun setCategoryAndCurrentWordToBeGuessed(randomCategoryAndWord: String, numberOfCategoryAndWords: Int): Boolean {
-        return if (previousCategoriesAndWords.value?.contains(randomCategoryAndWord) == false
-            || numberOfCategoryAndWords == previousCategoriesAndWords.value?.size
-            || previousCategoriesAndWords.value == null) {
-                _previousCategoriesAndWords.value?.add(randomCategoryAndWord)
+        return if (!previousCategoriesAndWords.contains(randomCategoryAndWord)
+            || numberOfCategoryAndWords <= previousCategoriesAndWords.size
+            || previousCategoriesAndWords.isEmpty()) {
+            previousCategoriesAndWords.add(randomCategoryAndWord)
 
             val tempArray = randomCategoryAndWord.split(",").toTypedArray()
             _category.value = tempArray[0]
