@@ -178,7 +178,10 @@ class GameViewModel : ViewModel() {
     /**
      * Sets the category and the currentWordToBeGuessed from randomCategoryAndWord
      * Creates a LetterCard for each letter and adds this to letterCardList
-     * TODO update jdoc
+     *
+     * @return If the word has already been in play, return false.
+     * (Unless all words have been guessed, then return true)
+     * @param numberOfCategoryAndWords total number of possible categories and words
      * @param randomCategoryAndWord from strings.xml
      */
     fun setCategoryAndCurrentWordToBeGuessed(randomCategoryAndWord: String, numberOfCategoryAndWords: Int): Boolean {
@@ -191,7 +194,6 @@ class GameViewModel : ViewModel() {
             _category.value = tempArray[0]
             _currentWordToBeGuessed = tempArray[1]
 
-            //TODO kortere
             val tempLetterCardList = mutableListOf<LetterCard>()
             for (i in _currentWordToBeGuessed.indices) {
                 tempLetterCardList.add(LetterCard(_currentWordToBeGuessed[i]))

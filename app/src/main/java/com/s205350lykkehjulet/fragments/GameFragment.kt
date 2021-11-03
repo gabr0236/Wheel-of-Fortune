@@ -80,7 +80,9 @@ class GameFragment : Fragment() {
     }
 
     /**
-     * TODO jdoc
+     * Sets a new category and word.
+     * If the word has already been in play, fetch a new random word.
+     * (Unless all words have been guessed, then allow for repeat word)
      */
     private fun setCategoryAndWord() {
         val datasource = Datasource(requireContext())
