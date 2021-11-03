@@ -11,10 +11,9 @@ const val BANKRUPT = "Bankrupt"
 const val MISS_TURN = "Miss Turn"
 const val EXTRA_TURN = "Extra Turn"
 
-enum class GameStage {
-    SPIN, GUESS, GAME_WON, GAME_LOST, WAITING;
-}
-
+/**
+ * ViewModel to store and control game logic
+ */
 class GameViewModel : ViewModel() {
 
     private var _gameStage = MutableLiveData<GameStage>()
@@ -47,28 +46,31 @@ class GameViewModel : ViewModel() {
     val gameQuote: LiveData<String>
         get() = _gameQuote
 
-    private lateinit var _currentWordToBeGuessed: String
-
     fun setGameQuote(newGameQuote: String) {
         _gameQuote.value = newGameQuote
     }
 
-    //Only return currentWordToBeGuessed if the game is over
+    private lateinit var _currentWordToBeGuessed: String
     val currentWordToBeGuessed: String
-        get() {
-            return if (gameStage.value==GameStage.GAME_LOST
-                || gameStage.value==GameStage.GAME_WON) _currentWordToBeGuessed
+        get() { //Only return currentWordToBeGuessed if the game is over
+            return if (gameStage.value == GameStage.GAME_LOST
+                || gameStage.value == GameStage.GAME_WON
+            ) _currentWordToBeGuessed
             else "It's a secret!"
         }
 
     val numberOfGuesses: Int
         get() = _guessedCharacters.size
 
-
     init {
         Log.d(TAG, "ViewModel initialized")
     }
 
+    /**
+     * Used for updating the recyclerview
+     *
+     * @return a list of the positions of the guessed characters
+     */
     fun getPosOfLastGuessedChars(): List<Int> {
         val positions = mutableListOf<Int>()
         for (i in _currentWordToBeGuessed.indices) {
@@ -82,7 +84,14 @@ class GameViewModel : ViewModel() {
 
 
     /**
-     * Return whether the currentWordToBeGuessed contains the player input
+     * A function for checking if the character input matches the currentWordToBeGuessed
+     * Sets the gameStage to SPIN.
+     * Passes the character input on to savedGuessedChar()
+     *
+     * If the character input matches check for game won and call doWheelAction()
+     * else subtract a life from the player and checkGameLost()
+     *
+     * @return whether the currentWordToBeGuessed contains the player input
      */
     fun isUserInputMatch(playerInputLetter: Char): Boolean {
         _gameStage.value = GameStage.SPIN
@@ -92,13 +101,13 @@ class GameViewModel : ViewModel() {
         ) {
             saveGuessedChar(playerInputLetterLC)
             _letterCardList.value?.filter {
-                it.letter.lowercaseChar() == playerInputLetterLC
+                it.letter.lowercaseChar() == playerInputLetterLC //Ignore case
             }
                 ?.forEach {
-                    it.isHidden = false
+                    it.isHidden = false //Reveal letterCard(s)
                 }
             if (_letterCardList.value?.all { !it.isHidden || it.letter == ' ' } == true) {
-                _gameStage.value=GameStage.GAME_WON
+                _gameStage.value = GameStage.GAME_WON
             }
             doWheelResultAction()
             true
@@ -110,6 +119,10 @@ class GameViewModel : ViewModel() {
         }
     }
 
+    /**
+     * Adds the player input to _guessedCharacters and _guessedCharacterString
+     * @param playerInputLetter the player input
+     */
     private fun saveGuessedChar(playerInputLetter: Char) {
         _guessedCharacters.add(playerInputLetter)
         _guessedCharacterString.value =
@@ -121,15 +134,15 @@ class GameViewModel : ViewModel() {
      */
     fun doWheelResultAction() {
         when {
+            //Case when the wheelResult is a digit
             wheelResult.value?.all { it in '0'..'9' } == true -> {
                 val wheelValue = wheelResult.value?.toInt()
                 if (wheelValue != null) {
-                    val multiplier =
+                    val occurrences = //Occurrences of the last guessed char in the _currentWordToBeGuessed
                         _currentWordToBeGuessed.filter {
                             it.equals(_guessedCharacters.last(), ignoreCase = true)
                         }.count()
-
-                    _score.value = _score.value?.plus(wheelValue * multiplier)
+                    _score.value = _score.value?.plus(wheelValue * occurrences)
                 }
             }
             wheelResult.value == BANKRUPT -> _score.value = 0
@@ -139,7 +152,10 @@ class GameViewModel : ViewModel() {
         checkGameLost()
     }
 
-    private fun checkGameLost(){
+    /**
+     * Sets gameStage to GAME_LOST if players lives is 0 or lower
+     */
+    private fun checkGameLost() {
         lives.value?.let {
             if (it <= 0) {
                 _gameStage.value = GameStage.GAME_LOST
@@ -148,7 +164,7 @@ class GameViewModel : ViewModel() {
     }
 
     /**
-     * Resets all appropriate values for a fresh game
+     * Resets all appropriate values for a fresh game to begin
      */
     fun newGame() {
         Log.d(TAG, "newGame")
