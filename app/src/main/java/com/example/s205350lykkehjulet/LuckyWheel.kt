@@ -4,7 +4,6 @@ import android.view.animation.Animation
 import android.view.animation.DecelerateInterpolator
 import android.view.animation.RotateAnimation
 import android.widget.ImageView
-import androidx.fragment.app.viewModels
 import kotlin.random.Random
 
 class LuckyWheel(
@@ -13,25 +12,39 @@ class LuckyWheel(
 ) {
     private var degree = 0
 
+    companion object {
+        //There are 22 sectors on the wheel, divide 360 by this value to have degree for each sector
+        private const val WHEEL_SECTOR_SIZE = 360f / 22f
+
+        //Wheel values
+        private val WHEEL_SECTORS = arrayOf(
+            "Miss Turn", "600", "500", "800", "500",
+            "Bankrupt", "1500", "800", "100", "500",
+            "600", "500", "Extra Turn", "800", "500",
+            "800", "1000", "100", "300", "800", "1000",
+            "500"
+        )
+    }
+
+    /**
+     * Responisple for creating animation for rotating the luckyWheelImage
+     */
     fun spinWheelImage() {
         val degreeOld = degree % 360
 
-        //calculate random angle for rotation of our wheel + amount of wheel round trips
+        //Random angle for rotation of our wheel + amount of wheel round trips in degrees
         degree = Random.nextInt(360) + 1080
 
         //Rotation effect on the center of the wheel
-        val rotateAnim = RotateAnimation(
+        val rotateAnimation = RotateAnimation(
             degreeOld.toFloat(), degree.toFloat(),
             RotateAnimation.RELATIVE_TO_SELF, 0.5f, RotateAnimation.RELATIVE_TO_SELF, 0.5f
         )
-        rotateAnim.duration = 3600
+        rotateAnimation.duration = 3600 //Duration
+        rotateAnimation.fillAfter = true //Don't reset wheel after spin
+        rotateAnimation.interpolator = DecelerateInterpolator()//Decelerate spin speed at end of spin
 
-        //Don't reset wheel after spin
-        rotateAnim.fillAfter = true
-
-        //Decelerate spin speed at end of spin
-        rotateAnim.interpolator = DecelerateInterpolator()
-        rotateAnim.setAnimationListener(object : Animation.AnimationListener {
+        rotateAnimation.setAnimationListener(object : Animation.AnimationListener {
             override fun onAnimationStart(animation: Animation) {}
             override fun onAnimationRepeat(animation: Animation) {}
             override fun onAnimationEnd(animation: Animation) {
@@ -40,36 +53,29 @@ class LuckyWheel(
             }
         })
         //Start the animation
-        luckyWheelImage.startAnimation(rotateAnim)
+        luckyWheelImage.startAnimation(rotateAnimation)
     }
 
+    /**
+     * Gets the WHEEL_SECTORS value at the degree of the wheel spin
+     *
+     * @param degrees the degree of the wheel
+     * @return the corresponding value of the degree
+     */
     private fun getSector(degrees: Int): String? {
         var i = 0
-        var text: String? = null
+        var result: String? = null
         do {
             // start and end of each sector on the wheel
             val start = WHEEL_SECTOR_SIZE * i
             val end = WHEEL_SECTOR_SIZE * (i + 1)
             if (degrees >= start && degrees < end) {
                 // degrees is in [start;end[
-                // so text is equals to sectors[i];
-                text = WHEEL_SECTORS[i]
+                // so result is equals to sectors[i];
+                result = WHEEL_SECTORS[i]
             }
             i++
-        } while (text == null && i < WHEEL_SECTORS.size)
-        return text
-    }
-
-
-    companion object {
-        // We have 22 sectors on the wheel, we divide 360 by this value to have angle for each sector
-        private const val WHEEL_SECTOR_SIZE = 360f / 22f
-        private val WHEEL_SECTORS = arrayOf(
-            "Miss Turn", "600", "500", "800", "500",
-            "Bankrupt", "1500", "800", "100", "500",
-            "600", "500", "Extra Turn", "800", "500",
-            "800", "1000", "100", "300", "800", "1000",
-            "500"
-        )
+        } while (result == null && i < WHEEL_SECTORS.size)
+        return result
     }
 }
