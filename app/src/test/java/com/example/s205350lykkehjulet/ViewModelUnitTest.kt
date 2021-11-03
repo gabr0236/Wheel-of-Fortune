@@ -98,6 +98,5 @@ class ViewModelUnitTest {
         assertTrue("LetterCard is shown (isHidden==false)",viewModelTest.letterCardList.value!!.all { it.isHidden })
         assertTrue("Guessed char is not set to lowercase",viewModelTest.guessedCharacters.first()==guessedLetter.lowercaseChar())
     }
-
     //TODO: test to be done: getPosOfLastGuessedChars
 }
