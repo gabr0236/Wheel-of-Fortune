@@ -6,7 +6,7 @@ Period: Fall 2021
 Delivery deadline: 17/11 6pm Central European Standard Time
 Assignment type: Individual
 
-By Gabriel Rosenzweig Haugbøl, S205350, ITE.
+By Gabriel Rosenzweig Haugbøl, S205350, ITE (ITØ).
 
 
 The Wheel of Fortune (“Lykkehjulet”) game which was popular during the last millenium
@@ -54,7 +54,10 @@ To get started simply run the app. Sometimes a rebuild/clean/invalidate cache is
 
 
 Hidden features:
-Player wont be able to get the same random category and word in one session except if all has been throug 
+1. Player wont be able to get the same random category and word in one session, except if all categories and words have been in play.
+2. edit_text_letter (text input field) only accepts a single letter. 
+3. Guessed letters ignore case.
+4. ******************
 
 
 Copyright 2021 Gabriel Rosenzweig Haugbøl
