@@ -176,7 +176,10 @@ class GameViewModel : ViewModel() {
     }
 
     /**
-     * Sets the _category and the currentWordToBeGuessed from randomCategoryAndWord
+     * Sets the category and the currentWordToBeGuessed from randomCategoryAndWord
+     * Creates a LetterCard for each letter and adds this to letterCardList
+     *
+     * @param randomCategoryAndWord from strings.xml
      */
     fun setCategoryAndCurrentWordToBeGuessed(randomCategoryAndWord: String) {
         val tempArray = randomCategoryAndWord.split(",").toTypedArray()
@@ -191,14 +194,27 @@ class GameViewModel : ViewModel() {
         _letterCardList.value = tempLetterCardList
     }
 
-
-    fun setWheelResult(newValue: String) {
-        _wheelResult.value = newValue
+    /**
+     * Allow for the result from LuckyWheel to be set in this class
+     *
+     * Sets GameStage to GUESS if the result is a digit else allow for second spin
+     *
+     * @param result the result of the LuckyWheel spin
+     */
+    fun setWheelResult(result: String) {
+        _wheelResult.value = result
         _gameStage.value = if (this.wheelResult.value?.isDigitsOnly() == true) {
             GameStage.GUESS
         } else GameStage.SPIN
     }
 
+    /**
+     * Setter for gameStage
+     *
+     * GAME_WON and GAME_LOST is purposely not settable through this function
+     *
+     * @param stage the stage to be set
+     */
     fun setGameStage(stage: GameStage) {
         when (stage) {
             GameStage.SPIN -> _gameStage.value = GameStage.SPIN
