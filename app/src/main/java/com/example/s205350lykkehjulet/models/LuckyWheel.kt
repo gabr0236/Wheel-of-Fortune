@@ -1,4 +1,4 @@
-package com.example.s205350lykkehjulet
+package com.example.s205350lykkehjulet.models
 
 import android.view.animation.Animation
 import android.view.animation.DecelerateInterpolator

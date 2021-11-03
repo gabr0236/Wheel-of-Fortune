@@ -19,7 +19,7 @@
     </fragment>
     <fragment
         android:id="@+id/fragment_game_won"
-        android:name="com.example.s205350lykkehjulet.GameWonFragment"
+        android:name="com.example.s205350lykkehjulet.fragments.GameWonFragment"
         android:label="Game Won"
         tools:layout="@layout/fragment_game_won">
         <action
@@ -28,7 +28,7 @@
     </fragment>
     <fragment
         android:id="@+id/fragment_game_lost"
-        android:name="com.example.s205350lykkehjulet.GameLostFragment"
+        android:name="com.example.s205350lykkehjulet.fragments.GameLostFragment"
         android:label="Game Lost"
         tools:layout="@layout/fragment_game_lost">
         <action

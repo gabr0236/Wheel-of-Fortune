@@ -1,11 +1,10 @@
-package com.example.s205350lykkehjulet
+package com.example.s205350lykkehjulet.models
 
 import android.util.Log
 import androidx.core.text.isDigitsOnly
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.example.s205350lykkehjulet.data.LetterCard
 
 const val BANKRUPT = "Bankrupt"
 const val MISS_TURN = "Miss Turn"

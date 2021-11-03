@@ -1,7 +1,8 @@
-package com.example.s205350lykkehjulet
+package com.example.s205350lykkehjulet.activity
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import com.example.s205350lykkehjulet.R
 
 
 class MainActivity : AppCompatActivity() {

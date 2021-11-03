@@ -1,4 +1,4 @@
-package com.example.s205350lykkehjulet.data
+package com.example.s205350lykkehjulet.models
 
 /**
  * Class for storing the letter and visibility of a LetterCard

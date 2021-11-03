@@ -11,7 +11,7 @@
 
         <variable
             name="gameLostFragment"
-            type="com.example.s205350lykkehjulet.GameLostFragment" />
+            type="com.example.s205350lykkehjulet.fragments.GameLostFragment" />
     </data>
 
     <ScrollView
@@ -21,7 +21,7 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            tools:context=".GameWonFragment">
+            tools:context=".fragments.GameWonFragment">
 
             <TextView
                 android:id="@+id/text_you_lost"

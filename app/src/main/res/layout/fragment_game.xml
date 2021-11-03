@@ -14,7 +14,7 @@
             name="gameFragment"
             type="com.example.s205350lykkehjulet.fragments.GameFragment" />
 
-        <import type="com.example.s205350lykkehjulet.GameStage" />
+        <import type="com.example.s205350lykkehjulet.models.GameStage" />
     </data>
 
     <ScrollView

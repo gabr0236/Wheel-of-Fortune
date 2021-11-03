@@ -18,6 +18,9 @@ import com.example.s205350lykkehjulet.databinding.FragmentGameBinding
 import com.google.android.flexbox.*
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.example.s205350lykkehjulet.R
+import com.example.s205350lykkehjulet.models.GameStage
+import com.example.s205350lykkehjulet.models.LuckyWheel
+import com.example.s205350lykkehjulet.data.Datasource
 
 
 /**
