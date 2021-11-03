@@ -2,7 +2,7 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context=".GameFragment">
+    tools:context=".fragments.GameFragment">
 
     <data>
 
@@ -12,7 +12,7 @@
 
         <variable
             name="gameFragment"
-            type="com.example.s205350lykkehjulet.GameFragment" />
+            type="com.example.s205350lykkehjulet.fragments.GameFragment" />
 
         <import type="com.example.s205350lykkehjulet.GameStage" />
     </data>

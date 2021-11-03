@@ -1,4 +1,4 @@
-package com.example.s205350lykkehjulet.Adapter
+package com.example.s205350lykkehjulet.adapter
 
 import android.graphics.Color
 import android.view.LayoutInflater

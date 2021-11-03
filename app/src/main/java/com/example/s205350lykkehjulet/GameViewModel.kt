@@ -219,6 +219,7 @@ class GameViewModel : ViewModel() {
             GameStage.SPIN -> _gameStage.value = GameStage.SPIN
             GameStage.GUESS -> _gameStage.value = GameStage.GUESS
             GameStage.WAITING -> _gameStage.value = GameStage.WAITING
+            else -> return
         }
     }
 

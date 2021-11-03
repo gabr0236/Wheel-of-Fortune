@@ -4,6 +4,7 @@ import android.view.animation.Animation
 import android.view.animation.DecelerateInterpolator
 import android.view.animation.RotateAnimation
 import android.widget.ImageView
+import com.example.s205350lykkehjulet.fragments.GameFragment
 import kotlin.random.Random
 
 /**
@@ -18,22 +19,8 @@ class LuckyWheel(
 ) {
     private var degree = 0
 
-    companion object {
-        //There are 22 sectors on the wheel, divide 360 by this value to have degree for each sector
-        private const val WHEEL_SECTOR_SIZE = 360f / 22f
-
-        //Wheel values
-        private val WHEEL_SECTORS = arrayOf(
-            "Miss Turn", "600", "500", "800", "500",
-            "Bankrupt", "1500", "800", "100", "500",
-            "600", "500", "Extra Turn", "800", "500",
-            "800", "1000", "100", "300", "800", "1000",
-            "500"
-        )
-    }
-
     /**
-     * Responisple for creating animation for rotating the luckyWheelImage
+     * Responsible for creating animation for rotating the luckyWheelImage
      */
     fun spinWheelImage() {
         val degreeOld = degree % 360
@@ -83,5 +70,19 @@ class LuckyWheel(
             i++
         } while (result == null && i < WHEEL_SECTORS.size)
         return result
+    }
+
+    companion object {
+        //There are 22 sectors on the wheel, divide 360 by this value to have degree for each sector
+        private const val WHEEL_SECTOR_SIZE = 360f / 22f
+
+        //Wheel values
+        private val WHEEL_SECTORS = arrayOf(
+            "Miss Turn", "600", "500", "800", "500",
+            "Bankrupt", "1500", "800", "100", "500",
+            "600", "500", "Extra Turn", "800", "500",
+            "800", "1000", "100", "300", "800", "1000",
+            "500"
+        )
     }
 }

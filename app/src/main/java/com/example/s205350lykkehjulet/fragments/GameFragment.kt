@@ -1,4 +1,4 @@
-package com.example.s205350lykkehjulet
+package com.example.s205350lykkehjulet.fragments
 
 import android.os.Bundle
 import android.util.Log
@@ -12,10 +12,12 @@ import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import butterknife.ButterKnife
-import com.example.s205350lykkehjulet.Adapter.LetterCardAdapter
+import com.example.s205350lykkehjulet.*
+import com.example.s205350lykkehjulet.adapter.LetterCardAdapter
 import com.example.s205350lykkehjulet.databinding.FragmentGameBinding
 import com.google.android.flexbox.*
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
+import com.example.s205350lykkehjulet.R
 
 
 /**
