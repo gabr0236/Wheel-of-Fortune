@@ -6,7 +6,7 @@
 * **Semester:** Fall 2021
 * **Delivery Deadline:** 17/11/21 6pm Central European Standard Time
 * **Assignment type:** Individual
-* __Main Assignment__*The Wheel of Fortune (“Lykkehjulet”) game which was popular during the last millennium
+* __Main Assignment:__ *The Wheel of Fortune (“Lykkehjulet”) game which was popular during the last millennium
 is to be implemented in a modified version as an Android app.*
 
 **By Gabriel Rosenzweig Haugbøl, S205350, IT and Economics, Github: gabr0236, Gabriel Christ Haugbøl**
