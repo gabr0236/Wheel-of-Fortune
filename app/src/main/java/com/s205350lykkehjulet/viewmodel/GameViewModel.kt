@@ -1,10 +1,12 @@
-package com.s205350lykkehjulet.models
+package com.s205350lykkehjulet.viewmodel
 
 import android.util.Log
 import androidx.core.text.isDigitsOnly
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.s205350lykkehjulet.models.GameStage
+import com.s205350lykkehjulet.models.LetterCard
 
 const val BANKRUPT = "Bankrupt"
 const val MISS_TURN = "Miss Turn"

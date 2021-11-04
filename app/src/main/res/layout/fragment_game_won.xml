@@ -6,7 +6,7 @@
     <data>
         <variable
             name="gameViewModel"
-            type="com.s205350lykkehjulet.models.GameViewModel" />
+            type="com.s205350lykkehjulet.viewmodel.GameViewModel" />
 
         <variable
             name="gameWonFragment"

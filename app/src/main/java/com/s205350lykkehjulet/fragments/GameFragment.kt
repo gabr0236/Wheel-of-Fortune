@@ -20,6 +20,10 @@ import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.s205350lykkehjulet.R
 import com.s205350lykkehjulet.data.Datasource
 import com.s205350lykkehjulet.models.*
+import com.s205350lykkehjulet.viewmodel.BANKRUPT
+import com.s205350lykkehjulet.viewmodel.EXTRA_TURN
+import com.s205350lykkehjulet.viewmodel.GameViewModel
+import com.s205350lykkehjulet.viewmodel.MISS_TURN
 
 
 /**

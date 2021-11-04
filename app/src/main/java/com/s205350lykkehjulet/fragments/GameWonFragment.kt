@@ -9,7 +9,7 @@ import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import com.s205350lykkehjulet.R
 import com.s205350lykkehjulet.databinding.FragmentGameWonBinding
-import com.s205350lykkehjulet.models.GameViewModel
+import com.s205350lykkehjulet.viewmodel.GameViewModel
 
 class GameWonFragment : Fragment() {
     private var _binding: FragmentGameWonBinding? = null
