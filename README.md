@@ -9,7 +9,7 @@
 * __Main Assignment:__ *The Wheel of Fortune (“Lykkehjulet”) game which was popular during the last millennium
 is to be implemented in a modified version as an Android app.*
 
-**By Gabriel Rosenzweig Haugbøl, S205350, IT and Economics, Github: gabr0236, Gabriel Christ Haugbøl**
+**By Gabriel Rosenzweig Haugbøl, S205350, IT and Economics, Github: gabr0236, Gabriel Christ Haugbøl, NiGhtShAdk**
 
 ## Gameplay & Rules
 
