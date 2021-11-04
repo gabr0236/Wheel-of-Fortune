@@ -67,10 +67,10 @@ class GameFragment : Fragment() {
         //Pass LetterCards onto adapter
         recyclerView.adapter = viewModel.letterCardList.value?.let { LetterCardAdapter(it) }
 
-
         //val letterCardView = (recyclerView.layoutManager as FlexboxLayoutManager).findViewByPosition(2)
         //val lp = letterCardView?.layoutParams as? FlexboxLayout.LayoutParams
-        //lp?.isWrapBefore=true
+        //lp!!.isWrapBefore=true
+        ////TODO: check for null google elvis operatir
         //letterCardView?.layoutParams=lp
 
         return binding.root

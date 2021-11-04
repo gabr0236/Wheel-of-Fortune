@@ -15,6 +15,7 @@ const val EXTRA_TURN = "Extra Turn"
  */
 class GameViewModel : ViewModel() {
 
+    //TODO: model klasse så jeg ikke har en masse modeller her
     private var _gameStage = MutableLiveData<GameStage>()
     val gameStage: LiveData<GameStage>
         get() = _gameStage
@@ -130,7 +131,7 @@ class GameViewModel : ViewModel() {
      */
     fun doWheelResultAction() {
         when {
-            //Case when the wheelResult is a digit
+            //Case when the wheelResult is a digit (.isDigitsOnly() is omitted since this doesn't work with tests)
             wheelResult.value?.all { it in '0'..'9' } == true -> {
                 val wheelValue = wheelResult.value?.toInt()
                 if (wheelValue != null) {
@@ -207,7 +208,7 @@ class GameViewModel : ViewModel() {
      */
     fun setWheelResult(result: String) {
         _wheelResult.value = result
-        _gameStage.value = if (this.wheelResult.value?.isDigitsOnly() == true) {
+        _gameStage.value = if (this.wheelResult.value?.all { it in '0'..'9' } == true) {
             GameStage.GUESS
         } else GameStage.SPIN
     }
