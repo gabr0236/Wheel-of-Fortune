@@ -6,7 +6,6 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 
-//TODO string recourses?
 const val BANKRUPT = "Bankrupt"
 const val MISS_TURN = "Miss Turn"
 const val EXTRA_TURN = "Extra Turn"

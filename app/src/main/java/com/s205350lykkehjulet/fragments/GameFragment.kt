@@ -56,7 +56,6 @@ class GameFragment : Fragment() {
         //Setup recyclerview
         recyclerView = binding.recyclerviewLetterCards
 
-        //TODO flexbox attributes in xml
         //Setup FlexboxLayout for auto fitting LetterCards in the recyclerview
         val layoutManager = FlexboxLayoutManager(context)
         layoutManager.justifyContent = JustifyContent.CENTER

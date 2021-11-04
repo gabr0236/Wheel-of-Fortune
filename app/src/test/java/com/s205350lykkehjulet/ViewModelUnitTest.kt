@@ -60,8 +60,7 @@ class ViewModelUnitTest {
                 .filter { it.letter==guessedLetter.lowercaseChar() }
                 .all { !it.isHidden })
         assertTrue("Guessed char is not set to lowercase",viewModelTest.guessedCharacters.first()==guessedLetter.lowercaseChar())
-        //TODO: this is not working apparently
-        //assertTrue("Player is not awarded 2*1000 for 2 correct letters", viewModelTest.score.value==2000)
+        assertTrue("Player is not awarded 2*1000 for 2 correct letters", viewModelTest.score.value==2000)
     }
 
     @Test
@@ -78,7 +77,6 @@ class ViewModelUnitTest {
             .filter { it.letter==guessedLetter.lowercaseChar() }
             .all { !it.isHidden })
         assertTrue("Guessed char is not set to lowercase",viewModelTest.guessedCharacters.first()==guessedLetter.lowercaseChar())
-        //TODO: this is not working apparently
         assertTrue("Player is not awarded 1000 points for correct guess", viewModelTest.score.value==1000)
         assertTrue("Game is not won", viewModelTest.gameStage.value== GameStage.GAME_WON)
     }
@@ -96,5 +94,4 @@ class ViewModelUnitTest {
         assertTrue("LetterCard is shown (isHidden==false)",viewModelTest.letterCardList.value!!.all { it.isHidden })
         assertTrue("Guessed char is not set to lowercase",viewModelTest.guessedCharacters.first()==guessedLetter.lowercaseChar())
     }
-    //TODO: test to be done: getPosOfLastGuessedChars
 }

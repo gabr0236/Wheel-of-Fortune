@@ -15,7 +15,7 @@
         <entry key="app/src/main/res/font/font.xml" value="0.24010416666666667" />
         <entry key="app/src/main/res/layout-v28/game_fragment.xml" value="0.19114583333333332" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.25" />
-        <entry key="app/src/main/res/layout/fragment_game.xml" value="0.335" />
+        <entry key="app/src/main/res/layout/fragment_game.xml" value="0.25" />
         <entry key="app/src/main/res/layout/fragment_game_lost.xml" value="0.335" />
         <entry key="app/src/main/res/layout/fragment_game_won.xml" value="0.335" />
         <entry key="app/src/main/res/layout/fragment_losing_screen.xml" value="0.14935950316203836" />
@@ -24,6 +24,7 @@
         <entry key="app/src/main/res/layout/game_lost_fragment.xml" value="0.335" />
         <entry key="app/src/main/res/layout/game_won_fragment.xml" value="0.335" />
         <entry key="app/src/main/res/layout/item_view.xml" value="0.45" />
+        <entry key="app/src/main/res/layout/view_letter_card.xml" value="0.18697916666666667" />
         <entry key="app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.2064814814814815" />
         <entry key="app/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml" value="0.2101851851851852" />
       </map>

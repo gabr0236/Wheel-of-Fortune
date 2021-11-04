@@ -76,7 +76,7 @@ class LuckyWheel(
         //There are 22 sectors on the wheel, divide 360 by this value to have degree for each sector
         private const val WHEEL_SECTOR_SIZE = 360f / 22f
 
-        //Wheel values TODO: string resources?
+        //Wheel values
         private val WHEEL_SECTORS = arrayOf(
             "Miss Turn", "600", "500", "800", "500",
             "Bankrupt", "1500", "800", "100", "500",

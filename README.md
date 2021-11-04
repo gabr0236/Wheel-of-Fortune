@@ -1,18 +1,17 @@
 # Wheel of Fortune App (S205350 Lykkehjulet)
 
 ## Assignment Info
-* **University:** The Technical University of Denmark.
+* **University:** Technical University of Denmark.
 * **Course:** 62550 User experience and mobile application development 
-* **Period:** Fall 2021
-* **Delivery deadline:** 17/11 6pm Central European Standard Time
+* **Semester:** Fall 2021
+* **Delivery Deadline:** 17/11/21 6pm Central European Standard Time
 * **Assignment type:** Individual
+* __Main Assignment__*The Wheel of Fortune (“Lykkehjulet”) game which was popular during the last millennium
+is to be implemented in a modified version as an Android app.*
 
-**By Gabriel Rosenzweig Haugbøl, S205350, IT and Economics**
-
+**By Gabriel Rosenzweig Haugbøl, S205350, IT and Economics, Github: gabr0236, Gabriel Christ Haugbøl**
 
 ## Gameplay & Rules
-*The Wheel of Fortune (“Lykkehjulet”) game which was popular during the last millenium
-is to be implemented in a modified version as an Android app.* 
 
 ### Recordings of the television show
 Watch how the game is played:
@@ -56,13 +55,11 @@ Watch how the game is played:
 * NFR_8 - The minSdkVersion should be 24
 
 ## Get Started
-To get started simply run the app. Sometimes a rebuild/clean/invalidate cache is required before running the app is possible.
-
+To get started simply run the app. Sometimes a rebuild/clean/invalidate cache is required before running the app.
 
 ### Hidden features:
-1. Player wont be able to get the same random category and word in one session, except if all categories and words have been in play.
+1. Player wont be able to get the same random category and word in one play session, except if all categories and words have been in played.
 2. edit_text_letter (text input field) only accepts a single character from the alphabet. The text input is not case sensitive.
-
 
 ## License
 Copyright 2021 Gabriel Rosenzweig Haugbøl
