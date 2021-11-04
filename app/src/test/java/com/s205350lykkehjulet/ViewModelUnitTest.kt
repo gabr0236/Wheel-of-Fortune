@@ -23,6 +23,9 @@ class ViewModelUnitTest {
         viewModelTest.newGame()
     }
 
+    /**
+     * Test of newGame() method
+     */
     @Test
     fun testGameSetup(){
         assertTrue(viewModelTest.lives.value==5)
@@ -32,6 +35,9 @@ class ViewModelUnitTest {
         assertTrue(viewModelTest.gameStage.value== GameStage.SPIN)
     }
 
+    /**
+     * Test of wrong guess.
+     */
     @Test
     fun testWrongGuess(){
         val lives = viewModelTest.lives.value!!
@@ -46,6 +52,9 @@ class ViewModelUnitTest {
         assertTrue("Guessed char is not set to lowercase",viewModelTest.guessedCharacters.first()==guessedLetter.lowercaseChar())
     }
 
+    /**
+     * Test of correct guess
+     */
     @Test
     fun testCorrectGuess(){
         val lives = viewModelTest.lives.value!!
@@ -63,6 +72,9 @@ class ViewModelUnitTest {
         assertTrue("Player is not awarded 2*1000 for 2 correct letters", viewModelTest.score.value==2000)
     }
 
+    /**
+     * Test of game won
+     */
     @Test
     fun testGameWon(){
         val lives = viewModelTest.lives.value!!
@@ -81,6 +93,9 @@ class ViewModelUnitTest {
         assertTrue("Game is not won", viewModelTest.gameStage.value== GameStage.GAME_WON)
     }
 
+    /**
+     * Test of game lost
+     */
     @Test
     fun testGameLost(){
         val guessedLetter = 'K'
