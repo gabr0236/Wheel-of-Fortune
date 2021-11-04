@@ -1,6 +1,6 @@
 # Wheel of Fortune App (S205350 Lykkehjulet)
 
-## Assignemt Info
+## Assignment Info
 * **University:** The Technical University of Denmark.
 * **Course:** 62550 User experience and mobile application development 
 * **Period:** Fall 2021
@@ -14,7 +14,7 @@
 *The Wheel of Fortune (“Lykkehjulet”) game which was popular during the last millenium
 is to be implemented in a modified version as an Android app.* 
 
-### Recordings of the televisionshow
+### Recordings of the television show
 Watch how the game is played:
 * [English clip](https://youtu.be/j_FpIab0K_8)
 * [Danish clip](https://youtu.be/79nl-BDNek0)
@@ -30,7 +30,9 @@ Watch how the game is played:
 5. The possible results of the “spinning the wheel” are: a number of points e.g 1000 or an “extra
    turn”, “miss turn” or “bankrupt”.
 6. In the event of a value being shown, a letter (consonant or vowel) is chosen by the user (from
-   a keyboard or otherwise). If the letter is present, the user’s points total is incremented by the value shown times the number of occurrences of the letter. The occurrences of the letter are revealed in the word. If the letter is not present the user loses a “life”.
+   a keyboard or otherwise). 
+   If the letter is present, the user’s points total is incremented by the value shown times the number of occurrences of the letter.
+   The occurrences of the letter are revealed in the word. If the letter is not present the user loses a “life”.
 7. In the event of “extra turn” being shown, the user is given an extra life.
 8. In the event of “miss turn” being shown, the user loses a life without being able to choose a
    letter.

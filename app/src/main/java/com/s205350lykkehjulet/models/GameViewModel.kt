@@ -64,10 +64,6 @@ class GameViewModel : ViewModel() {
     val numberOfGuesses: Int
         get() = _guessedCharacters.size
 
-    init {
-        Log.d(TAG, "ViewModel initialized")
-    }
-
     /**
      * Used for updating the recyclerview
      *
@@ -168,7 +164,6 @@ class GameViewModel : ViewModel() {
      * Resets all appropriate values for a fresh game to begin
      */
     fun newGame() {
-        Log.d(TAG, "newGame")
         _lives.value = 5
         _score.value = 0
         _guessedCharacters = mutableListOf()

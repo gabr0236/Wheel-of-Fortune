@@ -6,11 +6,8 @@ import org.junit.Assert.*
 import org.junit.Before
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import com.s205350lykkehjulet.models.GameStage
-
+import com.s205350lykkehjulet.models.GameViewModel
 import org.junit.Rule
-
-
-
 
 class ViewModelUnitTest {
 
@@ -22,7 +19,7 @@ class ViewModelUnitTest {
     @Before
     fun init() {
         viewModelTest = GameViewModel()
-        viewModelTest.setCategoryAndCurrentWordToBeGuessed("Test,Doggo")
+        viewModelTest.setCategoryAndCurrentWordToBeGuessed("Test,Doggo",4)
         viewModelTest.newGame()
     }
 
@@ -71,7 +68,7 @@ class ViewModelUnitTest {
     fun testGameWon(){
         val lives = viewModelTest.lives.value!!
         val guessedLetter = 'T'
-        viewModelTest.setCategoryAndCurrentWordToBeGuessed("Test,T")
+        viewModelTest.setCategoryAndCurrentWordToBeGuessed("Test,T",5)
         viewModelTest.setWheelResult("1000")
         viewModelTest.isUserInputMatch(guessedLetter)
 
@@ -89,7 +86,7 @@ class ViewModelUnitTest {
     @Test
     fun testGameLost(){
         val guessedLetter = 'K'
-        viewModelTest.setCategoryAndCurrentWordToBeGuessed("Test,T")
+        viewModelTest.setCategoryAndCurrentWordToBeGuessed("Test,T",5)
         viewModelTest.setWheelResult("1000")
 
         for (i in 1..5) viewModelTest.isUserInputMatch(guessedLetter)

@@ -41,8 +41,6 @@ class GameFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        Log.d(TAG, "On CreateView")
-
         //Inflate the layout XML file and return a binding object instance
         _binding = DataBindingUtil.inflate(inflater, R.layout.fragment_game, container, false)
 
@@ -114,9 +112,7 @@ class GameFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
         binding.apply {
-            Log.d(TAG, "On ViewCreated")
             lifecycleOwner = viewLifecycleOwner //Specify the fragment as the lifecycle owner
             gameViewModel = viewModel //Assign the view model to a property in the binding class
             gameFragment = this@GameFragment //Assign this fragment
@@ -124,7 +120,6 @@ class GameFragment : Fragment() {
     }
 
     override fun onDestroyView() {
-        Log.d(TAG, "On Destroy")
         super.onDestroyView()
         _binding = null
     }
@@ -223,7 +218,6 @@ class GameFragment : Fragment() {
      */
     private fun showJokerDialog() {
         if (viewModel.wheelResult.value?.isDigitsOnly() == false) {
-            Log.d(TAG, "showJokerDialog() called")
             //Construct message depending on joker value (Extra turn, Miss turn or Bankrupt)
             val message: String = when (viewModel.wheelResult.value) {
                 MISS_TURN -> String.format(
