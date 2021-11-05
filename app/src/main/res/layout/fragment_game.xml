@@ -5,7 +5,6 @@
     tools:context=".fragments.GameFragment">
 
     <data>
-
         <variable
             name="gameViewModel"
             type="com.s205350lykkehjulet.viewmodel.GameViewModel" />
@@ -13,7 +12,6 @@
         <variable
             name="gameFragment"
             type="com.s205350lykkehjulet.fragments.GameFragment" />
-
         <import type="com.s205350lykkehjulet.models.GameStage" />
     </data>
 
@@ -95,7 +93,7 @@
                 android:layout_marginTop="16dp"
                 android:layout_marginBottom="16dp"
                 android:orientation="horizontal"
-                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                app:layoutManager="com.google.android.flexbox.FlexboxLayoutManager"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/text_category"

@@ -71,11 +71,14 @@ class GameFragment : Fragment() {
         //Pass LetterCards onto adapter
         recyclerView.adapter = viewModel.letterCardList.value?.let { LetterCardAdapter(it) }
 
-        //val letterCardView = (recyclerView.layoutManager as FlexboxLayoutManager).findViewByPosition(2)
-        //val lp = letterCardView?.layoutParams as? FlexboxLayout.LayoutParams
+        //val lp = recyclerView.layoutParams as FlexboxLayout.LayoutParams
+        //lp.isWrapBefore=true
+        //val letterCardView = recyclerView.findViewHolderForItemId(2)
+        ////letterCardView?: throw Exception("Lettercardview is null")
+        //val lp = letterCardView.itemView.layoutParams as? FlexboxLayout.LayoutParams
         //lp!!.isWrapBefore=true
         ////TODO: check for null google elvis operatir
-        //letterCardView?.layoutParams=lp
+        //letterCardView.itemView.layoutParams=lp
 
         return binding.root
     }
