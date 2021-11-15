@@ -26,7 +26,6 @@ class LetterCardAdapter(private var letterCardList: List<LetterCard>) :
     class ViewHolder(viewLetterCard: View) : RecyclerView.ViewHolder(viewLetterCard) {
         private val letterTextView: TextView = viewLetterCard.findViewById(R.id.text_card_letter)
         private val cardView: MaterialCardView = viewLetterCard.findViewById(R.id.card_view_letter_cards)
-
         /**
          * Responsible controlling how the LetterCard appears
          *

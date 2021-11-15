@@ -165,6 +165,7 @@ class ViewModelUnitTest {
         assertEquals("The gameStage should be SPIN",viewModelTest.gameStage.value,GameStage.SPIN)
     }
 
+    //TODO her
     @Test
     fun testSetCategoryAndCurrentWordToBeGuessed(){
 
