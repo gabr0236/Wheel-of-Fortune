@@ -17,7 +17,6 @@ const val EXTRA_TURN = "Extra Turn"
  */
 class GameViewModel : ViewModel() {
 
-    //TODO: model klasse så jeg ikke har en masse modeller her
     private var _gameStage = MutableLiveData<GameStage>()
     val gameStage: LiveData<GameStage>
         get() = _gameStage

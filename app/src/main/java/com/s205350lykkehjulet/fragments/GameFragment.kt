@@ -42,7 +42,8 @@ class GameFragment : Fragment() {
 
 
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
+        inflater: LayoutInflater,
+        container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
         //Inflate the layout XML file and return a binding object instance
@@ -83,6 +84,15 @@ class GameFragment : Fragment() {
         return binding.root
     }
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        binding.apply {
+            lifecycleOwner = viewLifecycleOwner //Specify the fragment as the lifecycle owner
+            gameViewModel = viewModel //Assign the view model to a property in the binding class
+            gameFragment = this@GameFragment //Assign this fragment
+        }
+    }
+
     /**
      * Sets a new category and word.
      * If the word has already been in play, fetch a new random word.
@@ -113,15 +123,6 @@ class GameFragment : Fragment() {
                 letterCardList.removeAt(lastSpaceBeforeMaxColumns)
             }
             lastSpaceBeforeMaxColumns ?: MAX_NUMBER_OF_COLUMNS
-        }
-    }
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-        binding.apply {
-            lifecycleOwner = viewLifecycleOwner //Specify the fragment as the lifecycle owner
-            gameViewModel = viewModel //Assign the view model to a property in the binding class
-            gameFragment = this@GameFragment //Assign this fragment
         }
     }
 

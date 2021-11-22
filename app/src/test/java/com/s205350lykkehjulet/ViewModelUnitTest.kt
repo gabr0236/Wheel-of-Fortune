@@ -6,7 +6,7 @@ import org.junit.Assert.*
 import org.junit.Before
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import com.s205350lykkehjulet.models.GameStage
-import com.s205350lykkehjulet.models.GameViewModel
+import com.s205350lykkehjulet.viewmodel.GameViewModel
 import org.junit.Rule
 
 class ViewModelUnitTest {
