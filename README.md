@@ -57,11 +57,13 @@ Watch how the game is played:
 ## Get Started
 To get started simply run the app. Sometimes a rebuild/clean/invalidate cache is required before running the app.
 
-### Hidden stuff:
-1. Player wont be able to get the same random category and word in one play session, except if all categories and words have been in played.
-2. edit_text_letter (text input field) only accepts a single character from the alphabet. The text input is not case sensitive.
-3. Updates in the recyclerview is only made to the specific updated LetterCard(s)
-4. There are 8 tests
+### Notes to the grader:
+1. I have used a recyclerview for showing letters (Recommended to state this)
+2. Player wont be able to get the same random category and word in one play session, except if all categories and words have been play.
+3. edit_text_letter (text input field) only accepts a single character from the alphabet. The text input is not case sensitive.
+4. Updates in the recyclerview is only made to the specific updated LetterCard(s) to avoid unnecessary updates.
+5. The project contains 8 tests.
+
 
 ## License
 Copyright 2021 Gabriel Rosenzweig Haugbøl
