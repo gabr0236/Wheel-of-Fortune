@@ -14,6 +14,11 @@ const val EXTRA_TURN = "Extra Turn"
  */
 class GameViewModel : ViewModel() {
 
+    /**
+     * Models implemented using the observable data holder class, LiveData.
+     * LiveData  respects the lifecycle of other app components such as fragments.
+     * This ensures LiveData only updates app component observers that are in an active lifecycle state.
+     */
     private var _gameStage = MutableLiveData<GameStage>()
     val gameStage: LiveData<GameStage>
         get() = _gameStage
@@ -45,10 +50,6 @@ class GameViewModel : ViewModel() {
         get() = _gameQuote
 
     private var previousCategoriesAndWords = mutableListOf<String>()
-
-    fun setGameQuote(newGameQuote: String) {
-        _gameQuote.value = newGameQuote
-    }
 
     private lateinit var _currentWordToBeGuessed: String
     val currentWordToBeGuessed: String
@@ -227,7 +228,7 @@ class GameViewModel : ViewModel() {
         }
     }
 
-    companion object {
-        private const val TAG = "GameViewModel"
+    fun setGameQuote(newGameQuote: String) {
+        _gameQuote.value = newGameQuote
     }
 }

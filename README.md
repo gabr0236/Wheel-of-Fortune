@@ -64,6 +64,7 @@ To get started simply run the app. Sometimes a rebuild/clean/invalidate cache is
 4. edit_text_letter (text input field) only accepts a single character from the alphabet. The text input is not case sensitive.
 5. Updates in the recyclerview is only made to the specific updated LetterCard(s) to avoid unnecessary updates.
 6. The project contains 8 tests.
+7. When the recyclerview line is filled the recyclerview expands next item to a new line. This is accomplished using FlexBox API.
 
 
 ## License
