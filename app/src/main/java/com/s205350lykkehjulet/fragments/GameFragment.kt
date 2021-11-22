@@ -1,7 +1,6 @@
 package com.s205350lykkehjulet.fragments
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -20,10 +19,7 @@ import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.s205350lykkehjulet.R
 import com.s205350lykkehjulet.data.Datasource
 import com.s205350lykkehjulet.models.*
-import com.s205350lykkehjulet.viewmodel.BANKRUPT
-import com.s205350lykkehjulet.viewmodel.EXTRA_TURN
-import com.s205350lykkehjulet.viewmodel.GameViewModel
-import com.s205350lykkehjulet.viewmodel.MISS_TURN
+import com.s205350lykkehjulet.viewmodel.*
 
 
 /**
@@ -71,15 +67,6 @@ class GameFragment : Fragment() {
 
         //Pass LetterCards onto adapter
         recyclerView.adapter = viewModel.letterCardList.value?.let { LetterCardAdapter(it) }
-
-        //val lp = recyclerView.layoutParams as FlexboxLayout.LayoutParams
-        //lp.isWrapBefore=true
-        //val letterCardView = recyclerView.findViewHolderForItemId(2)
-        ////letterCardView?: throw Exception("Lettercardview is null")
-        //val lp = letterCardView.itemView.layoutParams as? FlexboxLayout.LayoutParams
-        //lp!!.isWrapBefore=true
-        ////TODO: check for null google elvis operatir
-        //letterCardView.itemView.layoutParams=lp
 
         return binding.root
     }

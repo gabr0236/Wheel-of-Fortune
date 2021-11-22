@@ -5,7 +5,7 @@ import org.junit.Test
 import org.junit.Assert.*
 import org.junit.Before
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
-import com.s205350lykkehjulet.models.GameStage
+import com.s205350lykkehjulet.viewmodel.GameStage
 import com.s205350lykkehjulet.viewmodel.GameViewModel
 import org.junit.Rule
 
@@ -140,15 +140,16 @@ class ViewModelUnitTest {
      */
     @Test
     fun testSetGameStage(){
-        assertEquals("The game should start in GameStage.SPIN", viewModelTest.gameStage.value,GameStage.SPIN)
+        assertEquals("The game should start in GameStage.SPIN", viewModelTest.gameStage.value,
+            GameStage.SPIN)
         viewModelTest.setGameStage(GameStage.GUESS)
-        assertEquals("The game should GameStage.GUESS", viewModelTest.gameStage.value,GameStage.GUESS)
+        assertEquals("The game should GameStage.GUESS", viewModelTest.gameStage.value, GameStage.GUESS)
         viewModelTest.setGameStage(GameStage.SPIN)
-        assertEquals("The game should GameStage.SPIN", viewModelTest.gameStage.value,GameStage.SPIN)
+        assertEquals("The game should GameStage.SPIN", viewModelTest.gameStage.value, GameStage.SPIN)
         viewModelTest.setGameStage(GameStage.GAME_LOST)
-        assertEquals("The game should GameStage.SPIN", viewModelTest.gameStage.value,GameStage.SPIN)
+        assertEquals("The game should GameStage.SPIN", viewModelTest.gameStage.value, GameStage.SPIN)
         viewModelTest.setGameStage(GameStage.GAME_WON)
-        assertEquals("The game should GameStage.SPIN", viewModelTest.gameStage.value,GameStage.SPIN)
+        assertEquals("The game should GameStage.SPIN", viewModelTest.gameStage.value, GameStage.SPIN)
     }
 
     /**
@@ -158,16 +159,11 @@ class ViewModelUnitTest {
      */
     @Test
     fun testSetWheelResult(){
-        assertEquals("The game should start in GameStage.SPIN", viewModelTest.gameStage.value,GameStage.SPIN)
+        assertEquals("The game should start in GameStage.SPIN", viewModelTest.gameStage.value,
+            GameStage.SPIN)
         viewModelTest.setWheelResult("1000")
-        assertEquals("The gameStage should be GUESS",viewModelTest.gameStage.value,GameStage.GUESS)
+        assertEquals("The gameStage should be GUESS",viewModelTest.gameStage.value, GameStage.GUESS)
         viewModelTest.setWheelResult("Bankrupt")
-        assertEquals("The gameStage should be SPIN",viewModelTest.gameStage.value,GameStage.SPIN)
-    }
-
-    //TODO her
-    @Test
-    fun testSetCategoryAndCurrentWordToBeGuessed(){
-
+        assertEquals("The gameStage should be SPIN",viewModelTest.gameStage.value, GameStage.SPIN)
     }
 }

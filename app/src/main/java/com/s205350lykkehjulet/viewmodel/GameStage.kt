@@ -1,4 +1,4 @@
-package com.s205350lykkehjulet.models
+package com.s205350lykkehjulet.viewmodel
 
 /**
  * Enum for controlling the game flow

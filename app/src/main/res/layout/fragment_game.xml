@@ -12,7 +12,7 @@
         <variable
             name="gameFragment"
             type="com.s205350lykkehjulet.fragments.GameFragment" />
-        <import type="com.s205350lykkehjulet.models.GameStage" />
+        <import type="com.s205350lykkehjulet.viewmodel.GameStage" />
     </data>
 
     <ScrollView

@@ -35,15 +35,11 @@
 
     <!-- Categories and words -->
     <string-array name="category_and_words">
-        <item>Test1,AGWRGRewfGRE GREGA</item>
-
-        <!--<item>Animals,Mountain Lion</item>
+        <item>Animals,Mountain Lion</item>
         <item>Animals,Blobfish</item>
         <item>Animals,Chicken Turtle</item>
-        <item>Animals,Leafy Seadragon</item>
         <item>Animals,Hellbender</item>
         <item>Animals,Goblin Shark</item>
-        <item>Movies,The Dark Knight</item>
         <item>Movies,Inception</item>
         <item>Movies,Gladiator</item>
         <item>Movies,The Green Mile</item>
@@ -54,6 +50,6 @@
         <item>Sports,Tennis</item>
         <item>Sports,Badminton</item>
         <item>Sports,Soccer</item>
-        <item>Sports,Ice Hockey</item>-->
+        <item>Sports,Ice Hockey</item>
     </string-array>
 </resources>

@@ -1,10 +1,9 @@
-package com.s205350lykkehjulet.models
+package com.s205350lykkehjulet.fragments
 
 import android.view.animation.Animation
 import android.view.animation.DecelerateInterpolator
 import android.view.animation.RotateAnimation
 import android.widget.ImageView
-import com.s205350lykkehjulet.fragments.GameFragment
 import kotlin.random.Random
 
 /**
