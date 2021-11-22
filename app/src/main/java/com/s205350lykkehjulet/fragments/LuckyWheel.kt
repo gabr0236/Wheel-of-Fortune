@@ -14,7 +14,7 @@ import kotlin.random.Random
  */
 class LuckyWheel(
     private val luckyWheelImage: ImageView,
-    private val gameFragment: GameFragment
+    private val onWheelAnimationEndHandler: OnWheelAnimationEndHandler
 ) {
     private var degree = 0
 
@@ -41,7 +41,7 @@ class LuckyWheel(
             override fun onAnimationRepeat(animation: Animation) {}
             override fun onAnimationEnd(animation: Animation) {
                 //Pass the random wheel sector value on to the GameFragment
-                getSector(360 - degree % 360)?.let { gameFragment.continueGameAfterWheelSpin(it) }
+                getSector(360 - degree % 360)?.let { onWheelAnimationEndHandler.onWheelAnimationEnd(it) }
             }
         })
         //Start the animation

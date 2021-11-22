@@ -25,7 +25,7 @@ import com.s205350lykkehjulet.viewmodel.*
 /**
  * Main fragment responsible for letting the game play
  */
-class GameFragment : Fragment() {
+class GameFragment : Fragment(), OnWheelAnimationEndHandler {
     //Recommended way for implementing view binding in fragments
     //Source: https://developer.android.com/topic/libraries/view-binding#fragments
     private var _binding: FragmentGameBinding? = null
@@ -94,25 +94,6 @@ class GameFragment : Fragment() {
         ){}
     }
 
-
-    private fun letterCardsColumns(): Int {
-        val MAX_NUMBER_OF_COLUMNS = 11
-        val letterCardList = viewModel.letterCardList.value!!
-        return if (letterCardList.size <= MAX_NUMBER_OF_COLUMNS) MAX_NUMBER_OF_COLUMNS
-        else {
-            var lastSpaceBeforeMaxColumns: Int? = null
-            for (i in 0 until MAX_NUMBER_OF_COLUMNS) {
-                if (letterCardList[i].letter == ' ') {
-                    lastSpaceBeforeMaxColumns = i
-                }
-            }
-            if (lastSpaceBeforeMaxColumns != null) {
-                letterCardList.removeAt(lastSpaceBeforeMaxColumns)
-            }
-            lastSpaceBeforeMaxColumns ?: MAX_NUMBER_OF_COLUMNS
-        }
-    }
-
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
@@ -171,7 +152,7 @@ class GameFragment : Fragment() {
      *
      * @param wheelResult result of wheel spin
      */
-    fun continueGameAfterWheelSpin(wheelResult: String) {
+    override fun onWheelAnimationEnd(wheelResult: String) {
         viewModel.setWheelResult(wheelResult)
         if (!wheelResult.isDigitsOnly()) {
             showJokerDialog()
