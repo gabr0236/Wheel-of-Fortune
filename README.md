@@ -11,6 +11,15 @@ is to be implemented in a modified version as an Android app.*
 
 **By Gabriel Rosenzweig Haugbøl, S205350, IT and Economics, Github: gabr0236, Gabriel Christ Haugbøl, NiGhtShAdk**
 
+### Notes to the grader:
+1. The grader should run the app from the master branch.
+2. I have used a recyclerview for showing letters (Recommended to state this)
+3. Player wont be able to get the same random category and word in one play session, except if all categories and words have been play.
+4. edit_text_letter (text input field) only accepts a single character from the alphabet. The text input is not case sensitive.
+5. Updates in the recyclerview is only made to the specific updated LetterCard(s) to avoid unnecessary updates.
+6. The project contains 8 tests.
+7. When the recyclerview line is filled the recyclerview expands next item to a new line. This is accomplished using FlexBox API.
+
 ## Gameplay & Rules
 
 ### Recordings of the television show
@@ -56,16 +65,6 @@ Watch how the game is played:
 
 ## Get Started
 To get started simply run the app. Sometimes a rebuild/clean/invalidate cache is required before running the app.
-
-### Notes to the grader:
-1. The grader should run the app from the master branch.
-2. I have used a recyclerview for showing letters (Recommended to state this)
-3. Player wont be able to get the same random category and word in one play session, except if all categories and words have been play.
-4. edit_text_letter (text input field) only accepts a single character from the alphabet. The text input is not case sensitive.
-5. Updates in the recyclerview is only made to the specific updated LetterCard(s) to avoid unnecessary updates.
-6. The project contains 8 tests.
-7. When the recyclerview line is filled the recyclerview expands next item to a new line. This is accomplished using FlexBox API.
-
 
 ## License
 Copyright 2021 Gabriel Rosenzweig Haugbøl
