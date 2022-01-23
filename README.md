@@ -1,4 +1,4 @@
-# Wheel of Fortune App (S205350 Lykkehjulet)
+# Wheel of Fortune
 
 ## Assignment Info
 * **University:** Technical University of Denmark.
@@ -14,11 +14,11 @@ is to be implemented in a modified version as an Android app.*
 ### Notes to the grader:
 1. The grader should run the app from the master branch.
 2. I have used a recyclerview for showing letters (Recommended to state this)
-3. Player wont be able to get the same random category and word in one play session, except if all categories and words have been play.
-4. edit_text_letter (text input field) only accepts a single character from the alphabet. The text input is not case sensitive.
+3. A player won't be able to get the same random category and word in one play session, except if all categories and words have been play.
+4. edit_text_letter (text input field) only accepts a single character from the alphabet. The text input is not case-sensitive.
 5. Updates in the recyclerview is only made to the specific updated LetterCard(s) to avoid unnecessary updates.
 6. The project contains 8 tests.
-7. When the recyclerview line is filled the recyclerview expands next item to a new line. This is accomplished using FlexBox API.
+7. When the recyclerview line is filled, the recyclerview expands the next item to a new line. This is accomplished using FlexBox API.
 
 ## Gameplay & Rules
 
@@ -30,17 +30,17 @@ Watch how the game is played:
 ### Screenshots from the app
 
 #### Game Screen
-<img src="" width="200">
+<img src="https://github.com/gabr0236/Wheel-of-Fortune/blob/master/ReadmeImg/Guess.png" width="200">
 
 ***
 
 #### Popups
-<img src="" width="200">
+<img src="https://github.com/gabr0236/Wheel-of-Fortune/blob/master/ReadmeImg/ExtraTurn.png" width="200">
 
 ***
 
 #### Winning Screen
-<img src="" width="200">
+<img src="https://github.com/gabr0236/Wheel-of-Fortune/blob/master/ReadmeImg/Win.png" width="200">
 
 ***
 
@@ -52,12 +52,12 @@ Watch how the game is played:
    phrase.
 4. The player “spins the wheel”. (A graphically spinning wheel is not required to be implemented
    this could simply be done by tapping a button and showing the result.)
-5. The possible results of the “spinning the wheel” are: a number of points e.g 1000 or an “extra
+5. The possible results of the “spinning the wheel” are: a number of points e.g. 1000 or an “extra
    turn”, “miss turn” or “bankrupt”.
-6. In the event of a value being shown, a letter (consonant or vowel) is chosen by the user (from
+6. In the event of a value being shown, a letter (consonant or vowel) is decided by the user (from
    a keyboard or otherwise). 
    If the letter is present, the user’s points total is incremented by the value shown times the number of occurrences of the letter.
-   The occurrences of the letter are revealed in the word. If the letter is not present the user loses a “life”.
+   The occurrences of the letter are revealed in the word. If the letter is not present, the user loses a “life”.
 7. In the event of “extra turn” being shown, the user is given an extra life.
 8. In the event of “miss turn” being shown, the user loses a life without being able to choose a
    letter.
@@ -81,7 +81,7 @@ Watch how the game is played:
 * NFR_8 - The minSdkVersion should be 24
 
 ## Get Started
-To get started simply run the app. Sometimes a rebuild/clean/invalidate cache is required before running the app.
+To get started, simply run the app. Sometimes a rebuild/clean/invalidate cache is required before running the app.
 
 ## License
 Copyright 2021 Gabriel Rosenzweig Haugbøl
