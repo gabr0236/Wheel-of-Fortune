@@ -27,6 +27,23 @@ Watch how the game is played:
 * [English clip](https://youtu.be/j_FpIab0K_8)
 * [Danish clip](https://youtu.be/79nl-BDNek0)
 
+### Screenshots from the app
+
+#### Game Screen
+<img src="" width="200">
+
+***
+
+#### Popups
+<img src="" width="200">
+
+***
+
+#### Winning Screen
+<img src="" width="200">
+
+***
+
 ### For the Android application, the modified rules are:
 1. The game is for one player.
 2. When the game starts, a word is randomly chosen from predefined categories and displayed
