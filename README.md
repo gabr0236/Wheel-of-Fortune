@@ -1,25 +1,5 @@
 # Wheel of Fortune
 
-## Assignment Info
-* **University:** Technical University of Denmark.
-* **Course:** 62550 User experience and mobile application development 
-* **Semester:** Fall 2021
-* **Delivery Deadline:** 17/11/21 6pm Central European Standard Time
-* **Assignment type:** Individual
-* __Main Assignment:__ *The Wheel of Fortune (“Lykkehjulet”) game which was popular during the last millennium
-is to be implemented in a modified version as an Android app.*
-
-**By Gabriel Rosenzweig Haugbøl, S205350, IT and Economics, Github: gabr0236, Gabriel Christ Haugbøl, NiGhtShAdk**
-
-### Notes to the grader:
-1. The grader should run the app from the master branch.
-2. I have used a recyclerview for showing letters (Recommended to state this)
-3. A player won't be able to get the same random category and word in one play session, except if all categories and words have been play.
-4. edit_text_letter (text input field) only accepts a single character from the alphabet. The text input is not case-sensitive.
-5. Updates in the recyclerview is only made to the specific updated LetterCard(s) to avoid unnecessary updates.
-6. The project contains 8 tests.
-7. When the recyclerview line is filled, the recyclerview expands the next item to a new line. This is accomplished using FlexBox API.
-
 ## Gameplay & Rules
 
 ### Recordings of the television show
@@ -66,19 +46,6 @@ Watch how the game is played:
 11. The game is won when all the letters have been found and the user still has a life.
 12. The game is lost when the user has no lives left and the word has not been found.
 13. A user starts with 5 “lives”.
-
-## Requirements
-* FR_1  - The game rules listed should be implemented.
-* FR_2  - The game should be able to be played again when finished.
-* NFR_1 - The application should have a single activity and use fragments.
-* NFR_2 - The application should use the Navigation Component.
-* NFR_3 - Android architecture guidelines should be followed.
-* NFR_4 - There should be at least three screens: e.g. word guessing, game won, game lost.
-* NFR_5 - The hidden word/phrase should be displayed using a recyclerview.
-* NFR_6 - Version control (GitHub or GitLab) should be used.
-(Access should be given to Ian and the teaching assistants - usernames will be provided later.)
-* NFR_7 - The app name should start with the student number.
-* NFR_8 - The minSdkVersion should be 24
 
 ## Get Started
 To get started, simply run the app. Sometimes a rebuild/clean/invalidate cache is required before running the app.
